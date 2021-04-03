@@ -59,13 +59,13 @@ const MENUUSER = [
   { state: 'reveal', type: 'link', name: 'เบิกพัสดุ', icon: 'wysiwyg' },
   { state: 'bor-durable', type: 'link', name: 'ยืมครุภัณฑ์', icon: 'wysiwyg' },
   { state: 'from', type: 'link', name: 'แบบสำรวจ', icon: 'view_list' },
-  { state: 'register', type: 'link', name: 'เพิ่มสมาชิก', icon: 'view_headline' }
+  { state: 'userlist', type: 'link', name: 'สมาชิก', icon: 'view_headline' }
 ]
 
 @Injectable()
 export class MenuItems {
   getMenuitem(): Menu[] {
-    return MENUITEMS;
+    return MENUUSER;
   }
 }
 
