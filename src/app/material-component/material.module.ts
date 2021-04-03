@@ -40,6 +40,8 @@ import { BorrowDurableComponent } from './borrow-durable/borrow-durable.componen
 import { DialogBorComponent } from './dialog-bor/dialog-bor.component';
 import { FromComponent } from './from/from.component';
 import { FromDialogComponent } from './from-dialog/from-dialog.component';
+import { UserlistComponent } from './userlist/userlist.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 @NgModule({
@@ -81,7 +83,9 @@ import { FromDialogComponent } from './from-dialog/from-dialog.component';
     BorrowDurableComponent,
     DialogBorComponent,
     FromComponent,
-    FromDialogComponent
+    FromDialogComponent,
+    UserlistComponent,
+    UserDetailComponent
   ]
 })
 export class MaterialComponentsModule {}

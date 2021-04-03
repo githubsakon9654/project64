@@ -13,15 +13,22 @@ export class RevealComponent implements OnInit {
 
   public row:Array<Item> = [];
   key :string = '';
+  public total: Number = 0
   constructor(
     public dialog: MatDialog,
     public Source: RevealService
     ) { }
-    
+
   ngOnInit(): void {
     this.Source.source$.subscribe({
       next: s => {
         this.row = s
+      }
+    })
+
+    this.Source.total$.subscribe({
+      next: t => {
+        this.total = t
       }
     })
   }
@@ -43,6 +50,12 @@ export class RevealComponent implements OnInit {
       )
   }
 
- 
+  select(){
+    console.log(this.row.length);
+    for(let i=0; i < this.row.length; i++){
+      console.log(i)
+      console.log(this.row[i].supplie_name);
+    }
+  }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { FromDialogComponent } from '../from-dialog/from-dialog.component';
-import { RevealDialogComponent} from '../reveal-dialog/reveal-dialog.component';
+import { RegisterComponent } from '../register/register.component';
+import { UserDetailComponent } from '../user-detail/user-detail.component';
 
 export interface PeriodicElement {
   name: string;
@@ -24,31 +24,33 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-from',
-  templateUrl: './from.component.html',
-  styleUrls: ['./from.component.css']
+  selector: 'app-userlist',
+  templateUrl: './userlist.component.html',
+  styleUrls: ['./userlist.component.css']
 })
-export class FromComponent implements OnInit {
-
-  public row:Array<any> = [];
-  key :string = '';
-  name: String = '';
+export class UserlistComponent implements OnInit {
 
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
+
+  open(){
+    const register = this.dialog.open(RegisterComponent);
+    register.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  openDetail(row: any){
+    const detail = this.dialog.open(UserDetailComponent)
+    detail.componentInstance.name = row.name
+    detail.componentInstance.position = row.position
+    detail.componentInstance.weight = row.weight
+    detail.componentInstance.symbol = row.symbol
+    console.log(row.name)
+  }
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
-  test(row:any){
-    const dialogRef = this.dialog.open(FromDialogComponent);
-    dialogRef.componentInstance.name = row.name
-    dialogRef.componentInstance.position = row.position
-    dialogRef.componentInstance.weight = row.weight
-    dialogRef.componentInstance.symbol = row.symbol
-    dialogRef.afterClosed().subscribe(result => {
-    });
-    console.log(row)
-  }
 }

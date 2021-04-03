@@ -23,6 +23,7 @@ import { RevealComponent} from './reveal/reveal.component';
 import { BorrowDurableComponent } from './borrow-durable/borrow-durable.component';
 import { FromComponent } from './from/from.component';
 import { RegisterComponent } from './register/register.component';
+import { UserlistComponent } from './userlist/userlist.component';
 
 export const MaterialRoutes: Routes = [
   {
@@ -98,8 +99,8 @@ export const MaterialRoutes: Routes = [
     component: SliderComponent
   },
   {
-    path: 'slide-toggle',
-    component: SlideToggleComponent
+    path: 'userlist',
+    component: UserlistComponent
   },
   {
     path: 'register',
