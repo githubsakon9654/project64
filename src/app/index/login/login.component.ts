@@ -4,7 +4,7 @@ import { AuthService} from '../../shared/service/auth.service';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { MenuUser,MenuItems} from '../../shared/menu-items/menu-items';
 import { RevealService } from '../../shared/service/reveal.service';
- 
+
 
 @Component({
   selector: 'app-login',
@@ -22,11 +22,12 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private tokenStorage: TokenStorageService,
     public menuUser: MenuUser,
     public menuItems: MenuItems,
-    public list: RevealService
+    public list: RevealService,
+    public routes: Router
     ) { }
 
   ngOnInit(): void {
@@ -59,7 +60,6 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    window.location.reload();
-    
+    this.routes.navigateByUrl('/supplie')
   }
 }

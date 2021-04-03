@@ -1,5 +1,6 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component,OnDestroy,AfterViewInit, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItems, MenuUser } from '../../shared/menu-items/menu-items';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 
@@ -8,7 +9,7 @@ import { TokenStorageService } from '../../shared/service/token-storage.service'
 @Component({
   selector: 'app-full-layout',
   templateUrl: 'full.component.html',
-  styleUrls: []
+  styleUrls: ['full.component.css']
 })
 export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
   mobileQuery: MediaQueryList;
@@ -24,7 +25,8 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public menuItems: MenuUser,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    public routes: Router
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -58,4 +60,8 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   ngAfterViewInit() {}
+
+  link(){
+    this.routes.navigateByUrl('/login')
+  }
 }
