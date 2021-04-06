@@ -1,90 +1,3 @@
-<!-- <div class="col-md-12">
-    <div class="card card-container">
-      <img
-        id="profile-img"
-        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-        class="profile-img-card"
-      />
-      <form
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate
-      >
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            minlength="3"
-            maxlength="20"
-            #username="ngModel"
-          />
-          <div class="alert-danger" *ngIf="username.errors && f.submitted">
-            <div *ngIf="username.errors.required">Username is required</div>
-            <div *ngIf="username.errors.minlength">
-              Username must be at least 3 characters
-            </div>
-            <div *ngIf="username.errors.maxlength">
-              Username must be at most 20 characters
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            class="form-control"
-            name="email"
-            [(ngModel)]="form.email"
-            required
-            email
-            #email="ngModel"
-          />
-          <div class="alert-danger" *ngIf="email.errors && f.submitted">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">
-              Email must be a valid email address
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            [(ngModel)]="form.password"
-            required
-            minlength="6"
-            #password="ngModel"
-          />
-          <div class="alert-danger" *ngIf="password.errors && f.submitted">
-            <div *ngIf="password.errors.required">Password is required</div>
-            <div *ngIf="password.errors.minlength">
-              Password must be at least 6 characters
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <button mat-raised-button color="primary">Sign Up</button>
-        </div>
-  
-        <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
-          Signup failed!<br />{{ errorMessage }}
-        </div>
-      </form>
-  
-      <div class="alert alert-success" *ngIf="isSuccessful">
-        Your registration is successful!
-      </div>
-    </div>
-  </div> -->
-
 <mat-card>
   <mat-card-content>
     <form class="example-form"
@@ -93,9 +6,10 @@
         (ngSubmit)="f.form.valid && onSubmit()"
         #f="ngForm"
         novalidate>
+        <!-- username -->
       <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="กรอกชื่อ" 
+        <input matInput placeholder="กรอกชื่อ"
         type="text"
         class="form-control"
         name="username"
@@ -114,25 +28,7 @@
           Username must be at most 20 characters
         </div>
       </div>
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Email</mat-label>
-        <input matInput placeholder="กรอกชื่อ" 
-        type="email"
-        class="form-control"
-        name="email"
-        [(ngModel)]="form.email"
-        required
-        email
-        #email="ngModel">
-      </mat-form-field>
-      <div class="alert-danger" *ngIf="email.errors && f.submitted">
-            <div *ngIf="email.errors.required">Email is required</div>
-            <div *ngIf="email.errors.email">
-              Email must be a valid email address
-            </div>
-          </div>
-
+      <!-- password -->
       <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
         <input matInput placeholder="กรอกชื่อ"
@@ -150,6 +46,43 @@
           Password must be at least 6 characters
         </div>
       </div>
+      <!-- name -->
+      <mat-form-field class="example-full-width">
+        <mat-label>ชื่อ</mat-label>
+        <input matInput placeholder="กรอกชื่อ"
+              type="text"
+              class="form-control"
+              name="fullname"
+              [(ngModel)]="form.fullname"
+              required
+              #fullname="ngModel">
+        </mat-form-field>
+        <!-- <div class="alert-danger" *ngIf="email.errors && f.submitted">
+            <div *ngIf="name.errors.required">Name is required</div>
+            <div *ngIf="name.errors.name">
+              Name must be a valid email address
+            </div>
+        </div> -->
+        <!-- price -->
+        <mat-form-field class="example-full-width">
+          <mat-label>งบ</mat-label>
+          <input matInput placeholder="กรอกงบ"
+                type="text"
+                class="form-control"
+                name="price"
+                [(ngModel)]="form.price"
+                #price="ngModel">
+          </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>ระดับชั้น</mat-label>
+          <input matInput placeholder="กรอกระดับชั้น"
+                type="text"
+                class="form-control"
+                name="classes"
+                [(ngModel)]="form.classes"
+                #classes="ngModel">
+          </mat-form-field>
+
       <button mat-raised-button color="primary">Sign Up</button>
     </form>
   </mat-card-content>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { RegisterComponent } from '../register/register.component';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
-
+import { UserService} from '../../shared/service/user.service';
 export interface PeriodicElement {
   name: string;
   position: number;
@@ -29,10 +29,18 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./userlist.component.css']
 })
 export class UserlistComponent implements OnInit {
+  row: Array<any> = []
+  key: String =''
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.getAllUsers().subscribe(
+      data => {
+        this.row = data.users
+        console.log(this.row)
+      }
+    )
   }
 
   open(){
@@ -43,14 +51,9 @@ export class UserlistComponent implements OnInit {
   }
   openDetail(row: any){
     const detail = this.dialog.open(UserDetailComponent)
-    detail.componentInstance.name = row.name
-    detail.componentInstance.position = row.position
-    detail.componentInstance.weight = row.weight
-    detail.componentInstance.symbol = row.symbol
-    console.log(row.name)
+    detail.componentInstance.name = row.username
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id','username', 'fullname','class' , 'price'];
 
 }
