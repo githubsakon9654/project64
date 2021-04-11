@@ -27,7 +27,7 @@ export class RevealDialogComponent implements OnInit {
 
 
   constructor(public Source: RevealService) { }
-  
+
   ngOnInit(): void {
 
     this.key = localStorage.getItem('filterKey')
@@ -40,14 +40,14 @@ export class RevealDialogComponent implements OnInit {
           }
     )
   }
-  
+
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
- 
-  
-  
+
+
+
   test(row: any){
-    console.log(row)
-    this.Source.pushService(row)
+    const reveal = {id: row.id,supplie_name:row.supplie_name,price: row.price,unit_name:row.unit_name,unit:1}
+    this.Source.pushService(reveal)
   }
 
 

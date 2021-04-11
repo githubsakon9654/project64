@@ -32,7 +32,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { TablelistComponent } from './tablelist/tablelist.component';
-import { SupplielistComponent } from './supplielist/supplielist.component';
+import { SupplielistComponent,SupplieInsertComponent ,SupplieDeleteComponent,SupplieUpdateComponent} from './supplielist/supplielist.component';
 import { DurablelistComponent } from './durablelist/durablelist.component';
 import { RevealComponent } from './reveal/reveal.component';
 import { RevealDialogComponent } from './reveal-dialog/reveal-dialog.component';
@@ -74,6 +74,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     TooltipComponent,
     SnackbarComponent,
     SliderComponent,
+    SupplieInsertComponent,
+    SupplieDeleteComponent,
+    SupplieUpdateComponent,
     SlideToggleComponent,
     TablelistComponent,
     SupplielistComponent,
