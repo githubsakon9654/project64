@@ -40,15 +40,12 @@
         <!-- app header component - style you can find in header.scss / header.component.ts-->
         <!-- ============================================================== -->
 
-        <button class="login" (click)="link()" mat-mini-fab color="basic"><mat-icon>lock</mat-icon></button>
         <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
           <li class="nav-item">
             <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
           </li>
-          <li class="nav-item">
-            <a href class="nav-link" (click)="logout()">LogOut</a>
-          </li>
         </ul>
+        <button class="login"mat-mini-fab color="basic" (click)="logout()"><mat-icon>lock</mat-icon></button>
         <app-header></app-header>
     </mat-toolbar>
     <!-- ============================================================== -->

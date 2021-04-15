@@ -6,6 +6,7 @@ import {FormControl} from '@angular/forms';
 import {Observable,from } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../shared/service/token-storage.service';
 export interface DialogData {
   id : number;
   sup_name: string;
@@ -26,18 +27,36 @@ export class SupplielistComponent implements OnInit {
   price: number = 0
   unit: number = 0
   unit_name: string =''
-
+  private roles: string[] = [];
   delete : boolean = false
+  adminRole: boolean = false
+  userRole:boolean = false
 
-
-  constructor(public supplieServie: SupplieService,public dialog: MatDialog) { }
+  constructor(
+    public supplieServie: SupplieService,
+    private tokenStorageService: TokenStorageService,
+    public dialog: MatDialog
+    ) { }
 
 
   ngOnInit(): void {
    this.loadRow()
+   this.getRole()
   }
 
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','delete'];
+
+  getRole(){
+    const user = this.tokenStorageService.getUser();
+    this.roles = user.roles[0];
+
+    if(this.roles == ["ROLE_USER"]){
+      this.userRole = this.roles.includes('ROLE_USER');
+      console.log()
+    } else{
+      this.adminRole = this.roles.includes('ROLE_ADMIN');
+    }
+  }
 
   openDialog(){
     const dialogRef = this.dialog.open(SupplieInsertComponent);
@@ -121,6 +140,14 @@ export class SupplieUpdateComponent implements OnInit {
   }
 
   onSubmit(){
+    this.update()
+    this.close()
+  }
+  close(): void {
+    this.dialogRef.close();
+  }
+
+  update(){
     const id = this.data.id
     const {sup_name,price,unit,unit_name} = this.form;
     this.supplieServie.updateSupplie(id,sup_name,price,unit,unit_name).subscribe(
@@ -128,11 +155,8 @@ export class SupplieUpdateComponent implements OnInit {
         console.log(sup_name)
       }
     )
-    this.close()
   }
-  close(): void {
-    this.dialogRef.close();
-  }
+
 }
 
 @Component({

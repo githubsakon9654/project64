@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { UserService } from '../../shared/service/user.service';
-import { RevealDialogComponent} from './dialog/reveal-dialog/reveal-dialog.component';
-import { RevealService,Item } from '../../shared/service/reveal.service';
-import { SupplieService } from '../../shared/service/supplie.service';
+import { RevealDialogComponent} from '../../../reveal/dialog/reveal-dialog/reveal-dialog.component';
+import { BuyService,Item} from '../../../../shared/service/buy.service';
+import { SupplieService } from '../../../../shared/service/supplie.service';
+import { UserService} from '../../../../shared/service/user.service'
 
 @Component({
-  selector: 'app-reveal',
-  templateUrl: './reveal.component.html',
-  styleUrls: ['./reveal.component.css']
+  selector: 'app-buyform',
+  templateUrl: './buyform.component.html',
+  styleUrls: ['./buyform.component.css']
 })
-export class RevealComponent implements OnInit {
+export class BuyformComponent implements OnInit {
 
   public row:Array<Item> = [];
   key :string = '';
   public total: Number = 0
   constructor(
     public dialog: MatDialog,
-    public Source: RevealService,
+    public Source: BuyService,
     public SupplieService: SupplieService,
     private userService: UserService
     ) { }
@@ -30,8 +30,9 @@ export class RevealComponent implements OnInit {
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name', 'delete'];
 
   keytest(){
+    console.log('buy')
       const dialogRef = this.dialog.open(RevealDialogComponent,{
-        data: {keys:'reveal'}
+        data: {keytwo: 'buy'}
       });
       dialogRef.afterClosed().subscribe(result => {
         localStorage.removeItem('filterKey');
@@ -88,7 +89,7 @@ export class RevealComponent implements OnInit {
       }
       console.log(supplie)
       console.log(units)
-      this.Source.insertReveal(userId,price,supplie,units).subscribe(
+      this.SupplieService.insertBuyForm(userId,price,supplie,units).subscribe(
           data => {
               console.log(data)
             }

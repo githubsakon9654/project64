@@ -82,6 +82,26 @@
                 #classes="ngModel">
           </mat-form-field>
 
+          <mat-form-field class="example-full-width">
+            <mat-label>ตำแหน่ง</mat-label>
+            <input type="text"
+                   placeholder="Pick one"
+                   matInput placeholder="กรอกหน่วยพัสดุ"
+                   aria-label="Number"
+                   matInput
+                   class="form-control"
+                  name="role"
+                  [(ngModel)]="form.role"
+                   required
+                   [matAutocomplete]="auto"
+                   #role="ngModel">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                {{option}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
       <button mat-raised-button color="primary">Sign Up</button>
     </form>
 

@@ -59,7 +59,8 @@ const MENUUSER = [
   { state: 'reveal', type: 'link', name: 'เบิกพัสดุ', icon: 'wysiwyg' },
   { state: 'bor-durable', type: 'link', name: 'ยืมครุภัณฑ์', icon: 'wysiwyg' },
   { state: 'from', type: 'link', name: 'แบบสำรวจ', icon: 'view_list' },
-  { state: 'userlist', type: 'link', name: 'สมาชิก', icon: 'view_headline' }
+  { state: 'userlist', type: 'link', name: 'สมาชิก', icon: 'view_headline' },
+  { state: 'buy', type: 'link', name: 'แบบสั่งซื้อ', icon: 'view_list' }
 ]
 
 @Injectable()
@@ -71,6 +72,6 @@ export class MenuItems {
 
 export class MenuUser {
   getMenuitem(): Menu[] {
-    return MENUUSER;
+    return MENUITEMS;
   }
 }

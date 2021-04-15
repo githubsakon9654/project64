@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/service/user.service';
-
+import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',

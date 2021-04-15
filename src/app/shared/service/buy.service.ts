@@ -1,28 +1,39 @@
-import { Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject, Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
-const API_URL = 'http://localhost:8080/api/reveal/';
+const API_URL = 'http://localhost:8080/api/buy/'
+
+export interface Item {
+  id: number | string;
+  supplie_name: string;
+  unit: number;
+  price: number;
+  unit_name: string;
+}
+
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
+export class BuyService {
 
-export class RevealService {
+  constructor(private http: HttpClient) { this.calculatorTotal();}
 
-    constructor(private http: HttpClient){
-      this.calculatorTotal();
-    }
+  private item: Array<Item> = []
 
-    private item: Array<Item> = []
+  menu$: Subject<Object> = new Subject<Object>();
+  user$: Subject<String> = new Subject<String>();
+  source$: BehaviorSubject<Array<Item>> = new BehaviorSubject<Array<Item>>(this.item)
+  total$: BehaviorSubject<Number> = new BehaviorSubject<Number>(0)
 
-    menu$: Subject<Object> = new Subject<Object>();
-    user$: Subject<String> = new Subject<String>();
-    source$: BehaviorSubject<Array<Item>> = new BehaviorSubject<Array<Item>>(this.item)
-    total$: BehaviorSubject<Number> = new BehaviorSubject<Number>(0)
+  getBuyList(): Observable<any>{
+    return this.http.get(API_URL + 'listAll');
+  }
+
 
   pushService(item: Item) {
         let x = false
@@ -40,7 +51,11 @@ export class RevealService {
         this.calculatorTotal()
   }
 
-
+  filter(filter: string): Observable<any>{
+        return this.http.post('http://localhost:8080/api/supplie/filter', {
+            filter
+        },httpOptions);
+  }
 
   calculatorTotal(): Number {
       let t = this.item.reduce((previoueValue, currentValue) => +previoueValue + +currentValue.price * +currentValue.unit, 0)
@@ -63,7 +78,7 @@ export class RevealService {
     })
     this.source$.next(this.item)
     this.calculatorTotal()
-}
+  }
 
   removeServices(items: Array<Item>) {
     items.forEach(n => {
@@ -91,21 +106,6 @@ export class RevealService {
       this.calculatorTotal()
   }
 
-  insertReveal(userId:number,total_price:number,supplie:Array<any>,units:Array<any>): Observable<any>{
-    return this.http.post(API_URL + 'insert', {userId,total_price,supplie,units})
-  }
-
-  getRevealList(): Observable<any>{
-    return this.http.get(API_URL + 'listAll')
-  }
 
 
-}
-
-export interface Item {
-    id: number | string;
-    supplie_name: string;
-    unit: number;
-    price: number;
-    unit_name: string;
 }

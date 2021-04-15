@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { FromDialogComponent } from '../from-dialog/from-dialog.component';
-import { RevealDialogComponent} from '../reveal-dialog/reveal-dialog.component';
+import { RevealDialogComponent} from '../reveal/dialog/reveal-dialog/reveal-dialog.component';
 
 export interface PeriodicElement {
   name: string;

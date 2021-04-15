@@ -35,13 +35,17 @@ import { TablelistComponent } from './tablelist/tablelist.component';
 import { SupplielistComponent,SupplieInsertComponent ,SupplieDeleteComponent,SupplieUpdateComponent} from './supplielist/supplielist.component';
 import { DurablelistComponent } from './durablelist/durablelist.component';
 import { RevealComponent } from './reveal/reveal.component';
-import { RevealDialogComponent } from './reveal-dialog/reveal-dialog.component';
+import { RevealDialogComponent } from './reveal/dialog/reveal-dialog/reveal-dialog.component';
 import { BorrowDurableComponent } from './borrow-durable/borrow-durable.component';
 import { DialogBorComponent } from './dialog-bor/dialog-bor.component';
 import { FromComponent } from './from/from.component';
 import { FromDialogComponent } from './from-dialog/from-dialog.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { BuyComponent } from './buy/buy.component';
+import { BuyformComponent } from './buy/buyDialog/buyform/buyform.component';
+import { BuyDetailComponent } from './buy/buyDialog/buy-detail/buy-detail.component';
+import { RevelListComponent } from './revel-list/revel-list.component';
 
 
 @NgModule({
@@ -88,7 +92,11 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     FromComponent,
     FromDialogComponent,
     UserlistComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    BuyComponent,
+    BuyformComponent,
+    BuyDetailComponent,
+    RevelListComponent
   ]
 })
 export class MaterialComponentsModule {}

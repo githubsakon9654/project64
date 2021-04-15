@@ -3,7 +3,7 @@ import {ChangeDetectorRef, Component,OnDestroy,AfterViewInit, OnInit} from '@ang
 import { Router } from '@angular/router';
 import { MenuItems, MenuUser } from '../../shared/menu-items/menu-items';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
-
+import { UserService} from '../../shared/service/user.service'
 
 /** @title Responsive sidenav */
 @Component({
@@ -26,7 +26,8 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     media: MediaMatcher,
     public menuItems: MenuUser,
     private tokenStorageService: TokenStorageService,
-    public routes: Router
+    public routes: Router,
+    private userService: UserService
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -47,13 +48,14 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
       this.username = user.username;
     } else {
       localStorage.removeItem('auth')
+      this.link()
     }
   }
 
   logout(): void {
     this.tokenStorageService.signOut();
-    window.location.reload();
     localStorage.removeItem('auth')
+    this.link()
   }
 
   ngOnDestroy(): void {

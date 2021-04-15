@@ -24,6 +24,8 @@ import { BorrowDurableComponent } from './borrow-durable/borrow-durable.componen
 import { FromComponent } from './from/from.component';
 import { RegisterComponent } from './register/register.component';
 import { UserlistComponent } from './userlist/userlist.component';
+import { BuyComponent } from './buy/buy.component';
+import { RevelListComponent} from './revel-list/revel-list.component'
 
 export const MaterialRoutes: Routes = [
   {
@@ -32,7 +34,7 @@ export const MaterialRoutes: Routes = [
   },
   {
     path: 'reveal',
-    component: RevealComponent
+    component: RevelListComponent
   },
   {
     path: 'supplie',
@@ -105,5 +107,8 @@ export const MaterialRoutes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },{
+    path: 'buy',
+    component: BuyComponent
   }
 ];

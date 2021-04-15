@@ -3,7 +3,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService} from '../../shared/service/auth.service';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { MenuUser,MenuItems} from '../../shared/menu-items/menu-items';
-import { RevealService } from '../../shared/service/reveal.service';
+import { UserService} from '../../shared/service/user.service'
+
 
 
 @Component({
@@ -24,9 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    public menuUser: MenuUser,
-    public menuItems: MenuItems,
-    public list: RevealService,
+    private userService: UserService,
     public routes: Router
     ) { }
 
@@ -48,8 +47,14 @@ export class LoginComponent implements OnInit {
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
+        this.userService.getUser(username).subscribe(
+          data => {
+            this.userService.saveUser(data.user.id)
+          }
+        )
         console.log('login successful!')
         this.roles = this.tokenStorage.getUser().roles;
+        console.log(this.roles)
         this.reloadPage();
       },
       err => {

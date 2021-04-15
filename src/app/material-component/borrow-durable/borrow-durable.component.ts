@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RevealService,Item } from '../../shared/service/reveal.service';
 import { DialogBorComponent } from '../dialog-bor/dialog-bor.component';
 import {MatDialog} from '@angular/material/dialog';
+import { SupplieService } from '../../shared/service/supplie.service';
 
 @Component({
   selector: 'app-borrow-durable',
@@ -15,7 +16,8 @@ export class BorrowDurableComponent implements OnInit {
 
   constructor(
         public Source: RevealService,
-        public dialog: MatDialog 
+        public dialog: MatDialog,
+        public Supplie: SupplieService
   ) { }
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class BorrowDurableComponent implements OnInit {
     });
     console.log(this.key);
     localStorage.setItem('filterKey', this.key);
-    this.Source.filter(this.key).subscribe(
+    this.Supplie.filter(this.key).subscribe(
       data => {
         console.log(data);
       }

@@ -26,4 +26,15 @@ export class SupplieService {
   updateSupplie(id:number,supplie_name: string, price:number, unit:number, unit_name:string): Observable<any> {
     return this.http.post(API_URL + 'update',{id,supplie_name,price, unit,unit_name});
   }
+
+  filter(filter: string): Observable<any>{
+    return this.http.post(API_URL+'filter', {
+        filter
+    });
+  }
+
+  insertBuyForm(userId:number,price:number,supplie:Array<any>,units:Array<any>): Observable<any> {
+    return this.http.post('http://localhost:8080/api/buy/insert',{userId,price,supplie,units});
+  }
+
 }

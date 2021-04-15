@@ -1,0 +1,47 @@
+<mat-card>
+  <mat-card-content>
+    <h3>รายการเบิกพัสดุ</h3>
+    <button mat-raised-button color="primary" (click)="openform()">เบิกพัสดุ</button>
+    <table mat-table [dataSource]="table" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="admin_approve">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.admin_approve}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="dire_approvev">
+        <th mat-header-cell *matHeaderCellDef> ราคา </th>
+        <td mat-cell *matCellDef="let element"> {{element.dire_approvev}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="total_price">
+        <th mat-header-cell *matHeaderCellDef> จำนวน </th>
+        <td mat-cell *matCellDef="let element"> {{element.total_price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element" >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+  </mat-card-content>
+</mat-card>
