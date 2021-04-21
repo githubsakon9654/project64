@@ -1,0 +1,43 @@
+<div>
+  <h3>เพิ่มพัสดุ</h3>
+  <form  class="example-form"
+  name="form"
+  (ngSubmit)="f.form.valid && onSubmit()"
+  #f="ngForm"
+  novalidat>
+    <mat-form-field >
+    <mat-label>ชื่อครุภัณฑ์</mat-label>
+    <input matInput
+          matInput placeholder="กรอกชื่อครุภัณฑ์"
+          type="text"
+          class="form-control"
+          name="du_name"
+          [(ngModel)]="form.du_name"
+          required
+          #du_name="ngModel">
+    </mat-form-field>
+    <mat-form-field >
+    <mat-label>สภาพครุภัณฑ์</mat-label>
+    <input matInput
+          matInput placeholder="กรอกสภาพครุภัณฑ์"
+          type="text"
+          class="form-control"
+          name="du_status"
+          [(ngModel)]="form.du_status"
+          required
+          #du_status="ngModel">
+    </mat-form-field>
+    <mat-form-field >
+    <mat-label>เลขซีเรียล</mat-label>
+    <input matInput
+          matInput placeholder="กรอกเลขซีเรียล"
+          type="text"
+          class="form-control"
+          name="du_serial"
+          [(ngModel)]="form.du_serial"
+          required
+          #du_serial="ngModel">
+    </mat-form-field>
+    <button mat-raised-button color="primary">เพิ่ม</button>
+  </form>
+</div>

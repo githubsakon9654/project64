@@ -26,6 +26,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { BuyComponent } from './buy/buy.component';
 import { RevelListComponent} from './revel-list/revel-list.component'
+import { BorrowListComponent } from './borrow-list/borrow-list.component';
+
 
 export const MaterialRoutes: Routes = [
   {
@@ -46,7 +48,7 @@ export const MaterialRoutes: Routes = [
   },
   {
     path: 'bor-durable',
-    component: BorrowDurableComponent
+    component: BorrowListComponent
   },
   {
     path: 'from',

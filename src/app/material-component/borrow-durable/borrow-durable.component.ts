@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RevealService,Item } from '../../shared/service/reveal.service';
 import { DialogBorComponent } from '../dialog-bor/dialog-bor.component';
-import {MatDialog} from '@angular/material/dialog';
-import { SupplieService } from '../../shared/service/supplie.service';
-
+import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { BorrowService,Item} from '../../shared/service/borrow.service';
+import { DurableService} from '../../shared/service/durable.service';
+import { UserService } from '../../shared/service/user.service';
 @Component({
   selector: 'app-borrow-durable',
   templateUrl: './borrow-durable.component.html',
@@ -15,12 +15,19 @@ export class BorrowDurableComponent implements OnInit {
   key :string = '';
 
   constructor(
-        public Source: RevealService,
+        public Source: BorrowService,
         public dialog: MatDialog,
-        public Supplie: SupplieService
+        private dialogRef: MatDialogRef<BorrowDurableComponent>,
+        public durable: DurableService,
+        private userService: UserService
   ) { }
 
   ngOnInit(): void {
+    this.loadTable()
+  }
+  displayedColumns: string[] = ['id', 'du_name','du_serial', 'du_status'];
+
+  loadTable(){
     this.Source.source$.subscribe({
       next: s => {
         this.row = s
@@ -28,7 +35,6 @@ export class BorrowDurableComponent implements OnInit {
     })
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
 
   keytest(){
     const dialogRef = this.dialog.open(DialogBorComponent);
@@ -38,11 +44,31 @@ export class BorrowDurableComponent implements OnInit {
     });
     console.log(this.key);
     localStorage.setItem('filterKey', this.key);
-    this.Supplie.filter(this.key).subscribe(
+    this.durable.filter(this.key).subscribe(
       data => {
         console.log(data);
       }
     )
+  }
+
+  select(){
+    const userId = Number(this.userService.getId())
+    const username = String (this.userService.getUsername())
+    console.log(userId)
+    const durable : Array<any> = []
+    if(userId){
+      for(let i=0; i < this.row.length; i++){
+        let array = Number(this.row[i].id)
+        durable.push(array)
+      }
+      this.Source.insertBorrow(userId,username,durable).subscribe(
+        data => {
+          console.log(data)
+        }
+      )
+      console.log(durable)
+    }
+    this.dialogRef.close()
   }
 
 }

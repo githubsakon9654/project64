@@ -60,6 +60,6 @@
       <br>
       <span>ยอดรวม : {{total}} บาท</span>
       <br>
-      <button class="button" mat-raised-button color="primary" (click)="select()">ยืนยันรายการเบิก</button>
+      <button [disabled]="total > userprice" class="button" mat-raised-button color="primary" (click)="select()">ยืนยันรายการเบิก</button>
 	</mat-card-content>
 </mat-card>

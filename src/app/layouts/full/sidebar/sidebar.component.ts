@@ -40,12 +40,12 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
   }
 
   isAdmin(){
-    if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
-      this.menu = this.menuItems.getMenuitem()
+    if(localStorage.getItem('auth') == 'ROLE_USER'){
+      this.menu = this.menuUser.getMenuitem()
       console.log(this.role)
       console.log('user')
     } else {
-      this.menu = this.menuUser.getMenuitem()
+      this.menu = this.menuItems.getMenuitem()
       console.log(this.role)
       console.log('not')
 

@@ -4,7 +4,7 @@ import { RevealService,Item } from '../../shared/service/reveal.service';
 import { SupplieService } from '../../shared/service/supplie.service';
 import { BuyformComponent } from './buyDialog/buyform/buyform.component';
 import { UserService} from '../../shared/service/user.service'
-import { BuyService } from '../../shared/service/buy.service'
+import { BuyService ,DialogData} from '../../shared/service/buy.service'
 import { BuyDetailComponent } from './buyDialog/buy-detail/buy-detail.component';
 
 @Component({
@@ -25,12 +25,18 @@ export class BuyComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id','status','price'];
+  displayedColumns: string[] = ['id','status','buyprice'];
 
-  openDetail(){
+  openDetail(row:any){
     const dialogDetail = this.dialog.open(BuyDetailComponent,{
-      width: '1500px'
+      width: '1500px',
+      data: {id:row.id}
     })
+    dialogDetail.afterClosed().subscribe(
+      r => {
+        this.loadTable()
+      }
+    )
   }
 
   loadTable(){
@@ -48,5 +54,12 @@ export class BuyComponent implements OnInit {
     const dialog = this.dialog.open(BuyformComponent,{
       width: '1500px'
     });
+
+    dialog.afterClosed().subscribe(
+      r =>{
+        this.loadTable()
+        this.buyService.clear()
+      }
+    )
   }
 }

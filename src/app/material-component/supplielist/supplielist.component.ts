@@ -27,7 +27,7 @@ export class SupplielistComponent implements OnInit {
   price: number = 0
   unit: number = 0
   unit_name: string =''
-  private roles: string[] = [];
+  private roles: Array<any> =[]
   delete : boolean = false
   adminRole: boolean = false
   userRole:boolean = false
@@ -47,15 +47,9 @@ export class SupplielistComponent implements OnInit {
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','delete'];
 
   getRole(){
-    const user = this.tokenStorageService.getUser();
-    this.roles = user.roles[0];
+    this.roles = this.tokenStorageService.getRole()
+    this.userRole = this.roles[1].IsUser
 
-    if(this.roles == ["ROLE_USER"]){
-      this.userRole = this.roles.includes('ROLE_USER');
-      console.log()
-    } else{
-      this.adminRole = this.roles.includes('ROLE_ADMIN');
-    }
   }
 
   openDialog(){
@@ -110,7 +104,7 @@ export class SupplielistComponent implements OnInit {
 export class SupplieUpdateComponent implements OnInit {
 
   myControl = new FormControl();
-  options: string[] = ['1', '2', '3'];
+  options: string[] = ['แพ็ค', 'ชิ้น', 'ห่อ','ตัว'];
   filteredOptions = new Observable
 
   form: any = {
@@ -178,6 +172,10 @@ export class SupplieDeleteComponent {
     )
     this.dialogRef.close();
   }
+
+  close(){
+    this.dialogRef.close();
+  }
 }
 
 @Component({
@@ -186,7 +184,7 @@ export class SupplieDeleteComponent {
 })
 export class SupplieInsertComponent implements OnInit{
   myControl = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
+  options: string[] = ['แพ็ค', 'ชิ้น', 'ห่อ','ตัว'];
   filteredOptions = new Observable
 
   form: any = {

@@ -1,5 +1,5 @@
 import { Injectable} from '@angular/core';
-import { BehaviorSubject, Subject, Observable} from 'rxjs';
+import { BehaviorSubject, Subject, Observable, EMPTY} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 const httpOptions = {
@@ -24,6 +24,7 @@ export class RevealService {
     source$: BehaviorSubject<Array<Item>> = new BehaviorSubject<Array<Item>>(this.item)
     total$: BehaviorSubject<Number> = new BehaviorSubject<Number>(0)
 
+
   pushService(item: Item) {
         let x = false
         let y = this.item.map(n => {
@@ -46,6 +47,11 @@ export class RevealService {
       let t = this.item.reduce((previoueValue, currentValue) => +previoueValue + +currentValue.price * +currentValue.unit, 0)
       this.total$.next(t)
       return t
+  }
+
+  clear(){
+    let t = this.item = []
+    this.source$.next(t)
   }
 
   ca(): Number {
@@ -92,11 +98,23 @@ export class RevealService {
   }
 
   insertReveal(userId:number,total_price:number,supplie:Array<any>,units:Array<any>): Observable<any>{
-    return this.http.post(API_URL + 'insert', {userId,total_price,supplie,units})
+    return this.http.post(API_URL + 'insert', {userId,total_price,supplie,units});
   }
 
   getRevealList(): Observable<any>{
-    return this.http.get(API_URL + 'listAll')
+    return this.http.get(API_URL + 'listAll');
+  }
+
+  getRevealUserList(userId:number): Observable<any> {
+    return this.http.post(API_URL + 'listByUser', {userId});
+  }
+
+  getRevealDetail(id:number): Observable<any>{
+    return this.http.post(API_URL + 'detail',{id});
+  }
+
+  updateApprove(id:number,admin_approve:boolean,dire_approvev:boolean): Observable<any> {
+    return this.http.post(API_URL + 'updateAppove',{id,admin_approve,dire_approvev});
   }
 
 

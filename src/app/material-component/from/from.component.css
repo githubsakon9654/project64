@@ -5,3 +5,11 @@ dialog {
 table {
     width: 100%;
 }
+
+mat-slide-toggle{
+  margin-bottom: 10px;
+}
+
+button{
+  margin-bottom: 10px;
+}

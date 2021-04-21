@@ -1,0 +1,52 @@
+<mat-dialog-content class="mat-typography">
+
+  <p>{{name}}</p>
+  <p>{{cls}}</p>
+  <p>{{total}}</p>
+  <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
+  <br>
+  <mat-slide-toggle [disabled]="isAdmin || isUser"  [(ngModel)]="direApp" (ngModelChange)="Appove()">ยืนยันรายการเบิก(ผู้อำนวยการ)</mat-slide-toggle>
+
+  <table mat-table [dataSource]="table" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+      The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="supplieId">
+        <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.supplieId}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="supplie_name">
+        <th mat-header-cell *matHeaderCellDef> ชื่อพัสดุ </th>
+        <td mat-cell *matCellDef="let element"> {{element.supplie_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef> ราคา </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit">
+        <th mat-header-cell *matHeaderCellDef> จำนวน </th>
+        <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="unit_name">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element"> {{element.unit_name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef>  </th>
+        <td mat-cell *matCellDef="let element" >
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </mat-dialog-content>

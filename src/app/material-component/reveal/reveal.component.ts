@@ -15,16 +15,21 @@ export class RevealComponent implements OnInit {
   public row:Array<Item> = [];
   key :string = '';
   public total: Number = 0
+  userprice: number = 0
+  canReveal: boolean = true;
+
   constructor(
     public dialog: MatDialog,
     public Source: RevealService,
+    public dialogRef: MatDialogRef<RevealDialogComponent>,
     public SupplieService: SupplieService,
     private userService: UserService
-    ) { }
+    ) {}
 
   ngOnInit(): void {
     this.loadTable()
     this.priceTotal()
+    this.getUsername()
   }
 
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name', 'delete'];
@@ -95,6 +100,29 @@ export class RevealComponent implements OnInit {
       )
 
     }
+    this.updatePrice(userId)
+    this.close()
+  }
+
+  close(): void {
+    this.dialogRef.close();
+  }
+
+  updatePrice(id:number){
+    const price = this.userprice -  Number(this.total)
+    this.userService.updateUserPrice(id,price).subscribe( o => {
+      console.log(price)
+    })
+  }
+
+
+  getUsername(){
+    const username = String (this.userService.getUsername())
+    console.log(username)
+    this.userService.getUser(username).subscribe( s => {
+      console.log(s)
+      this.userprice = s.user.price
+    })
   }
 
 }

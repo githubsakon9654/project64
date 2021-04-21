@@ -33,8 +33,8 @@ export class SupplieService {
     });
   }
 
-  insertBuyForm(userId:number,price:number,supplie:Array<any>,units:Array<any>): Observable<any> {
-    return this.http.post('http://localhost:8080/api/buy/insert',{userId,price,supplie,units});
+  insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>): Observable<any> {
+    return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units});
   }
 
 }

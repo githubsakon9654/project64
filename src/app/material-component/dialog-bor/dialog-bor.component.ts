@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material/table';
-import {SelectionModel} from '@angular/cdk/collections';
-import { RevealService,Item } from '../../shared/service/reveal.service';
-import { SupplieService } from '../../shared/service/supplie.service'
+import {MatDialog} from '@angular/material/dialog';
+import { BorrowService,Item} from '../../shared/service/borrow.service';
+import { DurableService} from '../../shared/service/durable.service';
 
 
 @Component({
@@ -16,15 +15,15 @@ export class DialogBorComponent implements OnInit {
   dataRow = [];
 
   constructor(
-    public Source: RevealService,
-    public Supplie: SupplieService
+    public Source: BorrowService,
+    public durable: DurableService
     ) { }
 
   ngOnInit(): void {
     this.key = localStorage.getItem('filterKey')
     console.log('test')
 
-    this.Supplie.filter(this.key).subscribe(
+    this.durable.filter(this.key).subscribe(
           data => {
             this.dataRow = data.return
             console.log(this.dataRow);
@@ -32,10 +31,10 @@ export class DialogBorComponent implements OnInit {
     )
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
+  displayedColumns: string[] = ['id', 'du_name','du_serial', 'du_status'];
 
   test(row: any){
-    console.log(row)
-    // this.Source.pushService(row)
+    this.Source.pushService(row)
   }
+
 }

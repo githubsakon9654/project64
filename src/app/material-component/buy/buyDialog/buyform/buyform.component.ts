@@ -18,6 +18,7 @@ export class BuyformComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public Source: BuyService,
+    private dialogref: MatDialogRef<BuyformComponent>,
     public SupplieService: SupplieService,
     private userService: UserService
     ) { }
@@ -96,6 +97,8 @@ export class BuyformComponent implements OnInit {
       )
 
     }
+
+    this.dialogref.close()
   }
 
 }

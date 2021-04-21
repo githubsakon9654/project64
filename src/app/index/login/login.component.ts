@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
         this.userService.getUser(username).subscribe(
           data => {
             this.userService.saveUser(data.user.id)
+            this.userService.setUsername(data.user.username)
+            console.log(data.user.username)
           }
         )
         console.log('login successful!')

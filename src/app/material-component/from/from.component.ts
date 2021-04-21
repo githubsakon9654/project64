@@ -1,27 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { FromDialogComponent } from '../from-dialog/from-dialog.component';
-import { RevealDialogComponent} from '../reveal/dialog/reveal-dialog/reveal-dialog.component';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { FromDialogComponent } from './dialog/from-dialog/from-dialog.component';
+import { TokenStorageService } from '../../shared/service/token-storage.service';
+import { OfferService } from '../../shared/service/offer.service';
+import { FromDetailComponent } from './dialog/from-detail/from-detail.component';
 
 @Component({
   selector: 'app-from',
@@ -33,22 +15,80 @@ export class FromComponent implements OnInit {
   public row:Array<any> = [];
   key :string = '';
   name: String = '';
+  isChecked: boolean = false;
+  offer:boolean = false;
+  IsAdmin : boolean = false
+  IsUser : boolean = false
+  IsDircetor : boolean = false
+  role:Array<any> = []
 
-  constructor(public dialog: MatDialog) { }
+
+  constructor(
+    public dialog: MatDialog,
+    private token:TokenStorageService,
+    private offerService: OfferService
+    ) { }
 
   ngOnInit(): void {
+    this.Role()
+    this.getOffer()
+    this.loadTable()
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
+  displayedColumns: string[] = ['id', 'offer_name', 'offer_status'];
+
 
   test(row:any){
-    const dialogRef = this.dialog.open(FromDialogComponent);
-    dialogRef.componentInstance.name = row.name
-    dialogRef.componentInstance.position = row.position
-    dialogRef.componentInstance.weight = row.weight
-    dialogRef.componentInstance.symbol = row.symbol
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(FromDialogComponent,{
+      width: '1500px',
+      data: {id: row.id}
     });
-    console.log(row)
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadTable()
+    });
+
+  }
+
+  loadTable(){
+    this.offerService.get_list_offer().subscribe(
+      data => {
+        console.log(data)
+        this.row = data.offers
+      }
+    )
+  }
+
+  setOffer(){
+    this.offerService.set_offer(this.isChecked).subscribe(
+      data =>{
+        console.log(data)
+        this.getOffer()
+      }
+      )
+    }
+
+    getOffer(){
+      this.offerService.get_offer().subscribe(
+        data => {
+          this.offer = data.appove
+          this.isChecked = data.appove
+      }
+    )
+  }
+
+  openDetail(){
+    console.log('test')
+    const dialog = this.dialog.open(FromDetailComponent,{
+      width: '1500px'
+    })
+    dialog.afterClosed().subscribe(result => {
+      this.loadTable()
+      this.offerService.clear()
+    });
+  }
+
+  Role(){
+    this.role = this.token.getRole()
+    this.IsUser = this.role[1].IsUser
+    console.log(this.IsUser)
   }
 }

@@ -39,13 +39,18 @@ import { RevealDialogComponent } from './reveal/dialog/reveal-dialog/reveal-dial
 import { BorrowDurableComponent } from './borrow-durable/borrow-durable.component';
 import { DialogBorComponent } from './dialog-bor/dialog-bor.component';
 import { FromComponent } from './from/from.component';
-import { FromDialogComponent } from './from-dialog/from-dialog.component';
+import { FromDialogComponent } from './from/dialog/from-dialog/from-dialog.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { BuyComponent } from './buy/buy.component';
 import { BuyformComponent } from './buy/buyDialog/buyform/buyform.component';
 import { BuyDetailComponent } from './buy/buyDialog/buy-detail/buy-detail.component';
 import { RevelListComponent } from './revel-list/revel-list.component';
+import { RevealDetailComponent } from './reveal/dialog/reveal-detail/reveal-detail.component';
+import { FromDetailComponent } from './from/dialog/from-detail/from-detail.component';
+import { UserDeleteComponent ,UserResetComponent} from './user-detail/dialog/user-delete/user-delete.component';
+import { InsertDurableComponent,UpdateDurableComponent,DeleteDurableComponent } from './durablelist/dialog/insert-durable/insert-durable.component';
+import { BorrowListComponent } from './borrow-list/borrow-list.component';
 
 
 @NgModule({
@@ -65,7 +70,9 @@ import { RevelListComponent } from './revel-list/revel-list.component';
     ButtonsComponent,
     GridComponent,
     ListsComponent,
+    UpdateDurableComponent,
     MenuComponent,
+    DeleteDurableComponent,
     TabsComponent,
     StepperComponent,
     ExpansionComponent,
@@ -78,6 +85,7 @@ import { RevelListComponent } from './revel-list/revel-list.component';
     TooltipComponent,
     SnackbarComponent,
     SliderComponent,
+    UserResetComponent,
     SupplieInsertComponent,
     SupplieDeleteComponent,
     SupplieUpdateComponent,
@@ -96,7 +104,12 @@ import { RevelListComponent } from './revel-list/revel-list.component';
     BuyComponent,
     BuyformComponent,
     BuyDetailComponent,
-    RevelListComponent
+    RevelListComponent,
+    RevealDetailComponent,
+    FromDetailComponent,
+    UserDeleteComponent,
+    InsertDurableComponent,
+    BorrowListComponent
   ]
 })
 export class MaterialComponentsModule {}

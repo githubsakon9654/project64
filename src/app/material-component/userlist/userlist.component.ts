@@ -35,10 +35,17 @@ export class UserlistComponent implements OnInit {
     });
   }
   openDetail(row: any){
-    const detail = this.dialog.open(UserDetailComponent);
-    detail.componentInstance.name = row.username
+    const detail = this.dialog.open(UserDetailComponent,{
+      width: '1500px',
+      data: {id: row.id,username: row.username, fullname:row.fullname, classes: row.classes, price: row.price}
+    });
+    detail.afterClosed().subscribe(
+      r => {
+        this.loadUser()
+      }
+    )
   }
 
-  displayedColumns: string[] = ['id','username', 'fullname','class' , 'price'];
+  displayedColumns: string[] = ['id','username', 'fullname','classes' , 'price'];
 
 }

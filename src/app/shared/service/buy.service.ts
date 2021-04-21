@@ -16,6 +16,17 @@ export interface Item {
   unit_name: string;
 }
 
+export interface DialogData {
+  id : number;
+  username: string;
+  fullname: string;
+  price: number;
+  classes: string;
+  keys: string;
+  keytwo: string;
+  status:boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +43,18 @@ export class BuyService {
 
   getBuyList(): Observable<any>{
     return this.http.get(API_URL + 'listAll');
+  }
+
+  getDetail(id:number): Observable<any>{
+    return this.http.post(API_URL + 'byid',{id});
+  }
+
+  setBuyStatus(id:number,status:boolean) : Observable<any>{
+    return this.http.post(API_URL + 'update',{id,status})
+  }
+  clear(){
+    let t = this.item = []
+    this.source$.next(t)
   }
 
 
@@ -109,3 +132,5 @@ export class BuyService {
 
 
 }
+
+

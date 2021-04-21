@@ -7,7 +7,7 @@ const USER_KEY = 'auth-user';
   providedIn: 'root'
 })
 export class TokenStorageService {
-
+  private roles: string[] = [];
   constructor() { }
 
   signOut():void {
@@ -37,4 +37,32 @@ export class TokenStorageService {
     return {};
   }
 
+  public getRole() {
+    const user = this.getUser();
+    this.roles = user.roles[0];
+    var IsAdmin : boolean = false
+    var IsUser : boolean = false
+    var IsDircetor : boolean = false
+    const roles = [
+      {IsAdmin},
+      {IsUser},
+      {IsDircetor}
+    ]
+
+    if(this.roles == ["ROLE_USER"]){
+      IsUser = this.roles.includes('ROLE_USER');
+      roles[1].IsUser = IsUser
+    } else if(this.roles == ["ROLE_ADMIN"]){
+      IsAdmin = this.roles.includes('ROLE_ADMIN');
+      roles[0].IsAdmin = IsAdmin
+    } else if(this.roles == ["ROLE_DIRECTOR"]){
+      IsDircetor = this.roles.includes('ROLE_DIRECTOR')
+      roles[2].IsDircetor = IsDircetor
+    }
+
+
+    return roles
+  }
+
 }
+

@@ -5,3 +5,6 @@ dialog {
 table {
     width: 100%;
 }
+button{
+  margin-top: 10px;
+}
