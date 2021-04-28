@@ -41,6 +41,9 @@ export class UserService {
   getUser(username:string): Observable<any> {
     return this.http.post(API_URL + 'finduser', {username});
   }
+  getUserId(id:number): Observable<any> {
+    return this.http.post(API_URL + 'findid', {id});
+  }
 
   getModeratorBoard(): Observable<any> {
     return this.http.get(API_URL + 'mod', { responseType: 'text' });

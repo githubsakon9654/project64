@@ -57,6 +57,8 @@ import { ReturnFormComponent } from './durable-return/dialog/return-form/return-
 import { DurableComponent } from './durable-return/dialog/durable/durable.component';
 import { ReturnDetailComponent } from './durable-return/dialog/return-detail/return-detail.component';
 import { DurableOwnComponent } from './durable-own/durable-own.component';
+import { ProfileComponent } from './profile/profile.component';
+import { PasswordComponent } from './profile/dialog/password/password.component';
 
 @NgModule({
   imports: [
@@ -121,7 +123,9 @@ import { DurableOwnComponent } from './durable-own/durable-own.component';
     ReturnFormComponent,
     DurableComponent,
     ReturnDetailComponent,
-    DurableOwnComponent
+    DurableOwnComponent,
+    ProfileComponent,
+    PasswordComponent
   ]
 })
 export class MaterialComponentsModule {}

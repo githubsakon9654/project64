@@ -29,12 +29,13 @@ import { RevelListComponent} from './revel-list/revel-list.component'
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
 import { DurableReturnComponent } from './durable-return/durable-return.component';
 import { DurableOwnComponent } from './durable-own/durable-own.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 export const MaterialRoutes: Routes = [
   {
-    path: 'button',
-    component: ButtonsComponent
+    path: 'profile',
+    component: ProfileComponent
   },
   {
     path: 'reveal',

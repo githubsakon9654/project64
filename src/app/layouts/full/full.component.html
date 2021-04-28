@@ -41,7 +41,7 @@
         <!-- ============================================================== -->
 
 
-        <button *ngIf="isLoggedIn" mat-stroked-button color="primary" (click)="profile()" style="background-color: rgb(255, 255, 255);" class="name">{{ username }}</button>
+        <button *ngIf="isLoggedIn" mat-stroked-button color="primary" style="background-color: rgb(255, 255, 255);" class="name">{{ username }}</button>
         <button class="login" mat-mini-fab color="basic" (click)="logout()"><mat-icon>lock</mat-icon></button>
         <app-header></app-header>
     </mat-toolbar>
