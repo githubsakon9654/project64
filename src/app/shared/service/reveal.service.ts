@@ -117,6 +117,13 @@ export class RevealService {
     return this.http.post(API_URL + 'updateAppove',{id,admin_approve,dire_approvev});
   }
 
+  reportByUser(id:number){
+    return window.open('http://localhost:8080/api/report/revealuser/' + id)
+  }
+  reportDetail(id:number){
+    return window.open('http://localhost:8080/api/report/revealdetail/' + id)
+  }
+
 
 }
 

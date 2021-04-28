@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MenuItems, MenuUser } from '../../../shared/menu-items/menu-items';
+import { MenuItems} from '../../../shared/menu-items/menu-items';
 import { RevealService } from '../../../shared/service/reveal.service';
 
 @Component({
@@ -18,7 +18,6 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public menuUser: MenuUser,
     public menuItems: MenuItems,
     private list: RevealService
   ) {
@@ -41,14 +40,14 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
 
   isAdmin(){
     if(localStorage.getItem('auth') == 'ROLE_USER'){
-      this.menu = this.menuUser.getMenuitem()
-      console.log(this.role)
-      console.log('user')
-    } else {
+      this.menu = this.menuItems.getMenuUser()
+      console.log(localStorage.getItem('auth'))
+    } else if(localStorage.getItem('auth') == 'ROLE_DIRECTOR'){
+      this.menu = this.menuItems.getMenuDirector()
+      console.log(localStorage.getItem('auth'))
+    } else if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
       this.menu = this.menuItems.getMenuitem()
-      console.log(this.role)
-      console.log('not')
-
+      console.log(localStorage.getItem('auth'))
     }
   }
 }

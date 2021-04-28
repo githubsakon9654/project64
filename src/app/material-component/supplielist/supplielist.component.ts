@@ -80,6 +80,11 @@ export class SupplielistComponent implements OnInit {
     )
   }
 
+  report(){
+    this.supplieServie.reportSupplie()
+    console.log('print')
+  }
+
   openDetail(e:any){
     const name = e.supplie_name;
     const id = e.id;

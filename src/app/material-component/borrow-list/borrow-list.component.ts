@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { SupplieService } from '../../shared/service/supplie.service';
 import { UserService} from '../../shared/service/user.service'
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { BorrowService,Item} from '../../shared/service/borrow.service';
 import { DurableService} from '../../shared/service/durable.service';
 import { BorrowDurableComponent } from '../borrow-durable/borrow-durable.component';
+import { BorrowDetailComponent } from '../borrow-detail/borrow-detail.component';
 
 @Component({
   selector: 'app-borrow-list',
@@ -47,15 +47,14 @@ export class BorrowListComponent implements OnInit {
 
   loadTable(){
     const id = Number(this.userService.getId())
+    console.log(id)
     this.role = this.tokenStorageService.getRole()
-    console.log(this.role)
     this.isUser = this.role[1].IsUser
 
     if(this.isUser){
       this.Source.getBorrowUserList(id).subscribe(
         data => {
-          this.table = data.reveal
-
+          this.table = data.borrow
         }
       )
 
@@ -69,7 +68,14 @@ export class BorrowListComponent implements OnInit {
     }
   }
 
-  openDetail(){
-
+  openDetail(row:any){
+    const detail = this.dialog.open(BorrowDetailComponent,{
+      width: '1500px',
+      data: {id: row.id}
+    })
+    detail.afterClosed().subscribe(s => {
+      this.loadTable()
+    })
+    console.log(row.id)
   }
 }

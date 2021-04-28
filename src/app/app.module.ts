@@ -20,7 +20,6 @@ import { SpinnerComponent } from './shared/spinner.component';
 import { LoginComponent } from './index/login/login.component';
 import { RegisterComponent } from './material-component/register/register.component';
 import { HomeComponent } from './index/home/home.component';
-import { ProfileComponent } from './index/profile/profile.component';
 import { BoardAdminComponent } from './index/board-admin/board-admin.component';
 import { BoardModeratorComponent } from './index/board-moderator/board-moderator.component';
 import { BoardUserComponent } from './index/board-user/board-user.component';
@@ -36,7 +35,6 @@ import { authInterceptorProviders  } from './helper/auth.interceptor';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
     BoardUserComponent

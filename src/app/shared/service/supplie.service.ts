@@ -37,4 +37,8 @@ export class SupplieService {
     return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units});
   }
 
+  reportSupplie(){
+    return window.open('http://localhost:8080/api/report/supplielist');
+  }
+
 }

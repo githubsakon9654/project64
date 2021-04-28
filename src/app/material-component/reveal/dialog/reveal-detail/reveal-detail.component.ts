@@ -52,7 +52,7 @@ export class RevealDetailComponent implements OnInit {
         console.log(data.reveal)
         this.table = data.reveal
         this.name = data.reveal[0].fullname
-        this.cls = data.reveal[0].class
+        this.cls = data.reveal[0].classes
         this.total = data.reveal[0].total_price
         this.adminApp = data.appove[0].admin_approve
         this.direApp = data.appove[0].dire_approvev
@@ -79,6 +79,10 @@ export class RevealDetailComponent implements OnInit {
     this.revealService.updateApprove(this.revealID,this.adminApp,this.direApp).subscribe(
       data =>{}
     )
+  }
+
+  reportDetail(){
+    this.revealService.reportDetail(this.revealID)
   }
 
 

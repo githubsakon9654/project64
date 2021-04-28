@@ -10,6 +10,7 @@ export interface Item {
   du_status: number;
   du_serial: number;
   unit_name: string;
+  key:string;
 }
 
 @Injectable({
@@ -60,6 +61,14 @@ export class BorrowService {
 
   insertBorrow(userId:number,borrow_name:string,durable:Array<any>):Observable<any>{
     return this.http.post(API_URL + 'insert',{userId,borrow_name,durable});
+  }
+
+  detailBorrow(id:number) :Observable<any> {
+    return this.http.post(API_URL + 'detail',{id})
+  }
+
+  updateApprove(id:number,admin_approve:boolean,dire_approvev:boolean,durable:Array<any>): Observable<any> {
+    return this.http.post(API_URL + 'updateAppove',{id,admin_approve,dire_approvev,durable});
   }
 
 }

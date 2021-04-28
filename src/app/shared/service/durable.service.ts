@@ -16,6 +16,9 @@ export class DurableService {
   getAllDurable(): Observable<any>{
     return this.http.get(API_URL + 'listAll')
   }
+  getUserDurable(id:number): Observable<any>{
+    return this.http.post(API_URL + 'userlist',{id});
+  }
 
   create(du_name:string,du_status:string,du_serial:string): Observable<any>{
     return this.http.post(API_URL + 'insert',{du_name,du_status,du_serial})
@@ -33,6 +36,10 @@ export class DurableService {
     return this.http.post(API_URL + 'fillter',{filter})
   }
 
+  updateOwnerNull(id:number,userId:number| null): Observable<any> {
+    return this.http.post(API_URL + 'update',{id,userId});
+  }
+
 }
 
 export interface Item {
@@ -41,4 +48,5 @@ export interface Item {
   du_status: number;
   du_serial: number;
   unit_name: string;
+  userId:number;
 }

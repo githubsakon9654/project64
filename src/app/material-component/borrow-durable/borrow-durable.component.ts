@@ -25,7 +25,7 @@ export class BorrowDurableComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id', 'du_name','du_serial', 'du_status'];
+  displayedColumns: string[] = ['id', 'du_name','du_serial', 'du_status','delete'];
 
   loadTable(){
     this.Source.source$.subscribe({
@@ -37,7 +37,9 @@ export class BorrowDurableComponent implements OnInit {
 
 
   keytest(){
-    const dialogRef = this.dialog.open(DialogBorComponent);
+    const dialogRef = this.dialog.open(DialogBorComponent,{
+      data: {key:'borrow'}
+    });
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       localStorage.removeItem('filterKey');
@@ -69,6 +71,11 @@ export class BorrowDurableComponent implements OnInit {
       console.log(durable)
     }
     this.dialogRef.close()
+  }
+
+  deleteRow(row:any){
+    const table = [row]
+    this.Source.removeServices(table)
   }
 
 }

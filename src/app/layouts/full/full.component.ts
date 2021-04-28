@@ -1,7 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component,OnDestroy,AfterViewInit, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItems, MenuUser } from '../../shared/menu-items/menu-items';
+import { MenuItems } from '../../shared/menu-items/menu-items';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { UserService} from '../../shared/service/user.service'
 
@@ -24,7 +24,6 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    public menuItems: MenuUser,
     private tokenStorageService: TokenStorageService,
     public routes: Router,
     private userService: UserService
@@ -62,6 +61,10 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
   ngAfterViewInit() {}
+
+  profile(){
+    this.routes.navigateByUrl('/profile')
+  }
 
   link(){
     this.routes.navigateByUrl('/login')

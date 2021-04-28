@@ -60,4 +60,8 @@ export class BuyDetailComponent implements OnInit {
     )
   }
 
+  reportbuyform(){
+    this.buyService.reportbuyform(this.id)
+  }
+
 }

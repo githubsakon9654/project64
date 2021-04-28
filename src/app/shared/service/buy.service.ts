@@ -129,7 +129,9 @@ export class BuyService {
       this.calculatorTotal()
   }
 
-
+  reportbuyform(id:number){
+    return window.open('http://localhost:8080/api/report/buyform/' + id)
+  }
 
 }
 

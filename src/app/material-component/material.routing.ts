@@ -27,6 +27,8 @@ import { UserlistComponent } from './userlist/userlist.component';
 import { BuyComponent } from './buy/buy.component';
 import { RevelListComponent} from './revel-list/revel-list.component'
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
+import { DurableReturnComponent } from './durable-return/durable-return.component';
+import { DurableOwnComponent } from './durable-own/durable-own.component';
 
 
 export const MaterialRoutes: Routes = [
@@ -39,12 +41,20 @@ export const MaterialRoutes: Routes = [
     component: RevelListComponent
   },
   {
+    path: 'owndurable',
+    component: DurableOwnComponent
+  },
+  {
     path: 'supplie',
     component: SupplielistComponent
   },
   {
     path: 'durable',
     component: DurablelistComponent
+  },
+  {
+    path: 'return',
+    component: DurableReturnComponent
   },
   {
     path: 'bor-durable',

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService} from '../../shared/service/auth.service';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
-import { MenuUser,MenuItems} from '../../shared/menu-items/menu-items';
+
 import { UserService} from '../../shared/service/user.service'
 
 

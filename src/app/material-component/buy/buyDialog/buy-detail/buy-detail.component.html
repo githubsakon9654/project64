@@ -6,6 +6,8 @@
     <div *ngIf="buy_status">รับทราบแล้ว</div>
     <div *ngIf="!buy_status">ยืนยันรับทราบแบบสั่งซื้อ</div>
   </mat-slide-toggle>
+<br>
+  <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
   <table mat-table [dataSource]="dataRow" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.

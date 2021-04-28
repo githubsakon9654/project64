@@ -6,6 +6,9 @@
   <button mat-raised-button color="primary" (click)="openDialog()">
     เพิ่มพัสดุ
   </button>
+  <button mat-raised-button color="primary" (click)="report()">
+    พิมพ์รายการพัสดุ
+  </button>
   <br>
   <br>
 	<table mat-table [dataSource]="sup_row" class="mat-elevation-z8">
@@ -23,7 +26,7 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="supplie_name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th mat-header-cell *matHeaderCellDef> ชื่อพัสดุ </th>
       <td mat-cell *matCellDef="let element"> {{element.supplie_name}} </td>
     </ng-container>
 

@@ -49,9 +49,14 @@ import { RevelListComponent } from './revel-list/revel-list.component';
 import { RevealDetailComponent } from './reveal/dialog/reveal-detail/reveal-detail.component';
 import { FromDetailComponent } from './from/dialog/from-detail/from-detail.component';
 import { UserDeleteComponent ,UserResetComponent} from './user-detail/dialog/user-delete/user-delete.component';
-import { InsertDurableComponent,UpdateDurableComponent,DeleteDurableComponent } from './durablelist/dialog/insert-durable/insert-durable.component';
+import { InsertDurableComponent,UpdateDurableComponent,DeleteDurableComponent,SetnullDurableComponent } from './durablelist/dialog/insert-durable/insert-durable.component';
 import { BorrowListComponent } from './borrow-list/borrow-list.component';
-
+import { BorrowDetailComponent } from './borrow-detail/borrow-detail.component';
+import { DurableReturnComponent } from './durable-return/durable-return.component';
+import { ReturnFormComponent } from './durable-return/dialog/return-form/return-form.component';
+import { DurableComponent } from './durable-return/dialog/durable/durable.component';
+import { ReturnDetailComponent } from './durable-return/dialog/return-detail/return-detail.component';
+import { DurableOwnComponent } from './durable-own/durable-own.component';
 
 @NgModule({
   imports: [
@@ -72,6 +77,7 @@ import { BorrowListComponent } from './borrow-list/borrow-list.component';
     ListsComponent,
     UpdateDurableComponent,
     MenuComponent,
+    SetnullDurableComponent,
     DeleteDurableComponent,
     TabsComponent,
     StepperComponent,
@@ -109,7 +115,13 @@ import { BorrowListComponent } from './borrow-list/borrow-list.component';
     FromDetailComponent,
     UserDeleteComponent,
     InsertDurableComponent,
-    BorrowListComponent
+    BorrowListComponent,
+    BorrowDetailComponent,
+    DurableReturnComponent,
+    ReturnFormComponent,
+    DurableComponent,
+    ReturnDetailComponent,
+    DurableOwnComponent
   ]
 })
 export class MaterialComponentsModule {}

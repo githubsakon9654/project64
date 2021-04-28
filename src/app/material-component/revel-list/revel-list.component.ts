@@ -19,7 +19,7 @@ export class RevelListComponent implements OnInit {
   adAppove: boolean = false
   diAppove: boolean = false
   isUser: boolean = false
-
+  id = 0
   constructor(
     public dialog: MatDialog,
     public Source: RevealService,
@@ -55,13 +55,13 @@ export class RevelListComponent implements OnInit {
   }
 
   loadTable(){
-    const id = Number(this.userService.getId())
+    this.id = Number(this.userService.getId())
     this.role = this.tokenStorageService.getRole()
     console.log(this.role)
     this.isUser = this.role[1].IsUser
 
     if(this.isUser){
-      this.Source.getRevealUserList(id).subscribe(
+      this.Source.getRevealUserList(this.id).subscribe(
         data => {
           this.table = data.reveal
 
@@ -76,6 +76,10 @@ export class RevelListComponent implements OnInit {
         }
       )
     }
+  }
+
+  reportByUser(){
+    this.Source.reportByUser(this.id)
   }
 
 }
