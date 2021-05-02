@@ -78,4 +78,8 @@ export class BorrowListComponent implements OnInit {
     })
     console.log(row.id)
   }
+
+  openReport(){
+    this.Source.reportBorrow()
+  }
 }

@@ -2,6 +2,7 @@
   <mat-card-content>
     <h3>แบบสั่งซื้อ</h3>
     <button mat-raised-button color="primary" (click)="openform()">สั่งซื้อ</button>
+    <button mat-raised-button color="primary" (click)="reportBuyList()">พิมพ์รายการสั่งซื้อ</button>
     <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.

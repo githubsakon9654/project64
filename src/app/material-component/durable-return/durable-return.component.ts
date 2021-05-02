@@ -86,6 +86,10 @@ export class DurableReturnComponent implements OnInit {
   }
 
   report(){
-    this.Source.reportReturn(+this.id)
+    if(this.isUser){
+      this.Source.reportReturn(+this.id)
+    } else {
+      this.Source.reportAll()
+    }
   }
 }

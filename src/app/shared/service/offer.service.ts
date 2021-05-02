@@ -72,6 +72,10 @@ export class OfferService {
       });
   }
 
+  report(){
+    return window.open('http://localhost:8080/api/report/offerlist')
+  }
+
   calculatorTotal(): Number {
     let t = this.item.reduce((previoueValue, currentValue) => +previoueValue + +currentValue.price * +currentValue.unit, 0)
     this.total$.next(t)

@@ -95,4 +95,8 @@ export class ReturnDetailComponent implements OnInit,OnDestroy {
     })
   }
 
+  report(){
+    this.returnService.reportDetail(+this.data.id)
+  }
+
 }

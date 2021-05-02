@@ -27,6 +27,14 @@ export class SupplieService {
     return this.http.post(API_URL + 'update',{id,supplie_name,price, unit,unit_name});
   }
 
+  updateUnitSupplie(id:number,unit:number): Observable<any> {
+    return this.http.post(API_URL + 'update',{id,unit});
+  }
+
+  getSupById(id:number): Observable<any>{
+    return this.http.get(API_URL + 'getsup/' + id);
+  }
+
   filter(filter: string): Observable<any>{
     return this.http.post(API_URL+'filter', {
         filter

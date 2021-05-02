@@ -79,4 +79,11 @@ export class ReturnsService {
   reportReturn(id:number){
     return window.open('http://localhost:8080/api/report/return/' + id)
   }
+  reportAll(){
+    return window.open('http://localhost:8080/api/report/returnAll')
+  }
+
+  reportDetail(id:number){
+    return window.open('http://localhost:8080/api/report/returnDetail/' + id)
+  }
 }

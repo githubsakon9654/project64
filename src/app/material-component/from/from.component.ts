@@ -64,9 +64,13 @@ export class FromComponent implements OnInit {
         this.getOffer()
       }
       )
-    }
+  }
 
-    getOffer(){
+  openReport(){
+    this.offerService.report()
+  }
+
+  getOffer(){
       this.offerService.get_offer().subscribe(
         data => {
           this.offer = data.appove

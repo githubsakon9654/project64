@@ -133,6 +133,10 @@ export class BuyService {
     return window.open('http://localhost:8080/api/report/buyform/' + id)
   }
 
+  reportBuylist(){
+    return window.open('http://localhost:8080/api/report/buylist')
+  }
+
 }
 
 

@@ -3,7 +3,9 @@
   <p>ชื่อผู้ขอยืม : {{name}}</p>
   <p>ชั้นเรียน : {{cls}}</p>
   <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()">
-    ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
+    ยืนยันรายการคืน(ผู้ดูแล)</mat-slide-toggle>
+    <br>
+  <button *ngIf="adminApp" mat-raised-button color="primary" (click)="report()">พิมพ์รายการคืนครุภัณฑ์</button>
   <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.

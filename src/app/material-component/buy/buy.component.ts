@@ -48,6 +48,10 @@ export class BuyComponent implements OnInit {
     )
   }
 
+  reportBuyList(){
+    this.buyService.reportBuylist()
+  }
+
   openform(){
     const userId = this.userService.getId()
     console.log(userId)

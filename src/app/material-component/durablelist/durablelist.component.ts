@@ -42,6 +42,10 @@ export class DurablelistComponent implements OnInit {
     )
   }
 
+  openReport(){
+    this.durableService.reportDurable()
+  }
+
   openInsert(){
     const dialog = this.dialog.open(InsertDurableComponent,{
       width: '800px'

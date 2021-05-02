@@ -71,4 +71,8 @@ export class BorrowService {
     return this.http.post(API_URL + 'updateAppove',{id,admin_approve,dire_approvev,durable});
   }
 
+  reportBorrow(){
+    return window.open('http://localhost:8080/api/report/borrowlist')
+  }
+
 }

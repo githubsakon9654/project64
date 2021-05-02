@@ -39,6 +39,9 @@ export class DurableService {
   updateOwnerNull(id:number,userId:number| null): Observable<any> {
     return this.http.post(API_URL + 'update',{id,userId});
   }
+  reportDurable(){
+    return window.open('http://localhost:8080/api/report/durablelist');
+  }
 
 }
 

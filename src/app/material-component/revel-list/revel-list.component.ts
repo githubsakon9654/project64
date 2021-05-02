@@ -79,7 +79,12 @@ export class RevelListComponent implements OnInit {
   }
 
   reportByUser(){
-    this.Source.reportByUser(this.id)
+    if(!this.isUser){
+      this.Source.reportList()
+    } else{
+
+      this.Source.reportByUser(this.id)
+    }
   }
 
 }

@@ -4,6 +4,8 @@
         <h3 style="margin-right: 10px;">เปิดแบบสำรวจ</h3>
       </mat-slide-toggle>
       <button *ngIf="offer" mat-raised-button color="primary" (click)="openDetail()">สร้างแบบสำรวจ</button>
+      <br>
+      <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="openReport()">พิมพ์รายการแบบเสนอ</button>
         <table mat-table [dataSource]="row" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.

@@ -41,8 +41,6 @@ export class RevealService {
         this.calculatorTotal()
   }
 
-
-
   calculatorTotal(): Number {
       let t = this.item.reduce((previoueValue, currentValue) => +previoueValue + +currentValue.price * +currentValue.unit, 0)
       this.total$.next(t)
@@ -69,7 +67,7 @@ export class RevealService {
     })
     this.source$.next(this.item)
     this.calculatorTotal()
-}
+  }
 
   removeServices(items: Array<Item>) {
     items.forEach(n => {
@@ -122,6 +120,9 @@ export class RevealService {
   }
   reportDetail(id:number){
     return window.open('http://localhost:8080/api/report/revealdetail/' + id)
+  }
+  reportList(){
+    return window.open('http://localhost:8080/api/report/reveallist')
   }
 
 

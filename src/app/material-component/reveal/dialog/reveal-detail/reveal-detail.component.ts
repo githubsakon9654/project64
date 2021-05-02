@@ -2,6 +2,7 @@ import { Component, OnInit,Inject} from '@angular/core';
 import { RevealService,Item } from '../../../../shared/service/reveal.service';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TokenStorageService } from '../../../../shared/service/token-storage.service';
+import { SupplieService } from 'src/app/shared/service/supplie.service';
 
 
 export interface DialogData {
@@ -31,10 +32,12 @@ export class RevealDetailComponent implements OnInit {
   isDirec: boolean = false;
   revealID:number = 0;
   private roles: string[] = [];
+  public length:number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<RevealDetailComponent>,
     private revealService: RevealService,
+    private supService: SupplieService,
     private token:TokenStorageService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) { }
@@ -51,6 +54,8 @@ export class RevealDetailComponent implements OnInit {
       data => {
         console.log(data.reveal)
         this.table = data.reveal
+        this.length = this.table.length;
+        console.log(this.length)
         this.name = data.reveal[0].fullname
         this.cls = data.reveal[0].classes
         this.total = data.reveal[0].total_price
@@ -71,6 +76,31 @@ export class RevealDetailComponent implements OnInit {
     this.isUser = this.roles.includes('ROLE_USER');
     console.log(this.isAdmin)
     console.log(this.isDirec)
+  }
+
+  updateUnit(){
+    if(this.adminApp && this.direApp){
+      for (var i =0; i<this.length;i++){
+        var id = 0
+        var unit:number = 0
+        var tunit:number = this.table[i].unit
+        console.log(this.table[i].supplieId)
+        this.supService.getSupById(this.table[i].supplieId).subscribe(
+          data => {
+            console.log(data.supplie.unit)
+            unit = data.supplie.unit
+            unit = unit - tunit
+            console.log(unit)
+            console.log(data.supplie.id)
+            this.supService.updateUnitSupplie(data.supplie.id,unit).subscribe(
+              data=>{}
+            )
+          }
+          )
+      }
+    } else{
+      console.log(false)
+    }
   }
 
   Appove(){
