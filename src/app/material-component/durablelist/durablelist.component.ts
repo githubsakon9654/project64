@@ -13,7 +13,7 @@ import { from } from 'rxjs';
 })
 export class DurablelistComponent implements OnInit {
   datarow = []
-  userRole = false
+  userRole:boolean = false
   private roles: Array<any> =[]
   constructor(
     private durableService: DurableService,

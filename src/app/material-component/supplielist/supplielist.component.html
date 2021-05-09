@@ -3,7 +3,7 @@
 	<mat-card-title >รายการพัสดุ</mat-card-title>
   <br>
   <div>
-  <button mat-raised-button color="primary" (click)="openDialog()">
+  <button *ngIf="!userRole" mat-raised-button color="primary" (click)="openDialog()">
     เพิ่มพัสดุ
   </button>
   <button mat-raised-button color="primary" (click)="report()">

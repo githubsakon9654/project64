@@ -6,7 +6,8 @@
   <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
   <br>
   <mat-slide-toggle [disabled]="isAdmin || isUser"  [(ngModel)]="direApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้อำนวยการ)</mat-slide-toggle>
-  <button mat-raised-button color="primary" (click)=" reportDetail()">พิมพ์</button>
+  <br>
+  <button *ngIf="adminApp && direApp" mat-raised-button color="primary" (click)=" reportDetail()">พิมพ์</button>
   <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.

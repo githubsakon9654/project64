@@ -74,5 +74,8 @@ export class BorrowService {
   reportBorrow(){
     return window.open('http://localhost:8080/api/report/borrowlist')
   }
+  reportBorrowUser(id:number){
+    return window.open('http://localhost:8080/api/report/borrowlist/' + id)
+  }
 
 }

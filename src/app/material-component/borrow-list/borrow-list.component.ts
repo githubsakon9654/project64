@@ -18,6 +18,7 @@ export class BorrowListComponent implements OnInit {
   adAppove: boolean = false
   diAppove: boolean = false
   isUser: boolean = false
+  uId:number = 0;
 
   constructor(
         public Source: BorrowService,
@@ -48,6 +49,7 @@ export class BorrowListComponent implements OnInit {
   loadTable(){
     const id = Number(this.userService.getId())
     console.log(id)
+    this.uId = id
     this.role = this.tokenStorageService.getRole()
     this.isUser = this.role[1].IsUser
 
@@ -80,6 +82,10 @@ export class BorrowListComponent implements OnInit {
   }
 
   openReport(){
-    this.Source.reportBorrow()
+    if(this.isUser){
+      this.Source.reportBorrowUser(this.uId)
+    } else{
+      this.Source.reportBorrow()
+    }
   }
 }
