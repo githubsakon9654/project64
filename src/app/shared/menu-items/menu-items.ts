@@ -24,6 +24,7 @@ const MENUADMIN = [
   { state: 'durable', name: 'รายการครุภัณฑ์', type: 'link', icon: 'view_list' },
   { state: 'reveal', type: 'link', name: 'เบิกพัสดุ', icon: 'wysiwyg' },
   { state: 'bor-durable', type: 'link', name: 'ยืมครุภัณฑ์', icon: 'wysiwyg' },
+  { state: 'owndurable', name: 'ครุภัณฑ์ที่เป็นเจ้าของ', type: 'link', icon: 'view_list' },
   { state: 'return', type: 'link', name: 'คืนครุภัณฑ์', icon: 'view_list' },
   { state: 'from', type: 'link', name: 'แบบสำรวจ', icon: 'view_list' },
   { state: 'userlist', type: 'link', name: 'สมาชิก', icon: 'view_headline' },

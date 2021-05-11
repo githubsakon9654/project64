@@ -42,6 +42,7 @@ export class DurableOwnComponent implements OnInit {
       data => {
         this.datarow = data.durable
         console.log(id)
+        console.log(this.datarow)
       }
     )
   }

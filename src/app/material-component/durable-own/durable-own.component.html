@@ -34,7 +34,7 @@
 		<ng-container matColumnDef="owner">
 		  <th mat-header-cell *matHeaderCellDef> เจ้าของ </th>
 		  <td mat-cell *matCellDef="let element">
-        {{element.userId}}
+        {{element.fullname}}
         <div *ngIf="!element.userId">
           คลัง
         </div>

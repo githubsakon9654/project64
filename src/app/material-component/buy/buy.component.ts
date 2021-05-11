@@ -25,7 +25,7 @@ export class BuyComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id','status','buyprice'];
+  displayedColumns: string[] = ['id','status','buyprice','date'];
 
   openDetail(row:any){
     const dialogDetail = this.dialog.open(BuyDetailComponent,{

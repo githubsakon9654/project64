@@ -35,7 +35,7 @@ export class FromComponent implements OnInit {
     this.getOffer()
     this.loadTable()
   }
-  displayedColumns: string[] = ['id', 'offer_name', 'offer_status'];
+  displayedColumns: string[] = ['id', 'offer_name', 'offer_status','date'];
 
 
   test(row:any){
