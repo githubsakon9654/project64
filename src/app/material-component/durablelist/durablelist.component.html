@@ -37,7 +37,7 @@
 		<ng-container matColumnDef="owner">
 		  <th mat-header-cell *matHeaderCellDef> เจ้าของ </th>
 		  <td mat-cell *matCellDef="let element">
-        {{element.userId}}
+			{{element.fullname}}
         <div *ngIf="!element.userId">
           คลัง
         </div>
@@ -47,6 +47,8 @@
 		<ng-container matColumnDef="button">
 		  <th mat-header-cell *matHeaderCellDef></th>
 		  <td mat-cell *matCellDef="let element">
+		<button mat-icon-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(255, 145, 0);"
+		(click)="openRepair(element)"><mat-icon>build</mat-icon></button>
         <button *ngIf="!userRole" mat-icon-button color="basic" style="color: rgb(255, 196, 0); background-color: rgb(99, 99, 90);"
         (click)="openDetail(element)"><mat-icon>edit</mat-icon></button>
         <button *ngIf="!userRole" mat-icon-button color="warn" style="background-color: rgb(99, 99, 90);"

@@ -30,6 +30,7 @@ export class RevealDetailComponent implements OnInit {
   adminApp: boolean = false;
   direApp: boolean = false;
   isDirec: boolean = false;
+  isAccept: boolean = false;
   revealID:number = 0;
   private roles: string[] = [];
   public length:number = 0;
@@ -61,8 +62,10 @@ export class RevealDetailComponent implements OnInit {
         this.total = data.reveal[0].total_price
         this.adminApp = data.appove[0].admin_approve
         this.direApp = data.appove[0].dire_approvev
+        this.isAccept = data.appove[0].accept
         this.revealID = data.reveal[0].id
         console.log(this.adminApp)
+        console.log(this.isAccept)
         console.log(this.direApp)
       }
     )
@@ -101,6 +104,14 @@ export class RevealDetailComponent implements OnInit {
     } else{
       console.log(false)
     }
+  }
+
+  accept(){
+    this.isAccept = true
+    console.log(this.revealID)
+    this.revealService.updateAccept(this.revealID,this.isAccept).subscribe(
+      d=>{}
+    )
   }
 
   Appove(){

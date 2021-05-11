@@ -13,6 +13,8 @@ export class BorrowDurableComponent implements OnInit {
 
   public row:Array<Item> = [];
   key :string = '';
+  name: string ='';
+  user = []
 
   constructor(
         public Source: BorrowService,
@@ -24,6 +26,15 @@ export class BorrowDurableComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadTable()
+    const username = String (this.userService.getUsername())
+    this.userService.getUser(username).subscribe(
+      data => {
+        this.name = data.user.fullname
+        console.log(this.user)
+        console.log(data.user.fullname)
+      }
+    )
+    console.log(this.name)
   }
   displayedColumns: string[] = ['id', 'du_name','du_serial', 'du_status','delete'];
 
@@ -56,14 +67,13 @@ export class BorrowDurableComponent implements OnInit {
   select(){
     const userId = Number(this.userService.getId())
     const username = String (this.userService.getUsername())
-    console.log(userId)
     const durable : Array<any> = []
     if(userId){
       for(let i=0; i < this.row.length; i++){
         let array = Number(this.row[i].id)
         durable.push(array)
       }
-      this.Source.insertBorrow(userId,username,durable).subscribe(
+      this.Source.insertBorrow(userId,this.name,durable).subscribe(
         data => {
           console.log(data)
         }

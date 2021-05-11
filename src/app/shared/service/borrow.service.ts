@@ -59,12 +59,16 @@ export class BorrowService {
     return this.http.post(API_URL + 'listuser',{userId});
   }
 
-  insertBorrow(userId:number,borrow_name:string,durable:Array<any>):Observable<any>{
-    return this.http.post(API_URL + 'insert',{userId,borrow_name,durable});
+  insertBorrow(userId:number,name:string,durable:Array<any>):Observable<any>{
+    return this.http.post(API_URL + 'insert',{userId,name,durable});
   }
 
   detailBorrow(id:number) :Observable<any> {
     return this.http.post(API_URL + 'detail',{id})
+  }
+
+  update(id:number,accept:boolean): Observable<any>{
+    return this.http.post(API_URL + 'update',{id,accept});
   }
 
   updateApprove(id:number,admin_approve:boolean,dire_approvev:boolean,durable:Array<any>): Observable<any> {

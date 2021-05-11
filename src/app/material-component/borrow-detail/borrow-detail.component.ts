@@ -18,6 +18,7 @@ export class BorrowDetailComponent implements OnInit,OnDestroy {
   adminApp: boolean = false;
   direApp: boolean = false;
   isDirec: boolean = false;
+  isAccept: boolean = false;
   borrowID:number = 0;
   duID:number = 0;
   private roles: string[] = [];
@@ -50,7 +51,10 @@ export class BorrowDetailComponent implements OnInit,OnDestroy {
         this.cls = data.borrow[0].classes
         this.adminApp = data.appove[0].admin_approve
         this.direApp = data.appove[0].dire_approvev
+        this.isAccept = data.appove[0].accept
         this.borrowID = data.borrow[0].id
+        console.log(this.borrowID)
+        console.log(this.isAccept)
       }
     )
   }
@@ -73,6 +77,13 @@ export class BorrowDetailComponent implements OnInit,OnDestroy {
     this.isUser = this.roles.includes('ROLE_USER');
     console.log(this.isAdmin)
     console.log(this.isDirec)
+  }
+
+  accept(){
+    this.isAccept = true
+    this.borrow.update(this.borrowID,this.isAccept).subscribe(
+      d=>{}
+    )
   }
 
   Appove(){

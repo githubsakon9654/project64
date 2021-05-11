@@ -59,6 +59,19 @@ export class SupplielistComponent implements OnInit {
     })
 
   }
+  inputSup(e:any){
+    const name = e.supplie_name;
+    const id = e.id;
+    const unit = e.unit
+    console.log('input')
+    const dialogRef = this.dialog.open(SupplieInputComponent,{
+      width: '350px',
+      data: {id: id, sup_name:name,unit:unit}
+    });
+    dialogRef.afterClosed().subscribe( r => {
+      this.loadRow();
+    })
+  }
 
   deleteRow(e: any){
     const name = e.supplie_name;
@@ -159,6 +172,37 @@ export class SupplieUpdateComponent implements OnInit {
 }
 
 @Component({
+  selector: 'app-supplie-input',
+  templateUrl: 'supplieInput.component.html'
+})
+export class SupplieInputComponent {
+
+  form: any = {
+    unit: null,
+  };
+
+  constructor(
+    public supplieServie: SupplieService,
+    public dialogRef: MatDialogRef<SupplieInputComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+    onSubmit(){
+      var res = (+this.data.unit) + (+this.form.unit)
+      this.input(this.data.id,res)
+      this.dialogRef.close()
+    }
+
+    input(id:number,unit:number){
+      this.supplieServie.updateUnitSupplie(id,unit).subscribe(
+        data => {
+        }
+      )
+    }
+
+}
+
+
+@Component({
   selector: 'app-supplie-delete',
   templateUrl: 'supplieDelete.component.html'
 })
@@ -230,3 +274,4 @@ export class SupplieInsertComponent implements OnInit{
     this.dialogRef.close();
   }
 }
+

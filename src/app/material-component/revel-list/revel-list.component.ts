@@ -31,7 +31,7 @@ export class RevelListComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id', 'admin_approve','dire_approvev', 'total_price', 'delete'];
+  displayedColumns: string[] = ['id','name', 'admin_approve','dire_approvev', 'total_price','date', 'delete'];
 
   openform(){
     const dialog = this.dialog.open(RevealComponent,{
@@ -64,6 +64,7 @@ export class RevelListComponent implements OnInit {
       this.Source.getRevealUserList(this.id).subscribe(
         data => {
           this.table = data.reveal
+          console.log(this.table)
 
         }
       )

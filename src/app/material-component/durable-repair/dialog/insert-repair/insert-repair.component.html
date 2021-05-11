@@ -1,0 +1,44 @@
+<div>
+    <h3>เพิ่มรายการซ่อม</h3>
+    <form  class="example-form"
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidat>
+      <mat-form-field >
+      <mat-label>หัวข้อรายการซ่อม</mat-label>
+      <input matInput
+            matInput placeholder="กรอกชื่อครุภัณฑ์"
+            type="text"
+            class="form-control"
+            name="name"
+            [(ngModel)]="form.name"
+            required
+            #name="ngModel">
+      </mat-form-field>
+      <mat-form-field >
+      <mat-label>รายละเอียด</mat-label>
+      <textarea  matInput
+            matInput placeholder="กรอกชื่อครุภัณฑ์"
+            type="text"
+            class="form-control"
+            name="detail"
+            [(ngModel)]="form.detail"
+            required
+            #detail="ngModel"></textarea>
+      </mat-form-field>
+      <mat-form-field >
+      <mat-label>ราคา</mat-label>
+      <input matInput
+            matInput placeholder="กรอกชื่อครุภัณฑ์"
+            type="text"
+            class="form-control"
+            name="price"
+            [(ngModel)]="form.price"
+            required
+            #price="ngModel">
+      </mat-form-field>
+      <button mat-raised-button color="primary">เพิ่ม</button>
+    </form>
+  </div>
+  

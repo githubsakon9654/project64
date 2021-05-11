@@ -9,10 +9,15 @@ import { TokenStorageService } from '../../../../shared/service/token-storage.se
   styleUrls: ['./password.component.css']
 })
 export class PasswordComponent implements OnInit {
-
+  hide = true;
+  hide2 = true;
+  hide3 = true;
+  status:boolean= false
+  oldpass:number = 0;
   form: any = {
     password: null,
-    newpassword:null
+    newpassword:null,
+    new:null
   };
 
   constructor(
@@ -25,14 +30,26 @@ export class PasswordComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.id)
+    // this.userService.check(+this.data.id).subscribe(
+    //   data => {
+    //     this.oldpass = data.pass
+    //     console.log(this.oldpass)
+    //   }
+    // )
   }
 
   onSubmit() : void {
     const { password,newpassword} = this.form;
+    console.log(password)
 
     this.userService.changePass(+this.data.id,password,newpassword).subscribe(
-      data=>{}
+      data=>{
+        console.log(data.pass)
+        this.status = data.pass
+      }
     )
+
+    this.dialogRef.close(this.status)
   }
 
 }

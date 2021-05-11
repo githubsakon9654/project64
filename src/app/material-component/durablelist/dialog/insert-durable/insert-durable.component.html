@@ -27,7 +27,15 @@
           required
           #du_status="ngModel">
     </mat-form-field>
-    <mat-form-field >
+    <mat-form-field class="example-full-width">
+      <mat-label>ประเภทครุภัณฑ์</mat-label>
+             <mat-select [(ngModel)]="form.du_serial" name="du_serial" #du_serial="ngModel">
+                  <mat-option *ngFor="let food of foods" [value]="food.value" >
+                    {{food.viewValue}}
+                  </mat-option>
+                </mat-select>
+    </mat-form-field>
+    <!-- <mat-form-field >
     <mat-label>เลขซีเรียล</mat-label>
     <input matInput
           matInput placeholder="กรอกเลขซีเรียล"
@@ -37,7 +45,8 @@
           [(ngModel)]="form.du_serial"
           required
           #du_serial="ngModel">
-    </mat-form-field>
+    </mat-form-field> -->
+
     <button mat-raised-button color="primary">เพิ่ม</button>
   </form>
 </div>

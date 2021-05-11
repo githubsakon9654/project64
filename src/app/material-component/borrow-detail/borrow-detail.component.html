@@ -1,5 +1,8 @@
 <mat-dialog-content class="mat-typography">
-
+  <button *ngIf="!isAccept && adminApp && direApp" (click)="accept()" mat-raised-button color="primary" style="margin-left: 92%; background-color: rgb(32, 221, 80); color: rgb(48, 48, 48);">
+    รับพัสดุ
+  </button>
+  <p *ngIf="isAccept"  style="margin-left: 92%; color: rgb(28, 141, 0);">รับพัสดุแล้ว</p>
   <p>ชื่อผู้ขอยืม : {{name}}</p>
   <p>ชั้นเรียน : {{cls}}</p>
   <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>

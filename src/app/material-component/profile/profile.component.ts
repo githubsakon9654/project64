@@ -50,6 +50,12 @@ export class ProfileComponent implements OnInit {
       width: '500px',
       data: {id:this.id}
     })
+    dialog.afterClosed().subscribe(r =>{
+      console.log(r)
+      if(r == false){
+        window.alert('เปลี่ยนรหัสผ่านล้มเหลว รหัสผ่านเก่าผิด')
+      }
+    })
   }
 
 }

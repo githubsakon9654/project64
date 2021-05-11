@@ -3,7 +3,12 @@ import {FormControl} from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TokenStorageService } from 'src/app/shared/service/token-storage.service';
 import { DurableService, Item} from '../../../../shared/service/durable.service';
-
+import {Observable,from } from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+interface Food {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-insert-durable',
   templateUrl: './insert-durable.component.html',
@@ -16,18 +21,28 @@ export class InsertDurableComponent implements OnInit {
     du_status: null,
     du_serial: null,
   };
-
+  
   constructor(
     private dialogRef: MatDialogRef<InsertDurableComponent>,
     private durable: DurableService
-  ) { }
-
-  ngOnInit(): void {}
-
-
-
+    ) { }
+    
+    ngOnInit(): void {
+      
+    }
+    
+  foods: Food[] = [
+    {value: 'TB', viewValue: 'โต๊ะ'},
+    {value: 'CS', viewValue: 'ตู้'},
+    {value: 'CH', viewValue: 'เก้าอี้'},
+    {value: 'OH', viewValue: 'อื่นๆ'}
+  ];
+    
+    
+    
   onSubmit(){
     const {du_name,du_status,du_serial} = this.form
+    console.log(du_serial)
     this.durable.create(du_name,du_status,du_serial).subscribe(
       data => {}
     )

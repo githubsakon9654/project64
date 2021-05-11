@@ -1,0 +1,19 @@
+<h3>นำเข้า {{data.sup_name}}</h3>
+<form class="example-form"
+name="form"
+(ngSubmit)="f.form.valid && onSubmit()"
+#f="ngForm"
+novalidat>
+    <mat-form-field >
+        <mat-label>จำนวน</mat-label>
+        <input matInput
+              matInput placeholder="กรอกจำนวนพัสดุ"
+              type="text"
+              class="form-control"
+              name="unit"
+              [(ngModel)]="form.unit"
+              required
+              #unit="ngModel">
+    </mat-form-field>
+    <button mat-raised-button color="primary">นำเข้าพัสดุ</button>
+</form>

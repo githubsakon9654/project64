@@ -13,17 +13,20 @@
         <th mat-header-cell *matHeaderCellDef> No. </th>
         <td mat-cell *matCellDef="let element"> {{element.id}} </td>
       </ng-container>
-
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> ชื่อผู้เบิก </th>
+        <td mat-cell *matCellDef="let element"> {{element.fullname}} </td>
+      </ng-container>
 
 
       <!-- Name Column -->
       <ng-container matColumnDef="admin_approve">
         <th mat-header-cell *matHeaderCellDef>ผู้อำนวยการอนุมัติ</th>
         <td mat-cell *matCellDef="let element">
-           <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="element.admin_approve"
-                      style="color: rgb(104, 207, 0);">check_circle</mat-icon>
-           <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!element.admin_approve"
-                      style="color: rgb(219, 117, 0);">hourglass_bottom</mat-icon>
+           <p aria-hidden="false" aria-label="Example home icon" *ngIf="element.admin_approve"
+                      style="color: rgb(104, 207, 0);">อนุมัติแล้ว</p>
+           <p aria-hidden="false" aria-label="Example home icon" *ngIf="!element.admin_approve"
+                      style="color: rgb(219, 117, 0);">ยังไม่อนุมัติ</p>
         </td>
       </ng-container>
 
@@ -31,10 +34,10 @@
       <ng-container matColumnDef="dire_approvev">
         <th mat-header-cell *matHeaderCellDef>เจ้าหน้าที่อนุมัติ</th>
         <td mat-cell *matCellDef="let element">
-          <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="element.dire_approvev"
-                    style="color: rgb(104, 207, 0);">check_circle</mat-icon>
-          <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!element.dire_approvev"
-                    style="color: rgb(219, 117, 0);">hourglass_bottom</mat-icon>
+          <p aria-hidden="false" aria-label="Example home icon" *ngIf="element.dire_approvev"
+                    style="color: rgb(104, 207, 0);">อนุมัติแล้ว</p>
+          <p aria-hidden="false" aria-label="Example home icon" *ngIf="!element.dire_approvev"
+                    style="color: rgb(219, 117, 0);">ยังไม่อนุมัติ</p>
         </td>
       </ng-container>
 
@@ -44,9 +47,17 @@
         <td mat-cell *matCellDef="let element"> {{element.total_price}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> เวลาที่ขอเบิก</th>
+        <td mat-cell *matCellDef="let element" >
+          {{element.Date}}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let element" >
+          <p *ngIf="element.accept">รับของแล้ว</p>
+          <p *ngIf="!element.accept && element.dire_approvev && element.admin_approve">ยังไม่รับของ</p>
         </td>
       </ng-container>
 

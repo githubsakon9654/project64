@@ -4,6 +4,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DeleteDurableComponent, InsertDurableComponent, SetnullDurableComponent, UpdateDurableComponent } from './dialog/insert-durable/insert-durable.component';
 import { TokenStorageService} from '../../shared/service/token-storage.service'
 import { from } from 'rxjs';
+import { DurableRepairComponent } from '../durable-repair/durable-repair.component';
+import { E } from '@angular/cdk/keycodes';
 
 
 @Component({
@@ -38,8 +40,16 @@ export class DurablelistComponent implements OnInit {
     this.durableService.getAllDurable().subscribe(
       data => {
         this.datarow = data.durable
+        console.log(this.datarow)
       }
     )
+  }
+
+  openRepair(e:any){
+    const repair = this.dialog.open(DurableRepairComponent,{
+      width: '1500px',
+      data: {id:e.id,du_name:e.du_name,du_serial:e.du_serial}
+    })
   }
 
   openReport(){

@@ -33,6 +33,13 @@ export class OfferService {
     return this.http.get(API_URL + 'getappove')
   }
 
+  get_unit_offer(): Observable<any>{
+    return this.http.get(API_URL + 'listUnit');
+  }
+  get_clear_all(): Observable<any>{
+    return this.http.get(API_URL + 'clear');
+  }
+
   get_list_offer() :Observable<any>{
     return this.http.get(API_URL + 'listAll')
   }

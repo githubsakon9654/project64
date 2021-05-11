@@ -19,6 +19,7 @@ export class BorrowListComponent implements OnInit {
   diAppove: boolean = false
   isUser: boolean = false
   uId:number = 0;
+  date:string =''
 
   constructor(
         public Source: BorrowService,
@@ -31,7 +32,7 @@ export class BorrowListComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id', 'borrow_name', 'admin_approve','dire_approvev', 'delete'];
+  displayedColumns: string[] = ['id', 'borrow_name', 'admin_approve','dire_approvev','date', 'delete'];
 
   openform(){
     const borrow = this.dialog.open(BorrowDurableComponent,{
@@ -57,6 +58,7 @@ export class BorrowListComponent implements OnInit {
       this.Source.getBorrowUserList(id).subscribe(
         data => {
           this.table = data.borrow
+          console.log(this.table)
         }
       )
 

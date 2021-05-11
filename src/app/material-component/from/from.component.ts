@@ -4,6 +4,7 @@ import { FromDialogComponent } from './dialog/from-dialog/from-dialog.component'
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { OfferService } from '../../shared/service/offer.service';
 import { FromDetailComponent } from './dialog/from-detail/from-detail.component';
+import { UnitOfferComponent } from './dialog/unit-offer/unit-offer.component';
 
 @Component({
   selector: 'app-from',
@@ -41,6 +42,20 @@ export class FromComponent implements OnInit {
     const dialogRef = this.dialog.open(FromDialogComponent,{
       width: '1500px',
       data: {id: row.id}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.loadTable()
+    });
+
+  }
+
+  clear(){
+    this.offerService.clear()
+  }
+
+  unit(){
+    const dialogRef = this.dialog.open(UnitOfferComponent,{
+      width: '1000px'
     });
     dialogRef.afterClosed().subscribe(result => {
       this.loadTable()

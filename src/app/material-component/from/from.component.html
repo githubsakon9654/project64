@@ -1,12 +1,14 @@
 <mat-card>
     <mat-card-content>
-      <h4>รายการแบบเสนอ</h4>
+      <h3>รายการแบบเสนอ</h3>
       <mat-slide-toggle *ngIf="!IsUser" [(ngModel)]="isChecked" (ngModelChange)="setOffer()">
-        <h3 style="margin-right: 10px;">เปิดแบบสำรวจ</h3>
+        <h4 style="margin-right: 10px;">เปิดแบบสำรวจ</h4>
       </mat-slide-toggle>
-      <button *ngIf="offer" mat-raised-button color="primary" (click)="openDetail()">สร้างแบบสำรวจ</button>
       <br>
+      <button *ngIf="offer" mat-raised-button color="primary" (click)="openDetail()">สร้างแบบสำรวจ</button>
+      <h4 *ngIf="!offer">ยังไม่เปิดเสนอรายการพัสดุ</h4>
       <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="openReport()">พิมพ์รายการแบบเสนอ</button>
+      <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="unit()">ดูรายการรวมพัสดุที่เสนอ</button>
         <table mat-table [dataSource]="row" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
@@ -37,5 +39,6 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="test(row)"></tr>
           </table>
+          <button *ngIf="!IsUser" mat-raised-button style="margin-top: 10px; color: rgb(255, 255, 255); background-color: crimson;" (click)="clear()">ล้างรายการเสนอทั้งหมด</button>
     </mat-card-content>
 </mat-card>

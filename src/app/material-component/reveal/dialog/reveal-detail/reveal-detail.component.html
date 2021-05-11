@@ -1,5 +1,8 @@
 <mat-dialog-content class="mat-typography">
-
+  <button *ngIf="!isAccept && adminApp && direApp" mat-raised-button color="primary" (click)="accept()" style="margin-left: 92%; background-color: rgb(32, 221, 80); color: rgb(48, 48, 48);">
+    รับพัสดุ
+  </button>
+  <p *ngIf="isAccept"  style="margin-left: 92%; color: rgb(28, 141, 0);">รับพัสดุแล้ว</p>
   <p>ชื่อผู้เบิก : {{name}}</p>
   <p>ชั้นเรียน : {{cls}}</p>
   <p>ราคารวม : {{total}}</p>

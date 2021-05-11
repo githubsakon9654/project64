@@ -32,7 +32,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { SliderComponent } from './slider/slider.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { TablelistComponent } from './tablelist/tablelist.component';
-import { SupplielistComponent,SupplieInsertComponent ,SupplieDeleteComponent,SupplieUpdateComponent} from './supplielist/supplielist.component';
+import { SupplielistComponent,SupplieInsertComponent ,SupplieDeleteComponent,SupplieUpdateComponent, SupplieInputComponent} from './supplielist/supplielist.component';
 import { DurablelistComponent } from './durablelist/durablelist.component';
 import { RevealComponent } from './reveal/reveal.component';
 import { RevealDialogComponent } from './reveal/dialog/reveal-dialog/reveal-dialog.component';
@@ -59,6 +59,9 @@ import { ReturnDetailComponent } from './durable-return/dialog/return-detail/ret
 import { DurableOwnComponent } from './durable-own/durable-own.component';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordComponent } from './profile/dialog/password/password.component';
+import { UnitOfferComponent } from './from/dialog/unit-offer/unit-offer.component';
+import { DurableRepairComponent } from './durable-repair/durable-repair.component';
+import { InsertRepairComponent } from './durable-repair/dialog/insert-repair/insert-repair.component';
 
 @NgModule({
   imports: [
@@ -77,6 +80,7 @@ import { PasswordComponent } from './profile/dialog/password/password.component'
     ButtonsComponent,
     GridComponent,
     ListsComponent,
+    SupplieInputComponent,
     UpdateDurableComponent,
     MenuComponent,
     SetnullDurableComponent,
@@ -125,7 +129,10 @@ import { PasswordComponent } from './profile/dialog/password/password.component'
     ReturnDetailComponent,
     DurableOwnComponent,
     ProfileComponent,
-    PasswordComponent
+    PasswordComponent,
+    UnitOfferComponent,
+    DurableRepairComponent,
+    InsertRepairComponent
   ]
 })
 export class MaterialComponentsModule {}

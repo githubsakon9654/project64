@@ -34,6 +34,10 @@ export class UserService {
     return this.http.post(API_URL + 'repass',{id,password,newpassword})
   }
 
+  check(id:number):Observable<any>{
+    return this.http.post(API_URL + 'check',{id})
+  }
+
   resetPass(id:number) : Observable<any>{
     return this.http.post(API_URL + "reset",{id})
   }
