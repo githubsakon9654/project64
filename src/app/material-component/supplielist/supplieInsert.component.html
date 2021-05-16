@@ -27,17 +27,6 @@
           required
           #price="ngModel">
     </mat-form-field>
-    <mat-form-field >
-    <mat-label>จำนวน</mat-label>
-    <input matInput
-          matInput placeholder="กรอกจำนวนพัสดุ"
-          type="text"
-          class="form-control"
-          name="unit"
-          [(ngModel)]="form.unit"
-          required
-          #unit="ngModel">
-    </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>หน่วยพัสดุ</mat-label>
       <input type="text"
@@ -56,6 +45,14 @@
           {{option}}
         </mat-option>
       </mat-autocomplete>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>ประเภทครุภัณฑ์</mat-label>
+             <mat-select [(ngModel)]="form.stores" name="stores" #stores="ngModel">
+                  <mat-option *ngFor="let stores of store" [value]="stores.id" >
+                    {{stores.name}}
+                  </mat-option>
+                </mat-select>
     </mat-form-field>
     <button mat-raised-button color="primary">เพิ่ม</button>
   </form>

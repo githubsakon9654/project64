@@ -50,7 +50,10 @@ export class FromComponent implements OnInit {
   }
 
   clear(){
-    this.offerService.clear()
+    this.offerService.clearOffer().subscribe(
+      d =>{}
+    )
+    this.loadTable()
   }
 
   unit(){

@@ -7,6 +7,8 @@ import {Observable,from } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
+
 export interface DialogData {
   id : number;
   sup_name: string;
@@ -31,11 +33,12 @@ export class SupplielistComponent implements OnInit {
   delete : boolean = false
   adminRole: boolean = false
   userRole:boolean = false
-
+  year:string = ''
   constructor(
     public supplieServie: SupplieService,
     private tokenStorageService: TokenStorageService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private budget:BudgetYearService
     ) { }
 
 
@@ -44,7 +47,7 @@ export class SupplielistComponent implements OnInit {
    this.getRole()
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','delete'];
+  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store','delete'];
 
   getRole(){
     this.roles = this.tokenStorageService.getRole()
@@ -61,9 +64,10 @@ export class SupplielistComponent implements OnInit {
   }
   inputSup(e:any){
     const name = e.supplie_name;
-    const id = e.id;
+    const id = e.supplieId;
+    console.log(id)
     const unit = e.unit
-    console.log('input')
+    console.log(unit)
     const dialogRef = this.dialog.open(SupplieInputComponent,{
       width: '350px',
       data: {id: id, sup_name:name,unit:unit}
@@ -85,9 +89,11 @@ export class SupplielistComponent implements OnInit {
   }
 
   loadRow(){
-    this.supplieServie.getAllSup().subscribe(
+    this.year = this.budget.budgetYear()
+    console.log(this.year)
+    this.supplieServie.getAllSup(this.year).subscribe(
       data => {
-        this.sup_row = data.supplies
+        this.sup_row = data.sup
         console.log(this.sup_row)
       }
     )
@@ -128,7 +134,6 @@ export class SupplieUpdateComponent implements OnInit {
   form: any = {
     sup_name:this.data.sup_name,
     price: this.data.price,
-    unit: this.data.unit,
     unit_name: this.data.unit_name,
   };
 
@@ -162,7 +167,7 @@ export class SupplieUpdateComponent implements OnInit {
   update(){
     const id = this.data.id
     const {sup_name,price,unit,unit_name} = this.form;
-    this.supplieServie.updateSupplie(id,sup_name,price,unit,unit_name).subscribe(
+    this.supplieServie.updateSupplie(id,sup_name,price,unit_name).subscribe(
       data => {
         console.log(sup_name)
       }
@@ -184,16 +189,19 @@ export class SupplieInputComponent {
   constructor(
     public supplieServie: SupplieService,
     public dialogRef: MatDialogRef<SupplieInputComponent>,
+    private supYearService: BudgetYearService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
     onSubmit(){
       var res = (+this.data.unit) + (+this.form.unit)
-      this.input(this.data.id,res)
+      console.log(res)
+      this.input(this.data.id,+this.form.unit)
       this.dialogRef.close()
     }
 
     input(id:number,unit:number){
-      this.supplieServie.updateUnitSupplie(id,unit).subscribe(
+      var year:string = this.supYearService.budgetYear()
+      this.supplieServie.updateUnitSupplie(id,unit,year).subscribe(
         data => {
         }
       )
@@ -210,11 +218,13 @@ export class SupplieDeleteComponent {
   constructor(
     public supplieServie: SupplieService,
     public dialogRef: MatDialogRef<SupplieDeleteComponent>,
+    private budget:BudgetYearService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   onClick(): void {
+    var year = this.budget.budgetYear()
     const id = this.data.id
-    this.supplieServie.deleteSupplie(id).subscribe(
+    this.supplieServie.deleteSupplie(id,year).subscribe(
       data => {
 
       }
@@ -227,6 +237,12 @@ export class SupplieDeleteComponent {
   }
 }
 
+interface Food {
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-supplie-insert',
   templateUrl: 'supplieInsert.component.html'
@@ -235,18 +251,25 @@ export class SupplieInsertComponent implements OnInit{
   myControl = new FormControl();
   options: string[] = ['แพ็ค', 'ชิ้น', 'ห่อ','ตัว'];
   filteredOptions = new Observable
-
+  year:string =''
   form: any = {
     sup_name: null,
     price: null,
-    unit: null,
+    stores:null,
     unit_name: null
   };
+    
+  store: Food[] = [];
 
-  constructor(public supplieServie: SupplieService, public routes: Router,
-    public dialogRef: MatDialogRef<SupplieInsertComponent>) { }
+  constructor(
+    public supplieServie: SupplieService, public routes: Router,
+    public dialogRef: MatDialogRef<SupplieInsertComponent>,
+    private budget: BudgetYearService
+    ) { }
 
   ngOnInit() {
+    this.year = this.budget.budgetYear()
+    this.loadStore()
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -259,9 +282,18 @@ export class SupplieInsertComponent implements OnInit{
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  loadStore(){
+    this.supplieServie.getStore().subscribe(
+      date => {
+        this.store = date.store
+        console.log(this.store)
+      }
+    )
+  }
+
   onSubmit(){
-    const {sup_name,price,unit,unit_name} = this.form;
-    this.supplieServie.createSupplie(sup_name,price,unit,unit_name).subscribe(
+    const {sup_name,price,unit_name,stores} = this.form;
+    this.supplieServie.createSupplie(sup_name,price,unit_name,+stores,this.year).subscribe(
       data => {
         console.log(sup_name)
       }

@@ -7,6 +7,7 @@ import { SupplieService } from '../../../../shared/service/supplie.service';
 import { BuyService } from '../../../../shared/service/buy.service'
 import { UserService } from 'src/app/shared/service/user.service';
 import { OfferService} from '../../../../shared/service/offer.service';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 export interface DialogData {
   id : number;
   sup_name: string;
@@ -39,16 +40,17 @@ export class RevealDialogComponent implements OnInit {
     public Buy:BuyService,
     private userService: UserService,
     private offerService:OfferService,
+    private budget:BudgetYearService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
 
     this.key = localStorage.getItem('filterKey')
     console.log('test')
-
-    this.SupplieService.filter(this.key).subscribe(
+    var year = this.budget.budgetYear()
+    this.SupplieService.filter(this.key,year).subscribe(
           data => {
-            this.dataRow = data.return
+            this.dataRow = data.sup
             console.log(this.dataRow);
           }
     )
@@ -66,14 +68,14 @@ export class RevealDialogComponent implements OnInit {
 
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
+  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store'];
 
 
 
   test(row: any){
 
-    const result = {id: row.id,supplie_name:row.supplie_name,price: row.price,unit_name:row.unit_name,unit:1}
-
+    const result = {id: row.id-1,supplie_name:row.supplie_name,price: row.price,unit_name:row.unit_name,unit:1}
+    console.log(row.id)
     if(this.data.keys){
       this.Source.pushService(result)
       console.log('reveal')

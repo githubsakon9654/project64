@@ -12,7 +12,7 @@ export class UnitOfferComponent implements OnInit {
     private offerService: OfferService
   ) { }
 
-  displayedColumns: string[] = ['id', 'offer_name','offer_status'];
+  displayedColumns: string[] = ['id', 'offer_name','offer_status','unit_name'];
 
   ngOnInit(): void {
     this.loadTable()

@@ -3,6 +3,8 @@ import { UserService ,DialogData} from '../../shared/service/user.service';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
 import { UserDeleteComponent, UserResetComponent } from './dialog/user-delete/user-delete.component';
+import { BudgetComponent } from './dialog/budget/budget.component';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -11,10 +13,11 @@ import { UserDeleteComponent, UserResetComponent } from './dialog/user-delete/us
 export class UserDetailComponent implements OnInit {
 
   myControl = new FormControl();
-
+  IsEdit: boolean = false
+  year = ''
+  budgets:number =0
   form: any = {
     username: this.data.username,
-    price: this.data.price,
     fullname: this.data.fullname,
     classes: this.data.classes,
   };
@@ -22,11 +25,21 @@ export class UserDetailComponent implements OnInit {
   constructor(
     private userService: UserService,
     public dialog: MatDialog,
+    private budgetService: BudgetYearService,
     public dialogRef: MatDialogRef<UserDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) { }
 
   ngOnInit(): void {
+    console.log(this.IsEdit)
+    console.log(this.data.budget)
+    this.year= this.budgetService.budgetYear()
+    this.userService.getBudgetUser(this.data.id,this.year).subscribe(
+      d => {
+        console.log(d)
+        this.budgets = d.user[0].budget
+      }
+    )
   }
 
   updateData(){
@@ -40,6 +53,7 @@ export class UserDetailComponent implements OnInit {
   onSubmit(){
     this.updateData()
     this.dialogRef.close()
+    
   }
 
   resetPassword(){
@@ -54,6 +68,12 @@ export class UserDetailComponent implements OnInit {
         }
       }
     )
+  }
+
+  budget(){
+    const budget = this.dialog.open(BudgetComponent,{
+      data: {id:this.data.id}
+    })
   }
 
   deleteUser(){

@@ -1,69 +1,49 @@
-<mat-card-content>
-  <div>
-    <h3>แก้ไขผู้ใช้</h3>
-    <form  class="example-form"
-    name="form"
-    (ngSubmit)="f.form.valid && onSubmit()"
-    #f="ngForm"
-    novalidat>
-      <mat-form-field >
+<div>
+
+  <h3>ข้อมูลผู้ใช้</h3>
+  <mat-slide-toggle [(ngModel)]="IsEdit">
+    <h5 style="margin-right: 10px;">แก้ไขข้อมูลผู้ใช้</h5>
+  </mat-slide-toggle>
+<div *ngIf="!IsEdit">
+  <p>ชื่อ : {{data.fullname}}</p>
+  <p>ชั้นปีที่รับผิดชอบ : {{data.classes}}</p>
+  <p>งบประมาณประจำรอบที่ {{year}} : {{budgets}}</p>
+</div>
+
+<div *ngIf="IsEdit">
+  <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+    <mat-form-field>
       <mat-label>username</mat-label>
-      <input matInput
-            matInput placeholder="กรอก username"
-            type="text"
-            class="form-control"
-            name="username"
-            [(ngModel)]="form.username"
-            required
-            #username="ngModel">
-      </mat-form-field>
-      <mat-form-field >
-        <mat-label>ชื่อคณะครู</mat-label>
-        <input matInput
-        matInput placeholder="กรอกชื่อคณะครู"
-        type="text"
-        class="form-control"
-        name="fullname"
-        [(ngModel)]="form.fullname"
-        required
-        #fullname="ngModel">
-      </mat-form-field>
-      <mat-form-field >
-      <mat-label>จำนวนงบ</mat-label>
-      <input matInput
-            matInput placeholder="กรอกจำนวนงบ"
-            type="text"
-            class="form-control"
-            name="price"
-            [(ngModel)]="form.price"
-            required
-            #price="ngModel">
-      </mat-form-field>
-
-      <mat-form-field >
-      <mat-label>ระดับชั้น</mat-label>
-      <input matInput
-            matInput placeholder="กรอกระดับชั้น"
-            type="text"
-            class="form-control"
-            name="classes"
-            [(ngModel)]="form.classes"
-            required
-            #classes="ngModel">
-      </mat-form-field>
-
-      <button type="submit" mat-mini-fab  aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 136, 0);">
+      <input matInput matInput placeholder="กรอก username" type="text" class="form-control" name="username"
+      [(ngModel)]="form.username" required #username="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>ชื่อคณะครู</mat-label>
+      <input matInput matInput placeholder="กรอกชื่อคณะครู" type="text" class="form-control" name="fullname"
+      [(ngModel)]="form.fullname" required #fullname="ngModel">
+    </mat-form-field>
+    
+    <mat-form-field>
+      <mat-label>ชั้นปีที่รับผิดชอบ</mat-label>
+      <input matInput matInput placeholder="กรอกระดับชั้น" type="text" class="form-control" name="classes"
+      [(ngModel)]="form.classes" required #classes="ngModel">
+    </mat-form-field>
+    
+    <button type="submit" mat-mini-fab aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 136, 0);">
       <mat-icon>edit</mat-icon>
-      </button>
-      <button type="button" mat-mini-fab  aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 230, 0);"
-              (click)="resetPassword()">
-        <mat-icon>restart_alt</mat-icon>
-      </button>
-      <button type="button" mat-mini-fab  aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 0, 0);"
-              (click)="deleteUser()">
-        <mat-icon>delete_forever</mat-icon>
-      </button>
-    </form>
-  </div>
-
-</mat-card-content>
+    </button>
+    <button type="button" mat-mini-fab aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 230, 0);"
+      (click)="resetPassword()">
+      <mat-icon>restart_alt</mat-icon>
+    </button>
+    <button type="button" mat-mini-fab aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 0, 0);"
+      (click)="deleteUser()">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+    <button type="button" mat-mini-fab (click)="budget()" aria-label
+      style="background-color: rgb(83, 71, 0); color: rgb(255, 136, 0);">
+      เพิ่มงบ
+    </button>
+  </form>
+  <div>
+</div>

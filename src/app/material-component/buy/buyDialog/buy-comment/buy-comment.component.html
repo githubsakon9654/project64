@@ -1,0 +1,9 @@
+<h2>ข้อมเสนอแนะ</h2>
+<form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+    <mat-form-field>
+        <mat-label>ข้อเสนอแนะ</mat-label>
+        <textarea  matInput matInput placeholder="กรอกข้อเสนอแนะ" type="text" class="form-control" name="comment"
+            [(ngModel)]="form.comment" required #comment="ngModel"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary">ยืนยัน</button>
+</form>

@@ -1,0 +1,23 @@
+<h3>เพิ่มงบประจำรอบ {{year}}</h3>
+<form  class="example-form"
+    name="form"
+    (ngSubmit)="f.form.valid && onSubmit()"
+    #f="ngForm"
+    novalidat>
+      <mat-form-field >
+      <mat-label>จำนวนงบ</mat-label>
+      <input matInput
+            matInput placeholder="กรอก งบ"
+            type="text"
+            class="form-control"
+            name="budget"
+            [(ngModel)]="form.budget"
+            required
+            #budget="ngModel">
+      </mat-form-field>
+
+      <button type="submit" mat-mini-fab  aria-label style="background-color: rgb(83, 71, 0); color: rgb(255, 136, 0);">
+      <mat-icon>edit</mat-icon>
+      </button>
+
+    </form>

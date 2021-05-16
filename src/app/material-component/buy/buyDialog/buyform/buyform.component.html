@@ -6,6 +6,7 @@
 			<input [(ngModel)]="key" matInput placeholder="Placeholder" (keyup.enter)="keytest()">
 			<mat-hint>โปรดกรอกชื่อพัสดุ</mat-hint>
 		</mat-form-field>
+		<button mat-flat-button color="primary" (click)="pullOffer()">ดึงรายการพัสดุจากแบบเสนอ</button>
 		<br>
 		<table mat-table [dataSource]="row" class="mat-elevation-z8">
 
@@ -14,8 +15,8 @@
 
 			<!-- Position Column -->
 			<ng-container matColumnDef="id">
-			  <th mat-header-cell *matHeaderCellDef> No. </th>
-			  <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+			  <th mat-header-cell *matHeaderCellDef> ลำดับ </th>
+			  <td mat-cell *matCellDef="let element; let i = index"> {{i+ 1}} </td>
 			</ng-container>
 
 
@@ -29,21 +30,21 @@
 			<!-- Weight Column -->
 			<ng-container matColumnDef="price">
 			  <th mat-header-cell *matHeaderCellDef> ราคา </th>
-			  <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+			  <td mat-cell *matCellDef="let element"> {{element.price * element.unit}} </td>
 			</ng-container>
-
+			
 			<!-- Symbol Column -->
 			<ng-container matColumnDef="unit">
 			  <th mat-header-cell *matHeaderCellDef> จำนวน </th>
 			  <td mat-cell *matCellDef="let element">
-          <button mat-icon-button color="primary" style="font-size:x-large; color: rgb(255, 0, 0);" (click)="removeOne(element)">-</button>
-           {{element.unit}}
-          <button mat-icon-button color="primary" style="font-size:x-large;" (click)="addPush(element)">+</button>
-        </td>
+		  <button mat-icon-button color="primary" style="font-size:x-large; color: rgb(255, 0, 0);" (click)="removeOne(element)">-</button>
+		   {{element.unit}}
+		  <button mat-icon-button color="primary" style="font-size:x-large;" (click)="addPush(element)">+</button>
+		</td>
 			</ng-container>
-
+			
 			<ng-container matColumnDef="unit_name">
-				<th mat-header-cell *matHeaderCellDef>  </th>
+				<th mat-header-cell *matHeaderCellDef> หน่วย </th>
 				<td mat-cell *matCellDef="let element"> {{element.unit_name}} </td>
 			  </ng-container>
 

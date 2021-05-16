@@ -16,8 +16,13 @@
     
 }
 
+.head{
+    text-align: center;
+    margin-top: 0%;
+}
+
 .label{
-    margin-left: 50%;
+    margin-left: 10px;
 }
 
 .button{

@@ -39,7 +39,6 @@ export class ProfileComponent implements OnInit {
         this.id = data.user.id
         this.name = data.user.fullname
         this.classes = data.user.classes
-        this.price = data.user.price
         this.username = data.user.username
       }
     )
@@ -54,6 +53,8 @@ export class ProfileComponent implements OnInit {
       console.log(r)
       if(r == false){
         window.alert('เปลี่ยนรหัสผ่านล้มเหลว รหัสผ่านเก่าผิด')
+      } else {
+        window.alert('เปลี่ยนรหัสผ่านสำเร็จ')
       }
     })
   }

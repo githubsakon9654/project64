@@ -4,6 +4,8 @@ import { UserService } from '../../shared/service/user.service';
 import { RevealDialogComponent} from './dialog/reveal-dialog/reveal-dialog.component';
 import { RevealService,Item } from '../../shared/service/reveal.service';
 import { SupplieService } from '../../shared/service/supplie.service';
+import { OfferService } from 'src/app/shared/service/offer.service';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 @Component({
   selector: 'app-reveal',
@@ -13,17 +15,29 @@ import { SupplieService } from '../../shared/service/supplie.service';
 export class RevealComponent implements OnInit {
 
   public row:Array<Item> = [];
+  public row2:Array<Item> = [];
   key :string = '';
   public total: Number = 0
   userprice: number = 0
   canReveal: boolean = true;
+  dataRow : Array<any> = [];
+  lenDR:number = 0;
+  fullname: string = ''
+  class : string = ''
+  offer_status: boolean = false
+  id:number = 0
+  offerSum:number = 0
+  year:string = ''
+  budget:number= 0
 
   constructor(
     public dialog: MatDialog,
     public Source: RevealService,
     public dialogRef: MatDialogRef<RevealDialogComponent>,
     public SupplieService: SupplieService,
-    private userService: UserService
+    private userService: UserService,
+    private offerService: OfferService,
+    private BudgetService: BudgetYearService
     ) {}
 
   ngOnInit(): void {
@@ -32,7 +46,8 @@ export class RevealComponent implements OnInit {
     this.getUsername()
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name', 'delete'];
+  displayedColumns: string[] = ['id', 'offer_name', 'offer_status','date'];
+  displayedColumn: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
 
   keytest(){
       const dialogRef = this.dialog.open(RevealDialogComponent,{
@@ -43,7 +58,7 @@ export class RevealComponent implements OnInit {
       });
       console.log(this.key);
       localStorage.setItem('filterKey', this.key);
-      this.SupplieService.filter(this.key).subscribe(
+      this.SupplieService.filter(this.key,'').subscribe(
         data => {
           console.log(data);
         }
@@ -59,8 +74,17 @@ export class RevealComponent implements OnInit {
     this.Source.source$.subscribe({
       next: s => {
         this.row = s
+        console.log(this.row)
       }
     })
+    this.offerService.get_list_offer().subscribe(
+      data => {
+        console.log(data)
+        this.row2 = data.offers
+        this.offerSum = data.offers[0].price
+        console.log(this.offerSum)
+      }
+    )
   }
 
   priceTotal(){
@@ -79,17 +103,33 @@ export class RevealComponent implements OnInit {
     this.Source.removeService(row.id)
   }
 
+  selected(row: any){
+    console.log("selected!!")
+    this.offerService.get_detail(row.id).subscribe(
+      data => {
+        this.dataRow = data.offer
+        this.lenDR = this.dataRow.length
+        this.fullname = data.offer[0].fullname
+        this.class = data.offer[0].classes
+        this.id = data.offer[0].id
+        this.offer_status = data.appove[0].offer_status
+      }
+    )
+  }
+
   select(){
     const userId = Number(this.userService.getId())
-    const price = Number(this.total)
+    const price = Number(this.offerSum)
     const supplie : Array<any> = []
     const units : Array<any> = []
     if(userId){
-      for(let i=0; i < this.row.length; i++){
-        let array = Number(this.row[i].id)
-        let unit = Number(this.row[i].unit)
+      for(let i=0; i < this.dataRow.length; i++){
+        console.log(this.dataRow)
+        let array = Number(this.dataRow[i].supplieId)
+        let unit = Number(this.dataRow[i].unit)
         supplie.push(array)
         units.push(unit)
+        console.log(this.dataRow[i].supplieId)
       }
       console.log(supplie)
       console.log(units)
@@ -97,6 +137,11 @@ export class RevealComponent implements OnInit {
           data => {
               console.log(data)
             }
+      )
+
+      var sum = this.budget - this.offerSum
+      this.offerService.updatebudget(userId,sum,this.year).subscribe(
+        d => {}
       )
 
     }
@@ -123,6 +168,14 @@ export class RevealComponent implements OnInit {
       console.log(s)
       this.userprice = s.user.price
     })
+    this.year = this.BudgetService.budgetYear()
+    const userId = Number(this.userService.getId())
+    this.userService.getBudgetUser(userId,this.year).subscribe(
+      d => {
+        console.log(d)
+        this.budget = d.user[0].budget
+      }
+    )
   }
 
 }

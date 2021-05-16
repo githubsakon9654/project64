@@ -1,13 +1,24 @@
 <mat-dialog-content class="mat-typography">
+  <h2>รายละเอียดรายการสั่งซื้อ</h2>
+  <button *ngIf="isDirector && !buy_status" style="margin-left: 1050px; background-color: rgb(250, 104, 0);" (click)="Onrepel()" mat-raised-button>ตีกลับรายการสั่งซื้อ</button>
+  <button *ngIf="buy_status && !accept" style="margin-left: 1050px; background-color: rgb(103, 182, 0);"  mat-raised-button color="primary" >รับพัสดุครบแล้ว</button>
+  <p *ngIf="accept" style="margin-left: 1080px; color: rgb(103, 182, 0);">รับพัสดุครบแล้ว</p>
   <h4>ชื่อ: {{fullname}}</h4>
   <h4>ชั้นเรียน: {{class}}</h4>
   <h4>ราคา: {{price}}</h4>
+  <button *ngIf="isDirector" style="background-color: rgb(0, 250, 133); margin-bottom: 10px;" (click)="Oncomment()" mat-raised-button>เพิ่มข้อเสนอแนะ</button>
+  <!-- <mat-slide-toggle [disabled]="!isDirector"  [(ngModel)]="onCom" (ngModelChange)="Oncomment()">
+    เพิ่มข้อเสนอแนะ
+  </mat-slide-toggle> -->
+  <h4 >ข้อเสนอแนะ : {{comment}}</h4>
   <mat-slide-toggle [disabled]="!isDirector"  [(ngModel)]="buy_status" (ngModelChange)="appoveBuy()">
     <div *ngIf="buy_status">รับทราบแล้ว</div>
     <div *ngIf="!buy_status">ยืนยันรับทราบแบบสั่งซื้อ</div>
   </mat-slide-toggle>
 <br>
   <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
+  
+  
   <table mat-table [dataSource]="dataRow" class="mat-elevation-z8">
 
       <!--- Note that these columns can be defined in any order.
@@ -46,3 +57,5 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </mat-dialog-content>
+
+

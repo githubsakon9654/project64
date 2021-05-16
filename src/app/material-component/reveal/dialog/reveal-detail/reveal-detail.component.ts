@@ -3,6 +3,7 @@ import { RevealService,Item } from '../../../../shared/service/reveal.service';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TokenStorageService } from '../../../../shared/service/token-storage.service';
 import { SupplieService } from 'src/app/shared/service/supplie.service';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 
 export interface DialogData {
@@ -34,18 +35,21 @@ export class RevealDetailComponent implements OnInit {
   revealID:number = 0;
   private roles: string[] = [];
   public length:number = 0;
+  year:string =''
 
   constructor(
     public dialogRef: MatDialogRef<RevealDetailComponent>,
     private revealService: RevealService,
     private supService: SupplieService,
     private token:TokenStorageService,
+    private budget:BudgetYearService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
     ) { }
 
   ngOnInit(): void {
     this.loadTable(this.data.id);
     this.getRole();
+    this.year = this.budget.budgetYear()
   }
 
   displayedColumns: string[] = ['supplieId','supplie_name','price', 'unit', 'unit_name', 'delete'];
@@ -88,14 +92,14 @@ export class RevealDetailComponent implements OnInit {
         var unit:number = 0
         var tunit:number = this.table[i].unit
         console.log(this.table[i].supplieId)
-        this.supService.getSupById(this.table[i].supplieId).subscribe(
+        this.supService.getSupById(this.table[i].supplieId,this.year).subscribe(
           data => {
-            console.log(data.supplie.unit)
-            unit = data.supplie.unit
+            console.log(data.supplie[0].unit)
+            unit = data.supplie[0].unit
             unit = unit - tunit
-            console.log(unit)
-            console.log(data.supplie.id)
-            this.supService.updateUnitSupplie(data.supplie.id,unit).subscribe(
+            console.log(unit + 'จำนวน')
+            console.log(tunit + 'จำนวน')
+            this.supService.updateUnit(data.supplie[0].supplieId,unit,this.year).subscribe(
               data=>{}
             )
           }

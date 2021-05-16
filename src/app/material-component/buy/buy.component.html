@@ -10,17 +10,26 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+        <td mat-cell *matCellDef="let element; let i =index"> {{i+1}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> ชื่อเจ้าหน้าที่ </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
 			  <th mat-header-cell *matHeaderCellDef> ผู้อำนวยการอนุมัติ </th>
 			  <td mat-cell *matCellDef="let element">
-          <p *ngIf="!element.status" style="color: crimson;">ยังไม่อนุมัติ</p>
+          <div *ngIf="!element.repel; else repel">
+            <p *ngIf="!element.status" style="color: crimson;">ยังไม่อนุมัติ</p>
+          </div>
+          <p *ngIf="element.repel" style="color: rgb(255, 123, 0);">ถูกตีกลับ</p>
           <p *ngIf="element.status" style="color: rgb(15, 228, 33);">อนุมัติ</p>
         </td>
 			</ng-container>
+
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="buyprice">
@@ -30,6 +39,15 @@
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef> เวลาที่สั่งซื้อ </th>
         <td mat-cell *matCellDef="let element"> {{element.Date}}</td>
+      </ng-container>
+      <ng-container matColumnDef="accept">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngIf="element.status">
+            <p *ngIf="!element.accept">รอรับพัสดุ</p>
+            <p *ngIf="element.accept">รับพัสดุครบแล้ว</p>
+          </div>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

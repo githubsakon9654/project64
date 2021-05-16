@@ -26,10 +26,10 @@ export class FromDialogComponent implements OnInit {
   fullname: string = ''
   class : string = ''
   offer_status: boolean = false
-  isAdmin: boolean = false;
-  offerAppove: boolean = false;
-  private roles: string[] = [];
   id:number = 0
+  offerAppove: boolean = false;
+  isAdmin: boolean = false;
+  private roles: string[] = [];
 
   constructor(
     public dialogRef: MatDialogRef<FromDialogComponent>,

@@ -11,38 +11,45 @@ export class SupplieService {
 
   constructor(private http: HttpClient) { }
 
-  createSupplie(supplie_name: string, price:number, unit:number, unit_name:string): Observable<any> {
-    return this.http.post(API_URL + 'insert',{supplie_name,price, unit, unit_name});
+  createSupplie(supplie_name: string, price:number, unit_name:string,storeId:number,year:string): Observable<any> {
+    return this.http.post(API_URL + 'insert',{supplie_name,price, unit_name,storeId,year});
   }
 
-  getAllSup(): Observable<any> {
-    return this.http.get(API_URL + 'listall');
+  getStore():Observable<any>{
+    return this.http.get(API_URL + 'store')
   }
 
-  deleteSupplie(id:number): Observable<any>{
-    return this.http.post(API_URL + 'delete',{id})
+  getAllSup(year:string): Observable<any> {
+    return this.http.post(API_URL + 'listall',{year});
   }
 
-  updateSupplie(id:number,supplie_name: string, price:number, unit:number, unit_name:string): Observable<any> {
-    return this.http.post(API_URL + 'update',{id,supplie_name,price, unit,unit_name});
+  deleteSupplie(supplieId:number,year:string): Observable<any>{
+    return this.http.post(API_URL + 'deleteunit',{supplieId,year})
   }
 
-  updateUnitSupplie(id:number,unit:number): Observable<any> {
-    return this.http.post(API_URL + 'update',{id,unit});
+  updateSupplie(id:number,supplie_name: string, price:number, unit_name:string): Observable<any> {
+    return this.http.post(API_URL + 'update',{id,supplie_name,price,unit_name});
   }
 
-  getSupById(id:number): Observable<any>{
-    return this.http.get(API_URL + 'getsup/' + id);
+  updateUnitSupplie(supplieId:number,unit:number,year:string): Observable<any> {
+    return this.http.post(API_URL + 'unit',{supplieId,unit,year});
+  }
+  updateUnit(supplieId:number,unit:number,year:string): Observable<any> {
+    return this.http.post(API_URL + 'unitup',{supplieId,unit,year});
   }
 
-  filter(filter: string): Observable<any>{
+  getSupById(id:number,year:string): Observable<any>{
+    return this.http.post(API_URL + 'getsup',{id,year});
+  }
+
+  filter(filter: string,year:string): Observable<any>{
     return this.http.post(API_URL+'filter', {
-        filter
+        filter,year
     });
   }
 
-  insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>): Observable<any> {
-    return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units});
+  insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>,sum:Array<any>): Observable<any> {
+    return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units,sum});
   }
 
   reportSupplie(){

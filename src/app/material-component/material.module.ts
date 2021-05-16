@@ -62,6 +62,8 @@ import { PasswordComponent } from './profile/dialog/password/password.component'
 import { UnitOfferComponent } from './from/dialog/unit-offer/unit-offer.component';
 import { DurableRepairComponent } from './durable-repair/durable-repair.component';
 import { InsertRepairComponent } from './durable-repair/dialog/insert-repair/insert-repair.component';
+import { BudgetComponent } from './user-detail/dialog/budget/budget.component';
+import { BuyCommentComponent } from './buy/buyDialog/buy-comment/buy-comment.component';
 
 @NgModule({
   imports: [
@@ -132,7 +134,9 @@ import { InsertRepairComponent } from './durable-repair/dialog/insert-repair/ins
     PasswordComponent,
     UnitOfferComponent,
     DurableRepairComponent,
-    InsertRepairComponent
+    InsertRepairComponent,
+    BudgetComponent,
+    BuyCommentComponent
   ]
 })
 export class MaterialComponentsModule {}

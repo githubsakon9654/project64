@@ -11,8 +11,8 @@ export class RepairServiceService {
 
   constructor(private http: HttpClient) { }
 
-  getListRepair(): Observable<any>{
-    return this.http.get(API_URL + 'list');
+  getListRepair(duId:number): Observable<any>{
+    return this.http.post(API_URL + 'list',{duId});
   }
 
   insertRepair(name:string,detail:string,price:number,duId:number):Observable<any>{

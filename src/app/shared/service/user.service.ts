@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, JsonpClientBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { H } from '@angular/cdk/keycodes';
 
 const API_URL = 'http://localhost:8080/api/user/';
 const USER_ID : string = 'userId';
@@ -14,8 +15,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getAllUsers(): Observable<any> {
-    return this.http.get(API_URL + 'all');
+  getAllUsers(budget_year:string): Observable<any> {
+    return this.http.post(API_URL + 'all',{budget_year});
   }
 
   deleteUser(id:number): Observable<any>{
@@ -84,6 +85,13 @@ export class UserService {
       return window.sessionStorage.getItem('username')
     }
 
+    getBudgetUser(userId:number,budget_year:string):Observable<any>{
+      return this.http.post(API_URL + 'budget',{userId,budget_year})
+    }
+
+    insertBudget(userId:number,budget_year:string,budget:number):Observable<any>{
+      return this.http.post(API_URL + 'budgetInsert',{userId,budget_year,budget})
+    }
 
 
 }
@@ -92,6 +100,7 @@ export interface DialogData {
   id : number;
   username: string;
   fullname: string;
+  budget: number;
   price: number;
   classes: string;
   keys: string;

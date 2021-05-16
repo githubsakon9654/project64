@@ -46,10 +46,10 @@ export class PasswordComponent implements OnInit {
       data=>{
         console.log(data.pass)
         this.status = data.pass
+        this.dialogRef.close(this.status)
       }
     )
 
-    this.dialogRef.close(this.status)
   }
 
 }

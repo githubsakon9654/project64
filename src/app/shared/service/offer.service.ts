@@ -82,6 +82,9 @@ export class OfferService {
   report(){
     return window.open('http://localhost:8080/api/report/offerlist')
   }
+  clearOffer(): Observable<any>{
+   return this.http.get(API_URL + 'clear')
+  }
 
   calculatorTotal(): Number {
     let t = this.item.reduce((previoueValue, currentValue) => +previoueValue + +currentValue.price * +currentValue.unit, 0)
@@ -132,8 +135,12 @@ export class OfferService {
     this.calculatorTotal()
   }
 
-  insertOffer(userId:number,offer_name:string,supplie:Array<any>,units:Array<any>): Observable<any>{
-    return this.http.post(API_URL + 'insert', {userId,offer_name,supplie,units});
+  insertOffer(userId:number,offer_name:string,supplie:Array<any>,units:Array<any>,price:number): Observable<any>{
+    return this.http.post(API_URL + 'insert', {userId,offer_name,supplie,units,price});
+  }
+
+  updatebudget(userId:number,budget:number,budget_year:string):Observable<any>{
+    return this.http.post(API_URL+ 'upbudget',{userId,budget,budget_year})
   }
 
 }

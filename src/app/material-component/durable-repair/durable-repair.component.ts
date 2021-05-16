@@ -28,7 +28,7 @@ export class DurableRepairComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'detail','price','create'];
 
   loadTable(){
-    this.repair.getListRepair().subscribe(
+    this.repair.getListRepair(+this.data.id).subscribe(
       d => {
         this.datarow = d.repair
         console.log(d)

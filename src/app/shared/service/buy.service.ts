@@ -52,6 +52,12 @@ export class BuyService {
   setBuyStatus(id:number,status:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,status})
   }
+  setBuyRepel(id:number,repel:boolean) : Observable<any>{
+    return this.http.post(API_URL + 'update',{id,repel})
+  }
+  setComment(id:number,store:string) :Observable<any>{
+    return this.http.post(API_URL + 'update',{id,store})
+  }
   clear(){
     let t = this.item = []
     this.source$.next(t)

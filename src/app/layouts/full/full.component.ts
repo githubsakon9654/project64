@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import {ChangeDetectorRef, Component,OnDestroy,AfterViewInit, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 import { MenuItems } from '../../shared/menu-items/menu-items';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { UserService} from '../../shared/service/user.service'
@@ -18,6 +19,7 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
+  date:string=''
 
   private _mobileQueryListener: () => void;
 
@@ -26,7 +28,8 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     media: MediaMatcher,
     private tokenStorageService: TokenStorageService,
     public routes: Router,
-    private userService: UserService
+    private userService: UserService,
+    private budgetService: BudgetYearService
   ) {
     this.mobileQuery = media.matchMedia('(min-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -45,10 +48,12 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
       console.log(this.roles)
       localStorage.setItem('auth', this.roles[0])
       this.username = user.username;
-    } else {
+    } else { 
       localStorage.removeItem('auth')
       this.link()
     }
+    this.date = this.budgetService.budgetYear()
+    console.log(this.date)
   }
 
   logout(): void {
