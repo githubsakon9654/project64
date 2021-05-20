@@ -1,7 +1,4 @@
-<h3>รายการซ่อมครุภัณฑ์</h3>
-<p>ชื่อครุภัณฑ์ : {{data.du_name}}</p>
-<p>เลขครุภัณฑ์ : {{data.du_serial}}</p>
-<button mat-raised-button color="primary" (click)="openInsert()">เพิ่มรายาการซ่อม</button>
+<h2>รายการซ่อมครุภัณฑ์ทั้งหมด</h2>
 <table mat-table [dataSource]="datarow" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -13,6 +10,16 @@
       <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
     </ng-container>
 
+    <!-- Name Column -->
+    <ng-container matColumnDef="du_name">
+      <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
+      <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
+    </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="du_serial">
+      <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
+      <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
+    </ng-container>
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> หัวข้อรายการซ่อม </th>

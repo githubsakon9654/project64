@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RevealService,Item } from '../../shared/service/reveal.service';
 import { SupplieService } from '../../shared/service/supplie.service';
@@ -13,6 +14,10 @@ import { RevealDetailComponent } from '../reveal/dialog/reveal-detail/reveal-det
   styleUrls: ['./revel-list.component.css']
 })
 export class RevelListComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   table: Array<any> = []
   role: Array<any> = []
@@ -41,6 +46,23 @@ export class RevelListComponent implements OnInit {
       this.loadTable()
       this.Source.clear()
     });
+  }
+
+  getDate(){
+    var start = (this.range.value.start).toISOString()
+    var s = start.substring(0,10)
+    var end = (this.range.value.end).toISOString()
+    var e = end.substring(0,10)
+    console.log(this.range.value.start)
+    console.log(this.range.value.end)
+    console.log(s)
+    console.log(e)
+    this.Source.getDAteList(s,e).subscribe(
+      date => {
+        this.table = date.date
+        console.log(this.table)
+      }
+    )
   }
 
   openDetail(row: any){

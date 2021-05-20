@@ -24,6 +24,9 @@ export class ReturnsService {
 
   source$: BehaviorSubject<Array<Item>> = new BehaviorSubject<Array<Item>>(this.item)
 
+  getDAteList(start:string,end:string): Observable<any> {
+    return this.http.post(API_URL + 'filldate', {start,end});
+  }
 
   pushService(item: Item) {
     let x = false

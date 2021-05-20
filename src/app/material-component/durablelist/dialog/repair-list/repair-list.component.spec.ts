@@ -1,21 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DurableReturnComponent } from './durable-return.component';
+import { RepairListComponent } from './repair-list.component';
 
-describe('DurableReturnComponent', () => {
-  let component: DurableReturnComponent;
-  let fixture: ComponentFixture<DurableReturnComponent>;
+describe('RepairListComponent', () => {
+  let component: RepairListComponent;
+  let fixture: ComponentFixture<RepairListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DurableReturnComponent ]
+      declarations: [ RepairListComponent ]
     })
     .compileComponents();
   });
-  
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DurableReturnComponent);
+    fixture = TestBed.createComponent(RepairListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

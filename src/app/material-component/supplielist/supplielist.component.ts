@@ -144,6 +144,8 @@ export class SupplieUpdateComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit(){
+    console.log(this.data.id)
+    console.log('up')
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -165,7 +167,8 @@ export class SupplieUpdateComponent implements OnInit {
   }
 
   update(){
-    const id = this.data.id
+    const id = this.data.id - 1
+    console.log(id)
     const {sup_name,price,unit,unit_name} = this.form;
     this.supplieServie.updateSupplie(id,sup_name,price,unit_name).subscribe(
       data => {
@@ -223,10 +226,12 @@ export class SupplieDeleteComponent {
 
   onClick(): void {
     var year = this.budget.budgetYear()
-    const id = this.data.id
+    const id = this.data.id -1
+    console.log(id)
+    console.log(year)
     this.supplieServie.deleteSupplie(id,year).subscribe(
       data => {
-
+        console.log(data)
       }
     )
     this.dialogRef.close();

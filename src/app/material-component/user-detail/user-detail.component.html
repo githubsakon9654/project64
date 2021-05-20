@@ -7,7 +7,7 @@
 <div *ngIf="!IsEdit">
   <p>ชื่อ : {{data.fullname}}</p>
   <p>ชั้นปีที่รับผิดชอบ : {{data.classes}}</p>
-  <p>งบประมาณประจำรอบที่ {{year}} : {{budgets}}</p>
+  <p>งบประมาณประจำรอบที่ {{year}} : {{budgets | currency: '฿ '}} บาท</p>
 </div>
 
 <div *ngIf="IsEdit">

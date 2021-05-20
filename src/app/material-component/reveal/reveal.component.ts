@@ -29,6 +29,7 @@ export class RevealComponent implements OnInit {
   offerSum:number = 0
   year:string = ''
   budget:number= 0
+  offersPrice:number=0
 
   constructor(
     public dialog: MatDialog,
@@ -71,13 +72,14 @@ export class RevealComponent implements OnInit {
   }
 
   loadTable(){
+    const userId = Number(this.userService.getId())
     this.Source.source$.subscribe({
       next: s => {
         this.row = s
         console.log(this.row)
       }
     })
-    this.offerService.get_list_offer().subscribe(
+    this.offerService.get_reveal(userId).subscribe(
       data => {
         console.log(data)
         this.row2 = data.offers
@@ -113,6 +115,9 @@ export class RevealComponent implements OnInit {
         this.class = data.offer[0].classes
         this.id = data.offer[0].id
         this.offer_status = data.appove[0].offer_status
+        this.offersPrice = this.dataRow[0].offprice
+        console.log(this.offersPrice)
+        console.log(this.userprice)
       }
     )
   }

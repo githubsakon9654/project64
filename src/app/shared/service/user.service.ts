@@ -46,8 +46,12 @@ export class UserService {
   getUser(username:string): Observable<any> {
     return this.http.post(API_URL + 'finduser', {username});
   }
-  getUserId(id:number): Observable<any> {
-    return this.http.post(API_URL + 'findid', {id});
+  getUserId(id:number,budget_year:string): Observable<any> {
+    return this.http.post(API_URL + 'findid', {id,budget_year});
+  }
+
+  getallBudget(budget_year:string): Observable<any> {
+    return this.http.post(API_URL + 'allbudget', {budget_year});
   }
 
   getModeratorBoard(): Observable<any> {

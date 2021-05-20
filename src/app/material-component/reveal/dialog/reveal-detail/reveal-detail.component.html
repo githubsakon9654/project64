@@ -5,7 +5,7 @@
   <p *ngIf="isAccept"  style="margin-left: 92%; color: rgb(28, 141, 0);">รับพัสดุแล้ว</p>
   <p>ชื่อผู้เบิก : {{name}}</p>
   <p>ชั้นเรียน : {{cls}}</p>
-  <p>ราคารวม : {{total}}</p>
+  <p>ราคารวม : {{total | currency: '฿ '}}</p>
   <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
   <br>
   <mat-slide-toggle [disabled]="isAdmin || isUser"  [(ngModel)]="direApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้อำนวยการ)</mat-slide-toggle>
@@ -18,8 +18,8 @@
 
       <!-- Position Column -->
       <ng-container matColumnDef="supplieId">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.supplieId}} </td>
+        <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
       </ng-container>
 
       <!-- Symbol Column -->
@@ -29,8 +29,8 @@
       </ng-container>
 
       <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> ราคา </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        <th mat-header-cell *matHeaderCellDef> ราคา(บาท) </th>
+        <td mat-cell *matCellDef="let element"> {{element.price | currency: '฿ '}} </td>
       </ng-container>
 
       <ng-container matColumnDef="unit">

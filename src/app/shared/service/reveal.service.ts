@@ -107,6 +107,10 @@ export class RevealService {
     return this.http.post(API_URL + 'listByUser', {userId});
   }
 
+  getDAteList(start:string,end:string): Observable<any> {
+    return this.http.post(API_URL + 'filldate', {start,end});
+  }
+
   getRevealDetail(id:number): Observable<any>{
     return this.http.post(API_URL + 'detail',{id});
   }

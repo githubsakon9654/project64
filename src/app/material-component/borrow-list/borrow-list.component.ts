@@ -6,6 +6,7 @@ import { BorrowService,Item} from '../../shared/service/borrow.service';
 import { DurableService} from '../../shared/service/durable.service';
 import { BorrowDurableComponent } from '../borrow-durable/borrow-durable.component';
 import { BorrowDetailComponent } from '../borrow-detail/borrow-detail.component';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-borrow-list',
@@ -13,6 +14,11 @@ import { BorrowDetailComponent } from '../borrow-detail/borrow-detail.component'
   styleUrls: ['./borrow-list.component.css']
 })
 export class BorrowListComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
   table: Array<any> = []
   role: Array<any> = []
   adAppove: boolean = false
@@ -33,6 +39,23 @@ export class BorrowListComponent implements OnInit {
     this.loadTable()
   }
   displayedColumns: string[] = ['id', 'borrow_name', 'admin_approve','dire_approvev','date', 'delete'];
+
+  getDate(){
+    var start = (this.range.value.start).toISOString()
+    var s = start.substring(0,10)
+    var end = (this.range.value.end).toISOString()
+    var e = end.substring(0,10)
+    console.log(this.range.value.start)
+    console.log(this.range.value.end)
+    console.log(s)
+    console.log(e)
+    this.Source.getDAteList(s,e).subscribe(
+      date => {
+        this.table = date.date
+        console.log(this.table)
+      }
+    )
+  }
 
   openform(){
     const borrow = this.dialog.open(BorrowDurableComponent,{

@@ -64,6 +64,8 @@ import { DurableRepairComponent } from './durable-repair/durable-repair.componen
 import { InsertRepairComponent } from './durable-repair/dialog/insert-repair/insert-repair.component';
 import { BudgetComponent } from './user-detail/dialog/budget/budget.component';
 import { BuyCommentComponent } from './buy/buyDialog/buy-comment/buy-comment.component';
+import { RepairListComponent } from './durablelist/dialog/repair-list/repair-list.component';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   imports: [
@@ -136,7 +138,9 @@ import { BuyCommentComponent } from './buy/buyDialog/buy-comment/buy-comment.com
     DurableRepairComponent,
     InsertRepairComponent,
     BudgetComponent,
-    BuyCommentComponent
+    BuyCommentComponent,
+    RepairListComponent,
+    ReportComponent
   ]
 })
 export class MaterialComponentsModule {}

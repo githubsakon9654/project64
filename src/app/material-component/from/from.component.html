@@ -7,7 +7,7 @@
       <br>
       <button *ngIf="offer" mat-raised-button color="primary" (click)="openDetail()">สร้างแบบสำรวจ</button>
       <h4 *ngIf="!offer">ยังไม่เปิดเสนอรายการพัสดุ</h4>
-      <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="openReport()">พิมพ์รายการแบบเสนอ</button>
+      <!-- <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="openReport()">พิมพ์รายการแบบเสนอ</button> -->
       <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="unit()">ดูรายการรวมพัสดุที่เสนอ</button>
         <table mat-table [dataSource]="row" class="mat-elevation-z8">
 
@@ -16,8 +16,8 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="id">
-              <th mat-header-cell *matHeaderCellDef> No. </th>
-              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              <th mat-header-cell *matHeaderCellDef> ลำดับที่</th>
+              <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
             </ng-container>
 
             <!-- Name Column -->

@@ -5,6 +5,7 @@ import { BuyService,Item} from '../../../../shared/service/buy.service';
 import { SupplieService } from '../../../../shared/service/supplie.service';
 import { UserService} from '../../../../shared/service/user.service'
 import { OfferService } from 'src/app/shared/service/offer.service';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 @Component({
   selector: 'app-buyform',
@@ -18,19 +19,24 @@ export class BuyformComponent implements OnInit {
   public offer:Array<any> = [];
   key :string = '';
   public total: Number = 0
+  year:string = ''
+  allBudget:number = 0
+
   constructor(
     public dialog: MatDialog,
     public Source: BuyService,
     private dialogref: MatDialogRef<BuyformComponent>,
     public SupplieService: SupplieService,
     private userService: UserService,
-    private offerService:OfferService
+    private offerService:OfferService,
+    private Budget:BudgetYearService
     ) { }
 
   ngOnInit(): void {
     this.loadTable()
     this.priceTotal()
     this.loadofferlist()
+    this.getAllbudget()
   }
 
   displayedColumns: string[] = ['id', 'supplie_name','unit','price',  'unit_name', 'delete'];
@@ -90,6 +96,17 @@ export class BuyformComponent implements OnInit {
         this.total = t
       }
     })
+  }
+
+  getAllbudget(){
+    this.year = this.Budget.budgetYear()
+    console.log(this.year)
+    this.userService.getallBudget(this.year).subscribe(
+      d => {
+        this.allBudget = +d.user[0].sum
+        console.log(this.allBudget)
+      }
+    )
   }
 
   addPush(row: any){

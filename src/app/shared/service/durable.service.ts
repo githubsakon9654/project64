@@ -20,16 +20,16 @@ export class DurableService {
     return this.http.post(API_URL + 'userlist',{id});
   }
 
-  create(du_name:string,du_status:string,du_serial:string): Observable<any>{
-    return this.http.post(API_URL + 'insert',{du_name,du_status,du_serial})
+  create(du_name:string,du_status:string,du_serial:string,du_price:number,date:Date,get:string): Observable<any>{
+    return this.http.post(API_URL + 'insert',{du_name,du_status,du_serial,du_price,date,get})
   }
 
   deleteDurable(id:number) :Observable<any>{
     return this.http.post(API_URL + 'delete',{id})
   }
 
-  update(id:number,du_name:string,du_status:string,du_serial:string): Observable<any>{
-    return this.http.post(API_URL + 'update',{id,du_name,du_status,du_serial})
+  update(id:number,du_name:string,du_status:string,du_serial:string,du_price:number,get:string): Observable<any>{
+    return this.http.post(API_URL + 'update',{id,du_name,du_status,du_serial,du_price,get})
   }
 
 
@@ -50,7 +50,9 @@ export interface Item {
   id: number | string;
   du_name: string;
   du_status: number;
+  du_price: number;
   du_serial: number;
   unit_name: string;
   userId:number;
+  get:string;
 }

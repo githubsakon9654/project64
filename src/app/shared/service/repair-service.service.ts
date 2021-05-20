@@ -18,4 +18,8 @@ export class RepairServiceService {
   insertRepair(name:string,detail:string,price:number,duId:number):Observable<any>{
     return this.http.post(API_URL + 'insert',{name,detail,price,duId});
   }
+
+  all_list():Observable<any>{
+    return this.http.get(API_URL + 'all')
+  }
 }

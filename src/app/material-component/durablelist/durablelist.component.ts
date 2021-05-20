@@ -6,7 +6,8 @@ import { TokenStorageService} from '../../shared/service/token-storage.service'
 import { from } from 'rxjs';
 import { DurableRepairComponent } from '../durable-repair/durable-repair.component';
 import { E } from '@angular/cdk/keycodes';
-
+import { RepairListComponent } from './dialog/repair-list/repair-list.component';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-durablelist',
@@ -14,6 +15,13 @@ import { E } from '@angular/cdk/keycodes';
   styleUrls: ['./durablelist.component.css']
 })
 export class DurablelistComponent implements OnInit {
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
+
   datarow = []
   userRole:boolean = false
   private roles: Array<any> =[]
@@ -28,7 +36,7 @@ export class DurablelistComponent implements OnInit {
     this.getRole()
   }
 
-  displayedColumns: string[] = ['id', 'du_name', 'du_status', 'du_serial','owner', 'button'];
+  displayedColumns: string[] = ['id', 'du_name', 'du_status', 'du_serial','price','get','owner', 'button'];
 
 
   getRole(){
@@ -36,6 +44,25 @@ export class DurablelistComponent implements OnInit {
     this.userRole = this.roles[1].IsUser
 
   }
+
+  
+  getDate(){
+    var start = (this.range.value.start).toISOString()
+    var s = start.substring(0,10)
+    var end = (this.range.value.end).toISOString()
+    var e = end.substring(0,10)
+    console.log(this.range.value.start)
+    console.log(this.range.value.end)
+    console.log(s)
+    console.log(e)
+    // this.Source.getDAteList(s,e).subscribe(
+    //   date => {
+    //     this.table = date.date
+    //     console.log(this.table)
+    //   }
+    // )
+  }
+
   loadTable(){
     this.durableService.getAllDurable().subscribe(
       data => {
@@ -78,10 +105,16 @@ export class DurablelistComponent implements OnInit {
 
   openDetail(row:any){
     const edit = this.dialog.open(UpdateDurableComponent,{
-      data: {id:row.id,du_name: row.du_name,du_status:row.du_status,du_serial:row.du_serial,userId:row.userId}
+      data: {id:row.id,du_name: row.du_name,du_status:row.du_status,du_serial:row.du_serial,userId:row.userId,du_price:row.du_price,get:row.get}
     })
     edit.afterClosed().subscribe( d => {
       this.loadTable()
+    })
+  }
+
+  openRepairlist(){
+    const list = this.dialog.open(RepairListComponent,{
+      width: '1500px'
     })
   }
 

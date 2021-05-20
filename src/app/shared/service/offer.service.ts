@@ -43,7 +43,10 @@ export class OfferService {
   get_list_offer() :Observable<any>{
     return this.http.get(API_URL + 'listAll')
   }
-
+  
+  get_reveal(userId:number): Observable<any>{
+    return this.http.post(API_URL + 'listreveal',{userId})
+  }
   get_detail(id:number): Observable<any>{
     return this.http.post(API_URL + 'detail',{id})
   }

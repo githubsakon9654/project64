@@ -30,6 +30,7 @@ import { BorrowListComponent } from './borrow-list/borrow-list.component';
 import { DurableReturnComponent } from './durable-return/durable-return.component';
 import { DurableOwnComponent } from './durable-own/durable-own.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ReportComponent } from './report/report.component';
 
 
 export const MaterialRoutes: Routes = [
@@ -66,8 +67,8 @@ export const MaterialRoutes: Routes = [
     component: FromComponent
   },
   {
-    path: 'menu',
-    component: MenuComponent
+    path: 'report',
+    component: ReportComponent
   },
   {
     path: 'tabs',

@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-content>
+        <h3>ออกรายงาน</h3>
+        <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+
+            <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
+                <mat-label>ประเภทครุภัณฑ์</mat-label>
+                <mat-select [(ngModel)]="form.link" name="link" #link="ngModel">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button type="submit" mat-raised-button color="primary" (click)="onSubmit()">พิมพ์</button>
+        </form>
+    </mat-card-content>
+</mat-card>

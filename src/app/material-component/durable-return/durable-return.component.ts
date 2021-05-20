@@ -7,7 +7,7 @@ import { ReturnsService,Item} from '../../shared/service/returns.service';
 import { DurableService} from '../../shared/service/durable.service';
 import { ReturnFormComponent } from './dialog/return-form/return-form.component';
 import { ReturnDetailComponent } from './dialog/return-detail/return-detail.component';
-
+import {FormGroup, FormControl} from '@angular/forms';
 
 
 @Component({
@@ -16,6 +16,11 @@ import { ReturnDetailComponent } from './dialog/return-detail/return-detail.comp
   styleUrls: ['./durable-return.component.css']
 })
 export class DurableReturnComponent implements OnInit {
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
   table: Array<any> = []
   role: Array<any> = []
   adAppove: boolean = false
@@ -48,6 +53,23 @@ export class DurableReturnComponent implements OnInit {
       d => {
         this.loadTable()
         this.Source.clear()
+      }
+    )
+  }
+
+  getDate(){
+    var start = (this.range.value.start).toISOString()
+    var s = start.substring(0,10)
+    var end = (this.range.value.end).toISOString()
+    var e = end.substring(0,10)
+    console.log(this.range.value.start)
+    console.log(this.range.value.end)
+    console.log(s)
+    console.log(e)
+    this.Source.getDAteList(s,e).subscribe(
+      date => {
+        this.table = date.date
+        console.log(this.table)
       }
     )
   }

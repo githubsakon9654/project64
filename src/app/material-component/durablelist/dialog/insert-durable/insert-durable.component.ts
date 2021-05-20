@@ -1,13 +1,20 @@
 import { Component, OnInit ,Inject} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormGroup, FormControl} from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TokenStorageService } from 'src/app/shared/service/token-storage.service';
 import { DurableService, Item} from '../../../../shared/service/durable.service';
 import {Observable,from } from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {MatDatepickerInputEvent} from '@angular/material/datepicker';
+
+
+
 interface Food {
   value: string;
   viewValue: string;
+}
+interface status {
+  value: string;
 }
 @Component({
   selector: 'app-insert-durable',
@@ -16,10 +23,28 @@ interface Food {
 })
 export class InsertDurableComponent implements OnInit {
 
+  events: string[] = [];
+  d: string = ''
+
+  addEvent(event: MatDatepickerInputEvent<Date>) {
+    this.events.push(`${event.value}`);
+    console.log(event.value)
+  }
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
+
   form: any = {
     du_name:null,
     du_status: null,
     du_serial: null,
+    du_cate:null,
+    du_price:null,
+    get:null,
+    date:null
   };
   
   constructor(
@@ -32,19 +57,31 @@ export class InsertDurableComponent implements OnInit {
     }
     
   foods: Food[] = [
-    {value: 'TB', viewValue: 'โต๊ะ'},
-    {value: 'CS', viewValue: 'ตู้'},
-    {value: 'CH', viewValue: 'เก้าอี้'},
-    {value: 'OH', viewValue: 'อื่นๆ'}
+    {value: 'มสจ.7110.001.', viewValue: 'โต๊ะเก้าอี้นักเรียน'},
+    {value: 'มสจ.7210.001.', viewValue: 'ตู้'},
+    {value: 'มสจ.7310.001.', viewValue: 'อื่นๆ'}
   ];
+
+  status: status[]=[
+    {value: 'ปกติ'},
+    {value: 'ชำรุด'},
+    {value: 'เสื่อมสภาพ'},
+    {value: 'สูญหาย'}
+  ]
     
     
     
   onSubmit(){
-    const {du_name,du_status,du_serial} = this.form
-    console.log(du_serial)
-    this.durable.create(du_name,du_status,du_serial).subscribe(
-      data => {}
+    const {du_name,du_status,du_serial,du_cate,du_price,date,get} = this.form
+    const serial = du_serial + '0' + du_cate
+
+    var start = (date).toISOString()
+    var s = start.substring(0,10)
+    console.log(date)
+    this.durable.create(du_name,du_status,serial,du_price,s,get).subscribe(
+      data => {
+        console.log(data)
+      }
     )
     this.dialogRef.close();
   }
@@ -57,11 +94,19 @@ export class InsertDurableComponent implements OnInit {
 })
 export class UpdateDurableComponent implements OnInit{
 
+  status: status[]=[
+    {value: 'ปกติ'},
+    {value: 'ชำรุด'},
+    {value: 'เสื่อมสภาพ'},
+    {value: 'สูญหาย'}
+  ]
   form: any = {
     du_name:this.data.du_name,
     du_status: this.data.du_status,
     du_serial: this.data.du_serial,
-    userId:this.data.userId
+    userId:this.data.userId,
+    du_price: this.data.du_price,
+    get: this.data.get
   };
   private roles: Array<any> =[]
   userRole:boolean = false
@@ -86,8 +131,8 @@ export class UpdateDurableComponent implements OnInit{
 
   onSubmit(){
     const id = +this.data.id
-    const {du_name,du_status,du_serial} = this.form
-    this.durable.update(id,du_name,du_status,du_serial).subscribe(
+    const {du_name,du_status,du_serial,du_price,get} = this.form
+    this.durable.update(id,du_name,du_status,du_serial,du_price,get).subscribe(
       data => {}
     )
     this.dialogRef.close();
@@ -135,7 +180,7 @@ export class SetnullDurableComponent implements OnInit{
   ) { }
 
   ngOnInit(): void {
-    console.log()
+    console.log(+this.data.id)
   }
 
   onClick(){

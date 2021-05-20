@@ -48,6 +48,10 @@ export class BuyService {
   getDetail(id:number): Observable<any>{
     return this.http.post(API_URL + 'byid',{id});
   }
+  
+  getFilldate(start:string,end:string):Observable<any>{
+    return this.http.post(API_URL + 'filldate',{start,end});
+  }
 
   setBuyStatus(id:number,status:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,status})

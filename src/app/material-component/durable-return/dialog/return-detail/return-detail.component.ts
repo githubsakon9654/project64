@@ -92,6 +92,7 @@ export class ReturnDetailComponent implements OnInit,OnDestroy {
     })
     console.log(row.duId)
     set.afterClosed().subscribe(d => {
+      this.loadTable(+this.data.id)
     })
   }
 

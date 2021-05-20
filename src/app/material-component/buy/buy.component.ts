@@ -6,6 +6,7 @@ import { BuyformComponent } from './buyDialog/buyform/buyform.component';
 import { UserService} from '../../shared/service/user.service'
 import { BuyService ,DialogData} from '../../shared/service/buy.service'
 import { BuyDetailComponent } from './buyDialog/buy-detail/buy-detail.component';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-buy',
@@ -13,6 +14,12 @@ import { BuyDetailComponent } from './buyDialog/buy-detail/buy-detail.component'
   styleUrls: ['./buy.component.css']
 })
 export class BuyComponent implements OnInit {
+
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
   table: Array<any> = []
   constructor(
     public dialog: MatDialog,
@@ -63,6 +70,23 @@ export class BuyComponent implements OnInit {
       r =>{
         this.loadTable()
         this.buyService.clear()
+      }
+    )
+  }
+
+  getDate(){
+    var start = (this.range.value.start).toISOString()
+    var s = start.substring(0,10)
+    var end = (this.range.value.end).toISOString()
+    var e = end.substring(0,10)
+    console.log(this.range.value.start)
+    console.log(this.range.value.end)
+    console.log(s)
+    console.log(e)
+    this.buyService.getFilldate(s,e).subscribe(
+      date => {
+        this.table = date.buyform
+        console.log(this.table)
       }
     )
   }

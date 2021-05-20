@@ -3,6 +3,7 @@ import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { UserService} from '../../shared/service/user.service'
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { PasswordComponent } from './dialog/password/password.component';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 
 
@@ -19,11 +20,13 @@ export class ProfileComponent implements OnInit {
   price: number = 0
   username:string=''
   password:string=''
+  year:string =''
 
   constructor(
     public dialog: MatDialog,
     private tokenStorageService: TokenStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private budget:BudgetYearService
   ) { }
 
   ngOnInit(): void {
@@ -31,15 +34,18 @@ export class ProfileComponent implements OnInit {
   }
 
   loadData(){
+    this.year = this.budget.budgetYear()
     const id = Number(this.userService.getId())
     this.id = id
-    this.userService.getUserId(id).subscribe(
+    this.userService.getUserId(id,this.year).subscribe(
       data => {
         console.log(this.id)
+        console.log(data)
         this.id = data.user.id
         this.name = data.user.fullname
         this.classes = data.user.classes
         this.username = data.user.username
+        this.price = data.budget.budget
       }
     )
   }
