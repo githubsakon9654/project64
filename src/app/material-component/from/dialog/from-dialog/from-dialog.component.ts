@@ -39,6 +39,7 @@ export class FromDialogComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    console.log(this.data.id)
     this.loadData()
     this.getRole()
   }

@@ -7,7 +7,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { AppRoutes } from './app.routing';
 import { AppComponent } from './app.component';
-
+import {MatTreeModule} from '@angular/material/tree';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FullComponent } from './layouts/full/full.component';
 import { AppHeaderComponent } from './layouts/full/header/header.component';
@@ -46,6 +46,7 @@ import { authInterceptorProviders  } from './helper/auth.interceptor';
     FormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatTreeModule,
     SharedModule,
     RouterModule.forRoot(AppRoutes)
   ],

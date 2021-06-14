@@ -6,13 +6,11 @@ import { CommonModule } from '@angular/common';
 
 import { DemoMaterialModule } from '../demo-material-module';
 import { CdkTableModule } from '@angular/cdk/table';
-
+import {MatTreeModule} from '@angular/material/tree';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { MaterialRoutes } from './material.routing';
 import { ButtonsComponent } from './buttons/buttons.component';
-
 import { GridComponent } from './grid/grid.component';
 import { ListsComponent } from './lists/lists.component';
 import { MenuComponent } from './menu/menu.component';
@@ -76,7 +74,8 @@ import { ReportComponent } from './report/report.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    CdkTableModule
+    CdkTableModule,
+    MatTreeModule
   ],
   providers: [],
   entryComponents: [DialogOverviewExampleDialogComponent],

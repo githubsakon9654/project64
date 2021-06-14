@@ -21,6 +21,7 @@ export class BuyformComponent implements OnInit {
   public total: Number = 0
   year:string = ''
   allBudget:number = 0
+  name:string = ''
 
   constructor(
     public dialog: MatDialog,
@@ -37,6 +38,14 @@ export class BuyformComponent implements OnInit {
     this.priceTotal()
     this.loadofferlist()
     this.getAllbudget()
+    const userId = Number(this.userService.getId())
+    this.userService.getUserId(userId,this.year).subscribe(
+      data => {
+        console.log(data)
+        this.name = data.user.fullname
+      }
+    )
+    
   }
 
   displayedColumns: string[] = ['id', 'supplie_name','unit','price',  'unit_name', 'delete'];
@@ -135,7 +144,7 @@ export class BuyformComponent implements OnInit {
       console.log(supplie)
       console.log(units)
       console.log(sum)
-      this.SupplieService.insertBuyForm(userId,price,supplie,units,sum).subscribe(
+      this.SupplieService.insertBuyForm(userId,price,supplie,units,sum,this.name).subscribe(
           data => {
               console.log(data)
             }
