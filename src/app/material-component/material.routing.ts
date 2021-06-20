@@ -31,9 +31,14 @@ import { DurableReturnComponent } from './durable-return/durable-return.componen
 import { DurableOwnComponent } from './durable-own/durable-own.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReportComponent } from './report/report.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 export const MaterialRoutes: Routes = [
+  {
+    path: 'home',
+    component: HomepageComponent
+  },
   {
     path: 'profile',
     component: ProfileComponent

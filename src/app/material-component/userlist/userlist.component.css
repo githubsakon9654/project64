@@ -1,5 +1,9 @@
-
 table {
-  width: 100%;
-  margin-top: 1%;
+    width: 100%;
+    margin-top: 1%;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
 }

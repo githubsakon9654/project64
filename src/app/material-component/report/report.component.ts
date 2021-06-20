@@ -25,14 +25,14 @@ export class ReportComponent implements OnInit {
   userRole:boolean = false
   year:string = ''
   private roles: Array<any> =[]
-  
+
   constructor(
     private tokenStorageService: TokenStorageService,
     private budget : BudgetYearService,
     private userService:UserService
   ) { }
-  
-  
+
+
   ngOnInit(): void {
     this.getRole()
     this.year = this.budget.budgetYear()
@@ -67,14 +67,14 @@ export class ReportComponent implements OnInit {
     this.userRole = this.roles[1].IsUser
 
   }
-  
+
   onSubmit(){
     const {link} = this.form
     console.log(API_URL + link)
     console.log(this.userRole)
     const id = Number(this.userService.getId())
     if(!this.userRole){
-      return window.open(API_URL + link + this.year + '/0')
+      return window.open(API_URL + link + this.year + '/'+ id)
     } else {
       console.log('dddd')
       return window.open(API_URL + link + this.year + '/' + id)

@@ -42,13 +42,13 @@ export class FullComponent implements OnDestroy, AfterViewInit, OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
-
+      console.log(user)
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
       console.log(this.roles)
       localStorage.setItem('auth', this.roles[0])
-      this.username = user.username;
-    } else { 
+      this.username = user.fullname;
+    } else {
       localStorage.removeItem('auth')
       this.link()
     }

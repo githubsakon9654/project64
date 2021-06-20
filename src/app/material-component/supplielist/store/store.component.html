@@ -1,0 +1,14 @@
+<div>
+    <h3>เพิ่มร้านค้า</h3>
+    <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+        <mat-form-field>
+            <mat-label>ชื่อร้านค้า</mat-label>
+            <input matInput matInput placeholder="กรอกชื่อร้านค้า" type="text" class="form-control" name="name" [(ngModel)]="form.name" required #name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>ข้อมูลติดต่อ</mat-label>
+            <input matInput matInput placeholder="กรอกข้อมูลติดต่อ" type="text" class="form-control" name="contect" [(ngModel)]="form.contect" required #contect="ngModel">
+        </mat-form-field>
+        <button mat-raised-button color="primary">เพิ่ม</button>
+    </form>
+</div>

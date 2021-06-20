@@ -7,27 +7,32 @@ table {
     border: 3px solid rgb(5, 5, 5);
 }
 
-.card{
-  width: 100%;
-  border: 3px solid rgb(5, 5, 5);
-  height: 100%;
+.card {
+    width: 100%;
+    border: 3px solid rgb(5, 5, 5);
+    height: 100%;
 }
 
-mat-grid-tile{
- margin-top: 1px;
+mat-grid-tile {
+    margin-top: 1px;
 }
 
-th{
-  font-size: 18px;
+th {
+    font-size: 18px;
 }
 
-span{
-  font-size: 20px;
-  text-align: left;
+span {
+    font-size: 20px;
+    text-align: left;
 }
 
-.button{
-  text-align: left;
-  margin-top: 5px;
-  font-size: 18px;
+.example-container {
+    height: 350px;
+    overflow: auto;
+}
+
+.button {
+    text-align: left;
+    margin-top: 5px;
+    font-size: 18px;
 }

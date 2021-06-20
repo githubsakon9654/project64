@@ -1,34 +1,37 @@
 <h2 mat-dialog-title>รายการครุภัณฑ์</h2>
 <mat-dialog-content class="mat-typography">
-    <table mat-table [dataSource]="dataRow" class="mat-elevation-z8">
+    <div class="example-container mat-elevation-z8">
 
-        <!--- Note that these columns can be defined in any order.
+        <table mat-table [dataSource]="dataRow" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
-          <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
-        </ng-container>
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+                <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+            </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="du_name">
-          <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
-          <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
-        </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="du_name">
+                <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
+            </ng-container>
 
-        <ng-container matColumnDef="du_serial">
-          <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
-          <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
-        </ng-container>
+            <ng-container matColumnDef="du_serial">
+                <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
+                <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
+            </ng-container>
 
-        <!-- Weight Column -->
-        <ng-container matColumnDef="du_status">
-          <th mat-header-cell *matHeaderCellDef> สภาพครุภัณฑ์ </th>
-          <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
-        </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="du_status">
+                <th mat-header-cell *matHeaderCellDef> สภาพครุภัณฑ์ </th>
+                <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
+            </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="test(row)"></tr>
-      </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="test(row)"></tr>
+        </table>
+    </div>
 </mat-dialog-content>

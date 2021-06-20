@@ -1,10 +1,13 @@
 <mat-card class="card">
   <div class="header">
+    <div style="text-align: center;">
+      <img src="assets/images/logo/logos.jpg" alt="user">
+    </div>
     <h2 class="head">ระบบสารสนทเศเพื่อการจัดการพัสดุและดูแลครุภัณฑ์ โรงเรียนบ้านสวายจีก</h2>
     <mat-card-header >
       <h3  class="label">เข้าสู่ระบบ</h3>
     </mat-card-header>
-    <form class="example-form" 
+    <form class="example-form"
           *ngIf="!isLoggedIn"
           name="form"
           (ngSubmit)="f.form.valid && onSubmit()"
@@ -13,7 +16,7 @@
     >
       <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="กรอก Username" 
+        <input matInput placeholder="กรอก Username"
               type="text"
               class="form-control"
               name="username"
@@ -31,7 +34,7 @@
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="กรอก Password" 
+        <input matInput placeholder="กรอก Password"
               type="password"
               class="form-control"
               name="password"
@@ -51,9 +54,8 @@
             </div>
           </div>
       </mat-form-field>
-      
+
       <button class="button" mat-flat-button color="primary">Login</button>
     </form>
   </div>
 </mat-card>
-  

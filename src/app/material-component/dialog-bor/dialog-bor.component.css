@@ -1,7 +1,12 @@
 table {
     width: 100%;
-  }
+}
 
 mat-dialog-content {
     width: 1000px;
-  }
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
+}

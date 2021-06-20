@@ -64,6 +64,8 @@ import { BudgetComponent } from './user-detail/dialog/budget/budget.component';
 import { BuyCommentComponent } from './buy/buyDialog/buy-comment/buy-comment.component';
 import { RepairListComponent } from './durablelist/dialog/repair-list/repair-list.component';
 import { ReportComponent } from './report/report.component';
+import { HomepageComponent } from './homepage/homepage.component';
+import { StoreComponent } from './supplielist/store/store.component';
 
 @NgModule({
   imports: [
@@ -139,7 +141,9 @@ import { ReportComponent } from './report/report.component';
     BudgetComponent,
     BuyCommentComponent,
     RepairListComponent,
-    ReportComponent
+    ReportComponent,
+    HomepageComponent,
+    StoreComponent
   ]
 })
 export class MaterialComponentsModule {}

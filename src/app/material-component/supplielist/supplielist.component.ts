@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,TemplateRef,Inject } from '@angular/core';
+import { Component, OnInit, ViewChild,TemplateRef,Inject,AfterViewInit } from '@angular/core';
 import { SupplieService } from '../../shared/service/supplie.service';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
@@ -8,7 +8,9 @@ import {map, startWith} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../../shared/service/token-storage.service';
 import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
-
+import { StoreComponent } from './store/store.component';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
 export interface DialogData {
   id : number;
   sup_name: string;
@@ -34,6 +36,10 @@ export class SupplielistComponent implements OnInit {
   adminRole: boolean = false
   userRole:boolean = false
   year:string = ''
+  // paginator:any
+  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store','delete'];
+
+
   constructor(
     public supplieServie: SupplieService,
     private tokenStorageService: TokenStorageService,
@@ -42,12 +48,14 @@ export class SupplielistComponent implements OnInit {
     ) { }
 
 
+
   ngOnInit(): void {
    this.loadRow()
    this.getRole()
   }
 
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store','delete'];
+
+
 
   getRole(){
     this.roles = this.tokenStorageService.getRole()
@@ -60,8 +68,15 @@ export class SupplielistComponent implements OnInit {
     dialogRef.afterClosed().subscribe( r => {
       this.loadRow();
     })
-
   }
+  openDialogStore(){
+    const dialogRef = this.dialog.open(StoreComponent);
+    dialogRef.afterClosed().subscribe( r => {
+      this.loadRow();
+    })
+  }
+
+
   inputSup(e:any){
     const name = e.supplie_name;
     const id = e.supplieId;
@@ -263,7 +278,7 @@ export class SupplieInsertComponent implements OnInit{
     stores:null,
     unit_name: null
   };
-    
+
   store: Food[] = [];
 
   constructor(

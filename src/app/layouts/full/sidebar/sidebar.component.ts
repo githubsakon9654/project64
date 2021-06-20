@@ -85,29 +85,37 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
         this.role = s
       }
     })
-    this.isAdmin()
+    // this.isAdmin()
     this.tree()
   }
 
   tree(){
-    this.dataSource.data = this.menuItems.getTree()
-    this.menutree= this.menuItems.getTree()
+    if(localStorage.getItem('auth') == 'ROLE_USER'){
+      this.dataSource.data = this.menuItems.getTreeUser()
+      console.log(localStorage.getItem('auth'))
+    } else if(localStorage.getItem('auth') == 'ROLE_DIRECTOR'){
+      this.dataSource.data = this.menuItems.getMenuDirector()
+      console.log(localStorage.getItem('auth'))
+    } else if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
+      this.dataSource.data = this.menuItems.getTree()
+      console.log(localStorage.getItem('auth'))
+    }
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
 
-  isAdmin(){
-    if(localStorage.getItem('auth') == 'ROLE_USER'){
-      this.menu = this.menuItems.getMenuUser()
-      console.log(localStorage.getItem('auth'))
-    } else if(localStorage.getItem('auth') == 'ROLE_DIRECTOR'){
-      this.menu = this.menuItems.getMenuDirector()
-      console.log(localStorage.getItem('auth'))
-    } else if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
-      this.menu = this.menuItems.getMenuitem()
-      console.log(localStorage.getItem('auth'))
-    }
-  }
+  // isAdmin(){
+  //   if(localStorage.getItem('auth') == 'ROLE_USER'){
+  //     this.menu = this.menuItems.getMenuUser()
+  //     console.log(localStorage.getItem('auth'))
+  //   } else if(localStorage.getItem('auth') == 'ROLE_DIRECTOR'){
+  //     this.menu = this.menuItems.getMenuDirector()
+  //     console.log(localStorage.getItem('auth'))
+  //   } else if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
+  //     this.menu = this.menuItems.getTree()
+  //     console.log(localStorage.getItem('auth'))
+  //   }
+  // }
 }

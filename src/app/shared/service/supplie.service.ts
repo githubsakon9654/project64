@@ -19,6 +19,9 @@ export class SupplieService {
     return this.http.get(API_URL + 'store')
   }
 
+  pushStore(name:string,contect:string):Observable<any>{
+    return this.http.post(API_URL + 'storeinsert',{name,contect});
+  }
   getAllSup(year:string): Observable<any> {
     return this.http.post(API_URL + 'listall',{year});
   }

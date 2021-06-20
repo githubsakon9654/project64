@@ -47,7 +47,7 @@
       </mat-autocomplete>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>ประเภทครุภัณฑ์</mat-label>
+      <mat-label>ชื่อร้านค้า</mat-label>
              <mat-select [(ngModel)]="form.stores" name="stores" #stores="ngModel">
                   <mat-option *ngFor="let stores of store" [value]="stores.id" >
                     {{stores.name}}

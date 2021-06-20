@@ -67,6 +67,6 @@ export class LoginComponent implements OnInit {
   }
 
   reloadPage(): void {
-    this.routes.navigateByUrl('/supplie')
+    this.routes.navigateByUrl('/home')
   }
 }
