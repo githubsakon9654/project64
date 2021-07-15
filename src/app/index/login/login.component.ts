@@ -49,9 +49,9 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.userService.getUser(username).subscribe(
           data => {
-            this.userService.saveUser(data.user.id)
-            this.userService.setUsername(data.user.username)
-            console.log(data.user.username)
+            this.userService.saveUser(data.user[0].id)
+            this.userService.setUsername(data.user[0].username)
+            console.log(data.user[0].username)
           }
         )
         console.log('login successful!')

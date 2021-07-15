@@ -27,7 +27,7 @@ export class BuyDetailComponent implements OnInit {
   comment:string = ''
   onCom:boolean = false
 
-  
+
 
   constructor(
     public dialog: MatDialog,
@@ -50,7 +50,7 @@ export class BuyDetailComponent implements OnInit {
         console.log(data)
         this.dataRow = data.buy
         this.fullname = data.buy[0].fullname
-        this.class = data.buy[0].classes
+        this.class = data.buy[0].name
         this.price = data.buy[0].buyprice
         this.id = data.buy[0].id
         this.buy_status = data.buy[0].status
@@ -99,6 +99,14 @@ export class BuyDetailComponent implements OnInit {
       )
     }
     this.buyService.setBuyStatus(this.id,this.buy_status).subscribe(
+      data => {
+        console.log(data)
+      }
+    )
+  }
+
+  setAccept(){
+    this.buyService.setAccept(this.id).subscribe(
       data => {
         console.log(data)
       }

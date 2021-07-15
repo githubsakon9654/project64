@@ -1,16 +1,17 @@
 <!-- ============================================================== -->
 <!-- sidebar -->
 <!-- ============================================================== -->
- <div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
+<div class="user-profile" style="background: url(assets/images/background/user-info.jpg) no-repeat;">
     <!-- User profile image -->
-    <div class="profile-img"> <img src="assets/images/logo/logoo.png" alt="user"> </div>
+    <!-- <div class="profile-img"> <img src="assets/images/logo/logoo.png" alt="user"> </div> -->
     <!-- User profile text-->
     <!-- ============================================================== -->
     <!-- Profile - style you can find in header.scss -->
     <!-- ============================================================== -->
 </div>
 
-<!-- <mat-nav-list appAccordion>
+<mat-nav-list appAccordion>
+    <div mat-subheader>จัดการข้อมูลพื้นฐาน</div>
     <mat-list-item appAccordionLink *ngFor="let menuitem of menu" routerLinkActive="selected" group="{{menuitem.state}}">
         <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
             <mat-icon>{{ menuitem.icon }}</mat-icon>
@@ -18,11 +19,41 @@
             <span fxFlex></span>
             <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
         </a>
-
-
     </mat-list-item>
+    <mat-divider></mat-divider>
+    <div mat-subheader>จัดการพัสดุ</div>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menu2" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <div mat-subheader>ดูแลครุภัณฑ์</div>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menu3" routerLinkActive="selected" group="{{menuitem.state}}">
+        <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.name }}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+        </a>
+    </mat-list-item>
+    <div *ngIf="!UserRole">
+        <mat-divider></mat-divider>
+        <div mat-subheader>สั่งซื้อ</div>
+        <mat-list-item appAccordionLink *ngFor="let menuitem of menu4" routerLinkActive="selected" group="{{menuitem.state}}">
+            <a class="" appAccordionToggle [routerLink]="['/', menuitem.state]" *ngIf="menuitem.type === 'link'">
+                <mat-icon>{{ menuitem.icon }}</mat-icon>
+                <span>{{ menuitem.name }}</span>
+                <span fxFlex></span>
+                <span class="label label-{{ badge.type }}" *ngFor="let badge of menuitem.badge">{{ badge.value }}</span>
+            </a>
+        </mat-list-item>
+    </div>
 
-</mat-nav-list> -->
+</mat-nav-list>
 
 <!-- <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" >
 
@@ -45,35 +76,28 @@
     </mat-tree-node>
   </mat-tree> -->
 
+<!--
+<mat-tree appAccordion [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
 
-  <mat-tree appAccordion [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-    <!-- This is the tree node template for leaf nodes -->
-    <!-- There is inline padding applied to this node using styles.
-      This padding value depends on the mat-icon-button width. -->
-    <mat-tree-node appAccordionLink  *matTreeNodeDef="let node" routerLinkActive="selected" group="{{node.state}}">
-      <a appAccordionToggle matTreeNodeToggle [routerLink]="['/', node.state]" *ngIf="node.type === 'link'">
-        <mat-icon>{{node.icon}}</mat-icon>
-        <span>{{node.name}}</span>
-        <span fxFlex></span>
-          <span class="label label-{{ badge.type }}" *ngFor="let badge of node.badge">{{ badge.value }}</span>
-      </a>
+    <mat-tree-node appAccordionLink *matTreeNodeDef="let node" routerLinkActive="selected" group="{{node.state}}">
+        <a appAccordionToggle matTreeNodeToggle [routerLink]="['/', node.state]" *ngIf="node.type === 'link'">
+            <mat-icon>{{node.icon}}</mat-icon>
+            <span>{{node.name}}</span>
+            <span fxFlex></span>
+            <span class="label label-{{ badge.type }}" *ngFor="let badge of node.badge">{{ badge.value }}</span>
+        </a>
     </mat-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
+
     <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
         <div class="mat-tree-node">
-          <button mat-icon-button matTreeNodeToggle
-                  [attr.aria-label]="'Toggle ' + node.name">
+            <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
             <mat-icon class="mat-icon-rtl-mirror">
               {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
-          </button>
-          {{node.name}}
+          </button> {{node.name}}
         </div>
-        <!-- There is inline padding applied to this div using styles.
-            This padding value depends on the mat-icon-button width.  -->
-        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
-            role="group">
-          <ng-container matTreeNodeOutlet></ng-container>
-      </div>
+        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)" role="group">
+            <ng-container matTreeNodeOutlet></ng-container>
+        </div>
     </mat-nested-tree-node>
-  </mat-tree>
+</mat-tree> -->

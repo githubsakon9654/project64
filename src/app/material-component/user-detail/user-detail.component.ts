@@ -5,6 +5,12 @@ import {FormControl} from '@angular/forms';
 import { UserDeleteComponent, UserResetComponent } from './dialog/user-delete/user-delete.component';
 import { BudgetComponent } from './dialog/budget/budget.component';
 import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
+
+
+interface clss {
+  id: number;
+  name: string;
+}
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -16,6 +22,7 @@ export class UserDetailComponent implements OnInit {
   IsEdit: boolean = false
   year = ''
   budgets:number =0
+  classe: clss[] = [];
   form: any = {
     username: this.data.username,
     fullname: this.data.fullname,
@@ -31,6 +38,7 @@ export class UserDetailComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
+    this.loadClass()
     console.log(this.IsEdit)
     console.log(this.data.budget)
     this.year= this.budgetService.budgetYear()
@@ -40,6 +48,17 @@ export class UserDetailComponent implements OnInit {
         this.budgets = d.user[0].budget
       }
     )
+  }
+
+
+  loadClass(){
+    this.userService.getClass().subscribe(
+      date => {
+        this.classe = date.classe
+        console.log(this.classe)
+      }
+    )
+
   }
 
   updateData(){
@@ -53,7 +72,7 @@ export class UserDetailComponent implements OnInit {
   onSubmit(){
     this.updateData()
     this.dialogRef.close()
-    
+
   }
 
   resetPassword(){

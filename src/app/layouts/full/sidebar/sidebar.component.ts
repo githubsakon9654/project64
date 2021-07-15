@@ -59,9 +59,12 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
   dataSource = new MatTreeNestedDataSource<FoodNode>();
 
   mobileQuery: MediaQueryList;
-
+  UserRole : boolean = false
   private _mobileQueryListener: () => void;
   public menu = {}
+  public menu2 = {}
+  public menu3 = {}
+  public menu4 = {}
   public menutree = {}
   role:String = ''
 
@@ -91,13 +94,22 @@ export class AppSidebarComponent implements OnDestroy,OnInit {
 
   tree(){
     if(localStorage.getItem('auth') == 'ROLE_USER'){
-      this.dataSource.data = this.menuItems.getTreeUser()
+      this.UserRole = true;
+      this.menu = this.menuItems.getMenuUser1()
+      this.menu2 = this.menuItems.getMenuUser2()
+      this.menu3 = this.menuItems.getMenuUser3()
       console.log(localStorage.getItem('auth'))
     } else if(localStorage.getItem('auth') == 'ROLE_DIRECTOR'){
-      this.dataSource.data = this.menuItems.getMenuDirector()
+      this.menu = this.menuItems.getMenuDirector1()
+      this.menu2 = this.menuItems.getMenuDirector2()
+      this.menu3 = this.menuItems.getMenuDirector3()
+      this.menu4 = this.menuItems.getMenuDirector4()
       console.log(localStorage.getItem('auth'))
     } else if(localStorage.getItem('auth') == 'ROLE_ADMIN'){
-      this.dataSource.data = this.menuItems.getTree()
+      this.menu = this.menuItems.getMenuAdmin1()
+      this.menu2 = this.menuItems.getMenuAdmin2()
+      this.menu3 = this.menuItems.getMenuAdmin3()
+      this.menu4 = this.menuItems.getMenuAdmin4()
       console.log(localStorage.getItem('auth'))
     }
   }

@@ -1,7 +1,13 @@
-table{
-  width: 100%;
+table {
+    width: 100%;
 }
-button{
-  margin-bottom: 10px;
-  margin-right: 10px;
+
+button {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
 }

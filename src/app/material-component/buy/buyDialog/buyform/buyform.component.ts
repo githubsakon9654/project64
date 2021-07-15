@@ -22,7 +22,7 @@ export class BuyformComponent implements OnInit {
   year:string = ''
   allBudget:number = 0
   name:string = ''
-
+  serialRV = ''
   constructor(
     public dialog: MatDialog,
     public Source: BuyService,
@@ -45,7 +45,8 @@ export class BuyformComponent implements OnInit {
         this.name = data.user.fullname
       }
     )
-    
+    this.serialRV = this.year.substring(2,4);
+    console.log(this.serialRV)
   }
 
   displayedColumns: string[] = ['id', 'supplie_name','unit','price',  'unit_name', 'delete'];
@@ -144,7 +145,7 @@ export class BuyformComponent implements OnInit {
       console.log(supplie)
       console.log(units)
       console.log(sum)
-      this.SupplieService.insertBuyForm(userId,price,supplie,units,sum,this.name).subscribe(
+      this.SupplieService.insertBuyForm(userId,price,supplie,units,sum,this.name,this.serialRV).subscribe(
           data => {
               console.log(data)
             }

@@ -51,7 +51,7 @@ export class ReturnDetailComponent implements OnInit,OnDestroy {
         console.log(this.table)
         this.getArray()
         this.name = data.return[0].re_name
-        this.cls = data.return[0].classes
+        this.cls = data.return[0].name
         this.adminApp = data.status[0].status
         this.returnID = data.return[0].id
       }

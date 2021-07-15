@@ -1,69 +1,43 @@
 <h3>เพิ่มผู้ใช้ในระบบ</h3>
-    <form class="example-form"
-        *ngIf="!isSuccessful"
-        name="form"
-        (ngSubmit)="f.form.valid && onSubmit()"
-        #f="ngForm"
-        novalidate>
-        <!-- username -->
-      <mat-form-field class="example-full-width">
+<form class="example-form" *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+    <!-- username -->
+    <mat-form-field class="example-full-width">
         <mat-label>Username</mat-label>
-        <input matInput placeholder="กรอกชื่อ"
-        type="text"
-        class="form-control"
-        name="username"
-        [(ngModel)]="form.username"
-        required
-        minlength="3"
-        maxlength="20"
-        #username="ngModel">
-      </mat-form-field>
-      <div class="alert-danger" *ngIf="username.errors && f.submitted">
+        <input matInput placeholder="กรอกชื่อ" type="text" class="form-control" name="username" [(ngModel)]="form.username" required minlength="3" maxlength="20" #username="ngModel">
+    </mat-form-field>
+    <div class="alert-danger" *ngIf="username.errors && f.submitted">
         <div *ngIf="username.errors.required">Username is required</div>
         <div *ngIf="username.errors.minlength">
-          Username must be at least 3 characters
+            Username must be at least 3 characters
         </div>
         <div *ngIf="username.errors.maxlength">
-          Username must be at most 20 characters
+            Username must be at most 20 characters
         </div>
-      </div>
-      <!-- password -->
-      <mat-form-field class="example-full-width">
+    </div>
+    <!-- password -->
+    <mat-form-field class="example-full-width">
         <mat-label>Password</mat-label>
-        <input matInput placeholder="กรอกชื่อ"
-        type="password"
-        class="form-control"
-        name="password"
-        [(ngModel)]="form.password"
-        required
-        minlength="6"
-        #password="ngModel">
-      </mat-form-field>
-      <div class="alert-danger" *ngIf="password.errors && f.submitted">
+        <input matInput placeholder="กรอกชื่อ" type="password" class="form-control" name="password" [(ngModel)]="form.password" required minlength="6" #password="ngModel">
+    </mat-form-field>
+    <div class="alert-danger" *ngIf="password.errors && f.submitted">
         <div *ngIf="password.errors.required">Password is required</div>
         <div *ngIf="password.errors.minlength">
-          Password must be at least 6 characters
+            Password must be at least 6 characters
         </div>
-      </div>
-      <!-- name -->
-      <mat-form-field class="example-full-width">
+    </div>
+    <!-- name -->
+    <mat-form-field class="example-full-width">
         <mat-label>ชื่อ</mat-label>
-        <input matInput placeholder="กรอกชื่อ"
-              type="text"
-              class="form-control"
-              name="fullname"
-              [(ngModel)]="form.fullname"
-              required
-              #fullname="ngModel">
-        </mat-form-field>
-        <!-- <div class="alert-danger" *ngIf="email.errors && f.submitted">
+        <input matInput placeholder="กรอกชื่อ" type="text" class="form-control" name="fullname" [(ngModel)]="form.fullname" required #fullname="ngModel">
+    </mat-form-field>
+    <!-- <div class="alert-danger" *ngIf="email.errors && f.submitted">
             <div *ngIf="name.errors.required">Name is required</div>
             <div *ngIf="name.errors.name">
               Name must be a valid email address
             </div>
         </div> -->
-        <!-- price -->
-        <!-- <mat-form-field class="example-full-width">
+    <!-- price -->
+    <!-- <mat-form-field class="example-full-width">
           <mat-label>งบ</mat-label>
           <input matInput placeholder="กรอกงบ"
                 type="text"
@@ -72,35 +46,23 @@
                 [(ngModel)]="form.price"
                 #price="ngModel">
           </mat-form-field> -->
-        <mat-form-field class="example-full-width">
-          <mat-label>ระดับชั้น</mat-label>
-          <input matInput placeholder="กรอกระดับชั้น"
-                type="text"
-                class="form-control"
-                name="classes"
-                [(ngModel)]="form.classes"
-                #classes="ngModel">
-          </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>ระดับชั้น</mat-label>
+        <mat-select [(ngModel)]="form.classes" name="classes" #classes="ngModel">
+            <mat-option *ngFor="let stores of classe" [value]="stores.id">
+                {{stores.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-          <mat-form-field class="example-full-width">
-            <mat-label>ตำแหน่ง</mat-label>
-            <input type="text"
-                   placeholder="Pick one"
-                   matInput placeholder="กรอกหน่วยพัสดุ"
-                   aria-label="Number"
-                   matInput
-                   class="form-control"
-                  name="role"
-                  [(ngModel)]="form.role"
-                   required
-                   [matAutocomplete]="auto"
-                   #role="ngModel">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+    <mat-form-field class="example-full-width">
+        <mat-label>ตำแหน่ง</mat-label>
+        <input type="text" placeholder="Pick one" matInput placeholder="กรอกหน่วยพัสดุ" aria-label="Number" matInput class="form-control" name="role" [(ngModel)]="form.role" required [matAutocomplete]="auto" #role="ngModel">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                 {{option}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-      <button mat-raised-button color="primary">เพิ่มสมาชิก</button>
-    </form>
-
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <button mat-raised-button color="primary">เพิ่มสมาชิก</button>
+</form>

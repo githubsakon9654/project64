@@ -105,7 +105,7 @@ export class ProfileComponent implements OnInit {
         console.log(data)
         this.id = data.user.id
         this.name = data.user.fullname
-        this.classes = data.user.classes
+        this.classes = data.user.name
         this.username = data.user.username
         this.price = data.budget.budget
       }
@@ -131,6 +131,6 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  
+
 
 }

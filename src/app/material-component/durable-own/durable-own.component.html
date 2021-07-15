@@ -1,56 +1,58 @@
 <mat-card>
-	<mat-card-content>
-	<mat-card-title>รายการครุภัณฑ์ ที่ถือครอง</mat-card-title>
-	<br>
-	<table mat-table [dataSource]="datarow" class="mat-elevation-z8">
+    <mat-card-content>
+        <mat-card-title>รายการครุภัณฑ์ ที่ถือครอง</mat-card-title>
+        <br>
+        <div class="example-container">
 
-		<!--- Note that these columns can be defined in any order.
+            <table mat-table [dataSource]="datarow" class="mat-elevation-z8">
+
+                <!--- Note that these columns can be defined in any order.
 			  The actual rendered columns are set as a property on the row definition" -->
 
-		<!-- Position Column -->
-		<ng-container matColumnDef="id">
-		  <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
-		  <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
-		</ng-container>
+                <!-- Position Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+                </ng-container>
 
-		<!-- Name Column -->
-		<ng-container matColumnDef="du_name">
-		  <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
-		  <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
-		</ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="du_name">
+                    <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
+                </ng-container>
 
-		<!-- Weight Column -->
-		<ng-container matColumnDef="du_status">
-		  <th mat-header-cell *matHeaderCellDef> สภาพครุภัณฑ์ </th>
-		  <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
-		</ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="du_status">
+                    <th mat-header-cell *matHeaderCellDef> สภาพครุภัณฑ์ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
+                </ng-container>
 
-		<!-- Symbol Column -->
-		<ng-container matColumnDef="du_serial">
-		  <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
-		  <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
-		</ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="du_serial">
+                    <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
+                    <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
+                </ng-container>
 
-		<ng-container matColumnDef="owner">
-		  <th mat-header-cell *matHeaderCellDef> เจ้าของ </th>
-		  <td mat-cell *matCellDef="let element">
-        {{element.fullname}}
-        <div *ngIf="!element.userId">
-          คลัง
+                <ng-container matColumnDef="owner">
+                    <th mat-header-cell *matHeaderCellDef> เจ้าของ </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.fullname}}
+                        <div *ngIf="!element.userId">
+                            คลัง
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="button">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element">
+                        <button *ngIf="!userRole" mat-icon-button color="basic" style="color: rgb(255, 196, 0); background-color: rgb(99, 99, 90);" (click)="open(element)"><mat-icon>edit</mat-icon></button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
         </div>
-      </td>
-		</ng-container>
-
-		<ng-container matColumnDef="button">
-		  <th mat-header-cell *matHeaderCellDef></th>
-		  <td mat-cell *matCellDef="let element">
-        <button *ngIf="!userRole" mat-icon-button color="basic" style="color: rgb(255, 196, 0); background-color: rgb(99, 99, 90);"
-        (click)="open(element)"><mat-icon>edit</mat-icon></button>
-      </td>
-		</ng-container>
-
-		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-	  </table>
-	</mat-card-content>
+    </mat-card-content>
 </mat-card>

@@ -10,6 +10,7 @@ import { OfferService } from 'src/app/shared/service/offer.service';
 export class HomepageComponent implements OnInit {
   budgetYear:string = ''
   offer:boolean = false;
+  public link = 'from';
 
 
 

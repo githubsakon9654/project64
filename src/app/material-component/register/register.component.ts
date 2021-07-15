@@ -4,6 +4,12 @@ import { AuthService} from '../../shared/service/auth.service';
 import {map, startWith} from 'rxjs/operators';
 import {FormControl} from '@angular/forms';
 import {Observable,from } from 'rxjs';
+import { UserService } from 'src/app/shared/service/user.service';
+
+interface clss {
+  id: number;
+  name: string;
+}
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -22,24 +28,41 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
+  classe: clss[] = [];
   myControl = new FormControl();
   options: string[] = ['admin', 'user', 'director'];
   filteredOptions = new Observable
 
-  constructor(private authService: AuthService, public routes: Router, ) { }
+  constructor(
+    private authService: AuthService,
+    public routes: Router,
+    private userService: UserService
+    ) { }
 
   ngOnInit(): void {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+    this.loadClass()
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+
+  loadClass(){
+
+    this.userService.getClass().subscribe(
+      date => {
+        this.classe = date.classe
+        console.log(this.classe)
+      }
+    )
+
   }
 
   onSubmit() : void {

@@ -1,56 +1,56 @@
 <mat-dialog-content class="mat-typography">
-  <button *ngIf="!isAccept && adminApp && direApp" mat-raised-button color="primary" (click)="accept()" style="margin-left: 92%; background-color: rgb(32, 221, 80); color: rgb(48, 48, 48);">
+    <button *ngIf="!isAccept && adminApp" mat-raised-button color="primary" (click)="accept()" style="margin-left: 92%; background-color: rgb(32, 221, 80); color: rgb(48, 48, 48);">
     รับพัสดุ
   </button>
-  <p *ngIf="isAccept"  style="margin-left: 92%; color: rgb(28, 141, 0);">รับพัสดุแล้ว</p>
-  <p>ชื่อผู้เบิก : {{name}}</p>
-  <p>ชั้นเรียน : {{cls}}</p>
-  <p>ราคารวม : {{total | currency: '฿ '}}</p>
-  <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
-  <br>
-  <mat-slide-toggle [disabled]="isAdmin || isUser"  [(ngModel)]="direApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้อำนวยการ)</mat-slide-toggle>
-  <br>
-  <button *ngIf="adminApp && direApp" mat-raised-button color="primary" (click)=" reportDetail()">พิมพ์</button>
-  <table mat-table [dataSource]="table" class="mat-elevation-z8">
+    <p *ngIf="isAccept" style="margin-left: 92%; color: rgb(28, 141, 0);">รับพัสดุแล้ว</p>
+    <p>ชื่อผู้เบิก : {{name}}</p>
+    <p>ชั้นเรียน : {{cls}}</p>
+    <p>ราคารวม : {{total | currency: '฿ '}}</p>
+    <mat-slide-toggle [disabled]="isDirec || isUser" [(ngModel)]="adminApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้ดูแล)</mat-slide-toggle>
+    <br>
+    <!-- <mat-slide-toggle [disabled]="isAdmin || isUser" [(ngModel)]="direApp" (ngModelChange)="Appove()" (ngModelChange)="updateUnit()">ยืนยันรายการเบิก(ผู้อำนวยการ)</mat-slide-toggle> -->
+    <br>
+    <button *ngIf="adminApp" mat-raised-button color="primary" (click)=" reportDetail()">พิมพ์</button>
+    <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="supplieId">
-        <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
-        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
-      </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="supplieId">
+            <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="supplie_name">
-        <th mat-header-cell *matHeaderCellDef> ชื่อพัสดุ </th>
-        <td mat-cell *matCellDef="let element"> {{element.supplie_name}} </td>
-      </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="supplie_name">
+            <th mat-header-cell *matHeaderCellDef> ชื่อพัสดุ </th>
+            <td mat-cell *matCellDef="let element"> {{element.supplie_name}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef> ราคา(บาท) </th>
-        <td mat-cell *matCellDef="let element"> {{element.price | currency: '฿ '}} </td>
-      </ng-container>
+        <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> ราคา(บาท) </th>
+            <td mat-cell *matCellDef="let element"> {{element.price | currency: '฿ '}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="unit">
-        <th mat-header-cell *matHeaderCellDef> จำนวน </th>
-        <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
-      </ng-container>
+        <ng-container matColumnDef="unit">
+            <th mat-header-cell *matHeaderCellDef> จำนวน </th>
+            <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="unit_name">
-        <th mat-header-cell *matHeaderCellDef>หน่วย</th>
-        <td mat-cell *matCellDef="let element"> {{element.unit_name}} </td>
-      </ng-container>
+        <ng-container matColumnDef="unit_name">
+            <th mat-header-cell *matHeaderCellDef>หน่วย</th>
+            <td mat-cell *matCellDef="let element"> {{element.unit_name}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef>  </th>
-        <td mat-cell *matCellDef="let element" >
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let element">
+            </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-  </mat-dialog-content>
+</mat-dialog-content>

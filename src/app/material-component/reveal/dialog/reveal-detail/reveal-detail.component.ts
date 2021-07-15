@@ -62,10 +62,9 @@ export class RevealDetailComponent implements OnInit {
         this.length = this.table.length;
         console.log(this.length)
         this.name = data.reveal[0].fullname
-        this.cls = data.reveal[0].classes
+        this.cls = data.reveal[0].name
         this.total = data.reveal[0].total_price
         this.adminApp = data.appove[0].admin_approve
-        this.direApp = data.appove[0].dire_approvev
         this.isAccept = data.appove[0].accept
         this.revealID = data.reveal[0].id
         console.log(this.adminApp)
@@ -86,7 +85,7 @@ export class RevealDetailComponent implements OnInit {
   }
 
   updateUnit(){
-    if(this.adminApp && this.direApp){
+    if(this.adminApp){
       for (var i =0; i<this.length;i++){
         var id = 0
         var unit:number = 0
@@ -102,6 +101,7 @@ export class RevealDetailComponent implements OnInit {
             this.supService.updateUnit(data.supplie[0].supplieId,unit,this.year).subscribe(
               data=>{}
             )
+            this.revealService.updateRemain(this.revealID,data.supplie[0].supplieId,unit).subscribe()
           }
           )
       }
@@ -121,7 +121,7 @@ export class RevealDetailComponent implements OnInit {
   Appove(){
     console.log(this.adminApp)
     console.log(this.direApp)
-    this.revealService.updateApprove(this.revealID,this.adminApp,this.direApp).subscribe(
+    this.revealService.updateApprove(this.revealID,this.adminApp).subscribe(
       data =>{}
     )
   }

@@ -32,8 +32,8 @@ export class ReturnFormComponent implements OnInit {
     console.log(username)
     this.userService.getUser(username).subscribe(
       d => {
-        console.log(d.user.fullname)
-        this.re_name = d.user.fullname
+        console.log(d.user[0].fullname)
+        this.re_name = d.user[0].fullname
       }
     )
   }

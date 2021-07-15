@@ -13,7 +13,7 @@ import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 export class UserlistComponent implements OnInit {
   row: Array<any> = []
   data: Array<any> = []
-  
+
   key: String =''
   year:string =''
 
@@ -56,7 +56,7 @@ export class UserlistComponent implements OnInit {
     console.log(row.budget)
     const detail = this.dialog.open(UserDetailComponent,{
       width: '800px',
-      data: {id: row.id,username: row.username, fullname:row.fullname, classes: row.classes,budget: row.budget}
+      data: {id: row.id,username: row.username, fullname:row.fullname, classes: row.name,budget: row.budget}
     });
     detail.afterClosed().subscribe(
       r => {

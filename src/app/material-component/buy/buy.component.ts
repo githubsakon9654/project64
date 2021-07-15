@@ -63,7 +63,7 @@ export class BuyComponent implements OnInit {
     const userId = this.userService.getId()
     console.log(userId)
     const dialog = this.dialog.open(BuyformComponent,{
-      width: '1500px'
+      width: '1600px'
     });
 
     dialog.afterClosed().subscribe(

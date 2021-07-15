@@ -11,6 +11,7 @@ import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 import { StoreComponent } from './store/store.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { ListhistoryComponent } from './listhistory/listhistory.component';
 export interface DialogData {
   id : number;
   sup_name: string;
@@ -54,7 +55,16 @@ export class SupplielistComponent implements OnInit {
    this.getRole()
   }
 
+listhis(e:any){
+  console.log('his')
+  const dialogRef = this.dialog.open(ListhistoryComponent,{
+    width: '1000px',
+    data: {id: e.id}
+  });
+    dialogRef.afterClosed().subscribe( r => {
 
+    })
+}
 
 
   getRole(){
@@ -261,7 +271,10 @@ interface Food {
   value: string;
   viewValue: string;
 }
-
+interface clss {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-supplie-insert',
@@ -276,10 +289,12 @@ export class SupplieInsertComponent implements OnInit{
     sup_name: null,
     price: null,
     stores:null,
-    unit_name: null
+    unit_name: null,
+    cate: null
   };
 
   store: Food[] = [];
+  cates: clss[] = [];
 
   constructor(
     public supplieServie: SupplieService, public routes: Router,
@@ -309,11 +324,16 @@ export class SupplieInsertComponent implements OnInit{
         console.log(this.store)
       }
     )
+    this.supplieServie.getSupCate().subscribe(
+      date => {
+        this.cates = date.supcate
+      }
+    )
   }
 
   onSubmit(){
-    const {sup_name,price,unit_name,stores} = this.form;
-    this.supplieServie.createSupplie(sup_name,price,unit_name,+stores,this.year).subscribe(
+    const {sup_name,price,unit_name,stores,cate} = this.form;
+    this.supplieServie.createSupplie(sup_name,price,unit_name,+stores,this.year,cate).subscribe(
       data => {
         console.log(sup_name)
       }

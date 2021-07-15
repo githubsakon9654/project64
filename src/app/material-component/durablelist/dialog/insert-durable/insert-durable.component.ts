@@ -16,6 +16,11 @@ interface Food {
 interface status {
   value: string;
 }
+interface cate {
+  id: number;
+  name: string;
+  serial: string;
+}
 @Component({
   selector: 'app-insert-durable',
   templateUrl: './insert-durable.component.html',
@@ -25,7 +30,7 @@ export class InsertDurableComponent implements OnInit {
 
   events: string[] = [];
   d: string = ''
-
+  cates: cate[] = [];
   addEvent(event: MatDatepickerInputEvent<Date>) {
     this.events.push(`${event.value}`);
     console.log(event.value)
@@ -46,16 +51,16 @@ export class InsertDurableComponent implements OnInit {
     get:null,
     date:null
   };
-  
+
   constructor(
     private dialogRef: MatDialogRef<InsertDurableComponent>,
     private durable: DurableService
     ) { }
-    
+
     ngOnInit(): void {
-      
+      this.getCate()
     }
-    
+
   foods: Food[] = [
     {value: 'มสจ.7110.001.', viewValue: 'โต๊ะเก้าอี้นักเรียน'},
     {value: 'มสจ.7210.001.', viewValue: 'ตู้'},
@@ -68,17 +73,29 @@ export class InsertDurableComponent implements OnInit {
     {value: 'เสื่อมสภาพ'},
     {value: 'สูญหาย'}
   ]
-    
-    
-    
+
+  getCate() {
+    this.durable.getDuCate().subscribe(
+      date => {
+        this.cates = date.ducate
+        console.log(this.cates)
+      }
+    )
+  }
+
   onSubmit(){
     const {du_name,du_status,du_serial,du_cate,du_price,date,get} = this.form
-    const serial = du_serial + '0' + du_cate
-
+    var ser = ''
+    switch(+du_serial){
+      case 1:
+        ser = '7110'
+        break;
+    }
+    const serial = 'มสจ.' + ser + '.001.' + '0' + du_cate
     var start = (date).toISOString()
     var s = start.substring(0,10)
     console.log(date)
-    this.durable.create(du_name,du_status,serial,du_price,s,get).subscribe(
+    this.durable.create(du_name,du_status,serial,du_price,s,get,du_serial).subscribe(
       data => {
         console.log(data)
       }
@@ -184,7 +201,7 @@ export class SetnullDurableComponent implements OnInit{
   }
 
   onClick(){
-    this.durable.updateOwnerNull(+this.data.id,null).subscribe(
+    this.durable.updateOwnerNull(+this.data.id,null,null).subscribe(
       data => {}
     )
     this.dialogRef.close()

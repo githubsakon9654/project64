@@ -11,8 +11,20 @@ export class SupplieService {
 
   constructor(private http: HttpClient) { }
 
-  createSupplie(supplie_name: string, price:number, unit_name:string,storeId:number,year:string): Observable<any> {
-    return this.http.post(API_URL + 'insert',{supplie_name,price, unit_name,storeId,year});
+  getSupCate(): Observable<any> {
+    return this.http.get(API_URL + 'supcatefind');
+  }
+
+  getlist(year:string,id:number):Observable<any>{
+    return this.http.post(API_URL + 'remain',{year,id})
+  }
+
+  getHistory(id:number):Observable<any>{
+    return this.http.post(API_URL + 'history',{id})
+  }
+
+  createSupplie(supplie_name: string, price:number, unit_name:string,storeId:number,year:string,supcateId:number): Observable<any> {
+    return this.http.post(API_URL + 'insert',{supplie_name,price, unit_name,storeId,year,supcateId});
   }
 
   getStore():Observable<any>{
@@ -51,8 +63,8 @@ export class SupplieService {
     });
   }
 
-  insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>,sum:Array<any>,name:string): Observable<any> {
-    return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units,sum,name});
+  insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>,sum:Array<any>,name:string,year:string): Observable<any> {
+    return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units,sum,name,year});
   }
 
   reportSupplie(){

@@ -66,6 +66,7 @@ import { RepairListComponent } from './durablelist/dialog/repair-list/repair-lis
 import { ReportComponent } from './report/report.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { StoreComponent } from './supplielist/store/store.component';
+import { ListhistoryComponent } from './supplielist/listhistory/listhistory.component';
 
 @NgModule({
   imports: [
@@ -143,7 +144,8 @@ import { StoreComponent } from './supplielist/store/store.component';
     RepairListComponent,
     ReportComponent,
     HomepageComponent,
-    StoreComponent
+    StoreComponent,
+    ListhistoryComponent
   ]
 })
 export class MaterialComponentsModule {}

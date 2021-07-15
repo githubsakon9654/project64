@@ -1,8 +1,13 @@
-table{
-  width: 100%;
-  margin-top: 10px;
+table {
+    width: 100%;
+    margin-top: 10px;
 }
 
-button{
-  margin-right: 10px;
+button {
+    margin-right: 10px;
+}
+
+.example-container {
+    height: 400px;
+    overflow: auto;
 }

@@ -97,7 +97,8 @@ export class FromDetailComponent implements OnInit {
     const units: Array<any> = []
     if (userId) {
       for (let i = 0; i < this.row.length; i++) {
-        let array = Number(this.row[i].id)
+        let array = (Number(this.row[i].id) + 1)
+        console.log(this.row[i].id);
         let unit = Number(this.row[i].unit)
         supplie.push(array)
         units.push(unit)
@@ -135,7 +136,7 @@ export class FromDetailComponent implements OnInit {
     console.log(username)
     this.userService.getUser(username).subscribe(s => {
       console.log(s)
-      this.offer_name = s.user.fullname
+      this.offer_name = s.user[0].fullname
     })
     this.year = this.BudgetService.budgetYear()
     this.BudgetService.getBudget(userId, this.year).subscribe(

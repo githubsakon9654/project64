@@ -48,7 +48,7 @@ export class BuyService {
   getDetail(id:number): Observable<any>{
     return this.http.post(API_URL + 'byid',{id});
   }
-  
+
   getFilldate(start:string,end:string):Observable<any>{
     return this.http.post(API_URL + 'filldate',{start,end});
   }
@@ -58,6 +58,9 @@ export class BuyService {
   }
   setBuyRepel(id:number,repel:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,repel})
+  }
+  setAccept(id:number) : Observable<any>{
+    return this.http.post(API_URL + 'accept',{id});
   }
   setComment(id:number,store:string) :Observable<any>{
     return this.http.post(API_URL + 'update',{id,store})

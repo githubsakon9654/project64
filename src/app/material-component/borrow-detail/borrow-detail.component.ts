@@ -48,7 +48,7 @@ export class BorrowDetailComponent implements OnInit,OnDestroy {
         console.log(this.table)
         this.getArray()
         this.name = data.borrow[0].fullname
-        this.cls = data.borrow[0].classes
+        this.cls = data.borrow[0].name
         this.adminApp = data.appove[0].admin_approve
         this.direApp = data.appove[0].dire_approvev
         this.isAccept = data.appove[0].accept

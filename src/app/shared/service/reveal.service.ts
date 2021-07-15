@@ -95,12 +95,15 @@ export class RevealService {
       this.calculatorTotal()
   }
 
-  insertReveal(userId:number,total_price:number,supplie:Array<any>,units:Array<any>): Observable<any>{
-    return this.http.post(API_URL + 'insert', {userId,total_price,supplie,units});
+  insertReveal(userId:number,total_price:number,supplie:Array<any>,units:Array<any>,year:string): Observable<any>{
+    return this.http.post(API_URL + 'insert', {userId,total_price,supplie,units,year});
   }
 
   getRevealList(): Observable<any>{
     return this.http.get(API_URL + 'listAll');
+  }
+  updateRemain(id:number,supplieId:number,remain:number):Observable<any>{
+    return this.http.post(API_URL + 'upRemain',{id,supplieId,remain})
   }
 
   getRevealUserList(userId:number): Observable<any> {
@@ -115,8 +118,8 @@ export class RevealService {
     return this.http.post(API_URL + 'detail',{id});
   }
 
-  updateApprove(id:number,admin_approve:boolean,dire_approvev:boolean): Observable<any> {
-    return this.http.post(API_URL + 'updateAppove',{id,admin_approve,dire_approvev});
+  updateApprove(id:number,admin_approve:boolean): Observable<any> {
+    return this.http.post(API_URL + 'updateAppove',{id,admin_approve});
   }
 
   updateAccept(id:number,accept:boolean): Observable<any> {

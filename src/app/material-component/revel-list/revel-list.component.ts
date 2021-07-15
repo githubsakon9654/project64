@@ -36,7 +36,7 @@ export class RevelListComponent implements OnInit {
   ngOnInit(): void {
     this.loadTable()
   }
-  displayedColumns: string[] = ['id','name', 'admin_approve','dire_approvev', 'total_price','date', 'delete'];
+  displayedColumns: string[] = ['id','name', 'admin_approve', 'total_price','date', 'delete'];
 
   openform(){
     const dialog = this.dialog.open(RevealComponent,{

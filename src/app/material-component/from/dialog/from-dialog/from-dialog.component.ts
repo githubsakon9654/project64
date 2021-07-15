@@ -46,12 +46,12 @@ export class FromDialogComponent implements OnInit {
   displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name'];
 
   loadData(){
+    console.log(this.data.id)
     this.offerService.get_detail(this.data.id).subscribe(
       data => {
-        console.log(data)
         this.dataRow = data.offer
         this.fullname = data.offer[0].fullname
-        this.class = data.offer[0].classes
+        this.class = data.offer[0].name
         this.id = data.offer[0].id
         this.offer_status = data.appove[0].offer_status
       }

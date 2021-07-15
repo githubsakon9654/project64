@@ -15,6 +15,10 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getClass(): Observable<any>{
+    return this.http.get(API_URL + 'cls');
+  }
+
   getAllUsers(budget_year:string): Observable<any> {
     return this.http.post(API_URL + 'all',{budget_year});
   }
@@ -27,8 +31,8 @@ export class UserService {
     return this.http.post(API_URL + 'update',{id,price})
   }
 
-  updateUserByAdmin(id:number,username:string,classes:string, price:number,fullname:string): Observable<any>{
-    return this.http.post(API_URL + 'update',{id,username,fullname,classes,price})
+  updateUserByAdmin(id:number,username:string,claId:number, price:number,fullname:string): Observable<any>{
+    return this.http.post(API_URL + 'update',{id,username,fullname,claId,price})
   }
 
   changePass(id:number,password:string,newpassword:string): Observable<any>{

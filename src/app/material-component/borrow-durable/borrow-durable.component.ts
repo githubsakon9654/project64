@@ -29,9 +29,10 @@ export class BorrowDurableComponent implements OnInit {
     const username = String (this.userService.getUsername())
     this.userService.getUser(username).subscribe(
       data => {
-        this.name = data.user.fullname
-        console.log(this.user)
-        console.log(data.user.fullname)
+        console.log(data)
+        this.name = data.user[0].fullname
+        console.log(this.user[0])
+        console.log(data.user[0].fullname)
       }
     )
     console.log(this.name)
