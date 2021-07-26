@@ -3,6 +3,7 @@ import { BuyService ,DialogData} from '../../../../shared/service/buy.service'
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TokenStorageService } from '../../../../shared/service/token-storage.service';
 import { BuyCommentComponent } from '../buy-comment/buy-comment.component';
+import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 
 
@@ -26,13 +27,14 @@ export class BuyDetailComponent implements OnInit {
   accept:boolean = false
   comment:string = ''
   onCom:boolean = false
-
+  year:string = ''
 
 
   constructor(
     public dialog: MatDialog,
     private buyService: BuyService,
     private token:TokenStorageService,
+    private budget:BudgetYearService,
     public dialogRef: MatDialogRef<BuyDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
@@ -42,6 +44,8 @@ export class BuyDetailComponent implements OnInit {
   ngOnInit(): void {
     this.loadData()
     this.getRole()
+    this.year = this.budget.budgetYear()
+    console.log(this.year.substring(2,4))
   }
 
   loadData(){
@@ -106,7 +110,9 @@ export class BuyDetailComponent implements OnInit {
   }
 
   setAccept(){
-    this.buyService.setAccept(this.id).subscribe(
+    this.accept=true;
+    var Y = this.year.substring(2,4);
+    this.buyService.setAccept(this.id,Y).subscribe(
       data => {
         console.log(data)
       }

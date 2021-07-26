@@ -59,8 +59,8 @@ export class BuyService {
   setBuyRepel(id:number,repel:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,repel})
   }
-  setAccept(id:number) : Observable<any>{
-    return this.http.post(API_URL + 'accept',{id});
+  setAccept(id:number,year:string) : Observable<any>{
+    return this.http.post(API_URL + 'accept',{id,year});
   }
   setComment(id:number,store:string) :Observable<any>{
     return this.http.post(API_URL + 'update',{id,store})

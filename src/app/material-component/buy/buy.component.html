@@ -31,6 +31,10 @@
                     <td mat-cell *matCellDef="let element; let i =index"> {{i+1}} </td>
                 </ng-container>
 
+                <ng-container matColumnDef="serial">
+                    <th mat-header-cell *matHeaderCellDef> ชื่อเจ้าหน้าที่ </th>
+                    <td mat-cell *matCellDef="let element"> {{element.serial}} </td>
+                </ng-container>
                 <ng-container matColumnDef="name">
                     <th mat-header-cell *matHeaderCellDef> ชื่อเจ้าหน้าที่ </th>
                     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
