@@ -17,7 +17,7 @@
             <mat-label>ประเภทครุภัณฑ์</mat-label>
             <mat-select [(ngModel)]="form.du_serial" name="du_serial" #du_serial="ngModel">
                 <mat-option *ngFor="let food of cates" [value]="food.id">
-                    {{food.name}}
+                    {{food.name + ' ' + food.serial}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

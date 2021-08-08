@@ -16,6 +16,9 @@ export class DurableService {
   getDuCate():Observable<any>{
     return this.http.get(API_URL + 'ducate');
   }
+  getDuCateByid(id:number):Observable<any>{
+    return this.http.post(API_URL + 'ducatebyid',{id});
+  }
 
   getAllDurable(): Observable<any>{
     return this.http.get(API_URL + 'listAll')

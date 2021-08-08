@@ -52,12 +52,18 @@ export class BuyService {
   getFilldate(start:string,end:string):Observable<any>{
     return this.http.post(API_URL + 'filldate',{start,end});
   }
+  setRamain(supplieId:number,unit:number,year:string,id:number):Observable<any>{
+    return this.http.post(API_URL + 'remain',{supplieId,unit,year,id});
+  }
 
-  setBuyStatus(id:number,status:boolean) : Observable<any>{
-    return this.http.post(API_URL + 'update',{id,status})
+  setBuyStatus(id:number,status:boolean,year:string) : Observable<any>{
+    return this.http.post(API_URL + 'update',{id,status,year})
   }
   setBuyRepel(id:number,repel:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,repel})
+  }
+  updateBuy(id:number,userId2:number) : Observable<any>{
+    return this.http.post(API_URL + 'update2',{id,userId2})
   }
   setAccept(id:number,year:string) : Observable<any>{
     return this.http.post(API_URL + 'accept',{id,year});

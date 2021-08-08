@@ -26,6 +26,9 @@ export class UserService {
   deleteUser(id:number): Observable<any>{
     return this.http.post(API_URL + 'delete',{id})
   }
+  getDirecBuy(id:number): Observable<any>{
+    return this.http.post(API_URL + 'getdire',{id})
+  }
 
   updateUserPrice(id:number,price:number): Observable<any>{
     return this.http.post(API_URL + 'update',{id,price})

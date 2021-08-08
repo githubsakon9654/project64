@@ -86,20 +86,39 @@ export class InsertDurableComponent implements OnInit {
   onSubmit(){
     const {du_name,du_status,du_serial,du_cate,du_price,date,get} = this.form
     var ser = ''
-    switch(+du_serial){
-      case 1:
-        ser = '7110'
-        break;
-    }
-    const serial = 'มสจ.' + ser + '.001.' + '0' + du_cate
-    var start = (date).toISOString()
-    var s = start.substring(0,10)
-    console.log(date)
-    this.durable.create(du_name,du_status,serial,du_price,s,get,du_serial).subscribe(
-      data => {
-        console.log(data)
+    this.durable.getDuCateByid(2).subscribe(
+      data =>{
+        ser = data.ducate[0].serial;
+        console.log(ser)
+
+        var start = (date).toISOString()
+        var s = start.substring(0,10)
+        const serial = 'มสจ.' + ser + '.' + '0' + du_cate
+        console.log(serial)
+        this.durable.create(du_name,du_status,serial,du_price,s,get,du_serial).subscribe(
+          data => {
+            console.log(data)
+          }
+        )
       }
-    )
+      );
+      // switch(+du_serial){
+        //   case 1:
+        //     ser = '7110.001'
+        //     break;
+        //   case 2:
+        //     ser = ''
+    //     break;
+    //   case 3:
+    //     ser = ''
+    //     break;
+    //   case 4:
+    //     ser = ''
+    //     break;
+    //   case 5:
+    //     ser = ''
+    //     break;
+    // }
     this.dialogRef.close();
   }
 

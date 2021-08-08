@@ -1,7 +1,7 @@
 <mat-dialog-content class="mat-typography">
     <h2>รายละเอียดรายการสั่งซื้อ</h2>
     <button *ngIf="isDirector && !buy_status" style="margin-left: 980px; background-color: rgb(250, 104, 0);" (click)="Onrepel()" mat-raised-button>ตีกลับรายการสั่งซื้อ</button>
-    <button *ngIf="buy_status && !accept" style="margin-left: 980px; background-color: rgb(103, 182, 0);" (click)="setAccept()" mat-raised-button color="primary">รับพัสดุครบแล้ว</button>
+    <button *ngIf="buy_status && !accept && isDT" style="margin-left: 980px; background-color: rgb(103, 182, 0);" (click)="setAccept()" mat-raised-button color="primary">รับพัสดุครบแล้ว</button>
     <p *ngIf="accept" style="margin-left: 1000px; color: rgb(103, 182, 0);">รับพัสดุครบแล้ว</p>
     <h4>ชื่อ: {{fullname}}</h4>
     <h4>ชั้นเรียน: {{class}}</h4>
@@ -12,11 +12,34 @@
   </mat-slide-toggle> -->
     <h4>ข้อเสนอแนะ : {{comment}}</h4>
     <mat-slide-toggle [disabled]="!isDirector" [(ngModel)]="buy_status" (ngModelChange)="appoveBuy()">
-        <div *ngIf="buy_status">รับทราบแล้ว</div>
-        <div *ngIf="!buy_status">ยืนยันรับทราบแบบสั่งซื้อ</div>
+        <div *ngIf="buy_status">อนุมัติแล้ว</div>
+        <div *ngIf="!buy_status">ยืนยันอนุมัติแบบสั่งซื้อ</div>
     </mat-slide-toggle>
     <br>
-    <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
+    <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat *ngIf="buy_status">
+        <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
+            <mat-label>ประเภทครุภัณฑ์</mat-label>
+            <mat-select [(ngModel)]="form.store" name="store" #store="ngModel">
+                <mat-option *ngFor="let food of stores" [value]="food.id">
+                    {{food.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" style="margin-right: 10px;" (click)="onSubmit()">พิมพ์ตามร้าน</button>
+        <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
+    </form>
+    <h4 *ngIf="dire2">{{direname}}</h4>
+    <form class="example-form" name="form2" (ngSubmit)="f.form.valid && onSubmit2()" #f="ngForm" novalidat *ngIf="buy_status && !dire2">
+        <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
+            <mat-label>ประเภทครุภัณฑ์</mat-label>
+            <mat-select [(ngModel)]="form2.fname" name="fname" #fname="ngModel">
+                <mat-option *ngFor="let food of names" [value]="food.id">
+                    {{food.fullname}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" style="margin-right: 10px;" (click)="onSubmit2()">ตั้งกรรมการ</button>
+    </form>
 
 
     <table mat-table [dataSource]="dataRow" class="mat-elevation-z8">
@@ -31,6 +54,10 @@
         </ng-container>
 
         <!-- Name Column -->
+        <ng-container matColumnDef="store">
+            <th mat-header-cell *matHeaderCellDef> ชื่อร้าน </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
         <ng-container matColumnDef="supplie_name">
             <th mat-header-cell *matHeaderCellDef> ชื่อพัสดุ </th>
             <td mat-cell *matCellDef="let element"> {{element.supplie_name}} </td>

@@ -62,6 +62,11 @@ export class SupplieService {
         filter,year
     });
   }
+  filter2(filter: string,year:string): Observable<any>{
+    return this.http.post(API_URL+'filter2', {
+        filter,year
+    });
+  }
 
   insertBuyForm(userId:number,buyprice:number,supplie:Array<any>,units:Array<any>,sum:Array<any>,name:string,year:string): Observable<any> {
     return this.http.post('http://localhost:8080/api/buy/insert',{userId,buyprice,supplie,units,sum,name,year});

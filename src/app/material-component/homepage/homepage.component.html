@@ -11,6 +11,11 @@
                   "เปิดรายการเสนอพัสดุแล้ว"
                 </a>
             </h3>
+            <h3 (click)="openDetail()" *ngIf="dire">
+                <a style="color: rgb(187, 138, 5);" routerLink="/home">
+                "เปิดหน้ารายการสั่งซื้อ"
+              </a>
+            </h3>
         </diV>
     </mat-card-content>
 </mat-card>

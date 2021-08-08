@@ -251,7 +251,7 @@ export class SupplieDeleteComponent {
 
   onClick(): void {
     var year = this.budget.budgetYear()
-    const id = this.data.id -1
+    const id = this.data.id
     console.log(id)
     console.log(year)
     this.supplieServie.deleteSupplie(id,year).subscribe(
