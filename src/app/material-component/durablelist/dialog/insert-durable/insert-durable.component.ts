@@ -86,7 +86,7 @@ export class InsertDurableComponent implements OnInit {
   onSubmit(){
     const {du_name,du_status,du_serial,du_cate,du_price,date,get} = this.form
     var ser = ''
-    this.durable.getDuCateByid(2).subscribe(
+    this.durable.getDuCateByid(du_serial).subscribe(
       data =>{
         ser = data.ducate[0].serial;
         console.log(ser)

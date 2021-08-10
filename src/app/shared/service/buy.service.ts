@@ -69,7 +69,7 @@ export class BuyService {
     return this.http.post(API_URL + 'accept',{id,year});
   }
   setComment(id:number,store:string) :Observable<any>{
-    return this.http.post(API_URL + 'update',{id,store})
+    return this.http.post(API_URL + 'update2',{id,store})
   }
   clear(){
     let t = this.item = []
@@ -150,6 +150,9 @@ export class BuyService {
 
   reportbuyform(id:number){
     return window.open('http://localhost:8080/api/report/buyform/' + id)
+  }
+  reportbuyformByStore(id:number,id2:number){
+    return window.open('http://localhost:8080/api/report/buyformbystore/' + id + '/'+ id2)
   }
 
   reportBuylist(){

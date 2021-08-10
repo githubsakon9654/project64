@@ -106,6 +106,7 @@ export class BuyDetailComponent implements OnInit {
   onSubmit(){
     const {store} = this.form
     console.log(store)
+    this.buyService.reportbuyformByStore(this.id,store)
   }
   onSubmit2(){
     const {fname} = this.form2

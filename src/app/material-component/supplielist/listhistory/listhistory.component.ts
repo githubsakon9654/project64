@@ -1,6 +1,6 @@
 import { Component, OnInit,Inject } from '@angular/core';
 import { SupplieService } from 'src/app/shared/service/supplie.service';
-import { DialogData } from 'src/app/shared/service/user.service';
+import { DialogData, UserService } from 'src/app/shared/service/user.service';
 import { SupplieUpdateComponent } from '../supplielist.component';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
@@ -20,6 +20,7 @@ export class ListhistoryComponent implements OnInit {
   constructor(public supplieServie: SupplieService,
     private budget: BudgetYearService,
     public dialogRef: MatDialogRef<ListhistoryComponent>,
+    private userService : UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit(): void {
@@ -38,8 +39,9 @@ export class ListhistoryComponent implements OnInit {
   }
 
   print(){
+    const id = Number(this.userService.getId())
     console.log('print');
-    return window.open('http://localhost:8080/api/report/suppliehistory/'+ this.year + '/' + this.data.id)
+    return window.open('http://localhost:8080/api/report/suppliehistory/'+ this.year + '/' + this.data.id + '/' + id)
     // /api/report/suppliehistory/
   }
 

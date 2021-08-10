@@ -18,7 +18,7 @@
     <br>
     <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat *ngIf="buy_status">
         <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
-            <mat-label>ประเภทครุภัณฑ์</mat-label>
+            <mat-label>เลือกร้านค้า</mat-label>
             <mat-select [(ngModel)]="form.store" name="store" #store="ngModel">
                 <mat-option *ngFor="let food of stores" [value]="food.id">
                     {{food.name}}
@@ -28,7 +28,7 @@
         <button type="submit" mat-raised-button color="primary" style="margin-right: 10px;" (click)="onSubmit()">พิมพ์ตามร้าน</button>
         <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
     </form>
-    <h4 *ngIf="dire2">{{direname}}</h4>
+    <h4 *ngIf="dire2">กรรมการ : {{direname}}</h4>
     <form class="example-form" name="form2" (ngSubmit)="f.form.valid && onSubmit2()" #f="ngForm" novalidat *ngIf="buy_status && !dire2">
         <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
             <mat-label>ประเภทครุภัณฑ์</mat-label>

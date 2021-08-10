@@ -65,7 +65,7 @@
                             <button *ngIf="!userRole" mat-icon-button color="basic" style="color: rgb(255, 196, 0); background-color: rgb(99, 99, 90);" (click)="openDetail(element)"><mat-icon>edit</mat-icon></button>
                             <button *ngIf="!userRole" mat-icon-button color="warn" style="background-color: rgb(99, 99, 90);" (click)="deleteRow(element)"><mat-icon>delete_forever</mat-icon></button>
                             <button *ngIf="!userRole" mat-icon-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(30, 255, 0);" (click)="inputSup(element)"><mat-icon>add</mat-icon></button>
-                            <button mat-icon-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(67, 154, 253);" (click)="listhis(element)"><mat-icon>article</mat-icon></button>
+                            <button *ngIf="!userRole" mat-icon-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(67, 154, 253);" (click)="listhis(element)"><mat-icon>article</mat-icon></button>
                         </td>
                     </ng-container>
 
