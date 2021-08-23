@@ -192,12 +192,13 @@ export class SupplieUpdateComponent implements OnInit {
   }
 
   update(){
-    const id = this.data.id - 1
+    const id = this.data.id
     console.log(id)
     const {sup_name,price,unit,unit_name} = this.form;
+    console.log(price)
+    console.log(unit_name)
     this.supplieServie.updateSupplie(id,sup_name,price,unit_name).subscribe(
       data => {
-        console.log(sup_name)
       }
     )
   }

@@ -1,66 +1,30 @@
 <div>
-  <h3>แก้ไขครุภัณฑ์</h3>
-  <form  class="example-form"
-  name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
-  novalidat>
-    <mat-form-field >
-    <mat-label>ชื่อครุภัณฑ์</mat-label>
-    <input matInput
-          matInput placeholder="กรอกชื่อครุภัณฑ์"
-          type="text"
-          class="form-control"
-          name="du_name"
-          [(ngModel)]="form.du_name"
-          required
-          [disabled]="userRole"
-          #du_name="ngModel">
-    </mat-form-field>
-    <mat-form-field >
-    <mat-label>สภาพครุภัณฑ์</mat-label>
-    <mat-select [(ngModel)]="form.du_status" name="du_status" #du_status="ngModel">
-      <mat-option *ngFor="let statuse of status" [value]="statuse.value" >
-        {{statuse.value}}
-      </mat-option>
-    </mat-select>
-    </mat-form-field>
-    <mat-form-field >
-    <mat-label>สภาพครุภัณฑ์</mat-label>
-    <input matInput
-          matInput placeholder="กรอกสภาพครุภัณฑ์"
-          type="text"
-          class="form-control"
-          name="du_serial"
-          [(ngModel)]="form.du_serial"
-          required
-          [disabled]="userRole"
-          #du_serial="ngModel">
-    </mat-form-field>
-    <mat-form-field >
-      <mat-label>ราคาครุภัณฑ์</mat-label>
-      <input matInput
-            matInput placeholder="กรอกราคาครุภัณฑ์"
-            type="number"
-            class="form-control"
-            name="du_price"
-            [(ngModel)]="form.du_price"
-            required
-            [disabled]="userRole"
-            #du_price="ngModel">
-      </mat-form-field>
-    <mat-form-field >
-      <mat-label>ที่มาของครุภัณฑ์</mat-label>
-      <input matInput
-            matInput placeholder="กรอกที่มาของครุภัณฑ์"
-            type="text"
-            class="form-control"
-            name="get"
-            [(ngModel)]="form.get"
-            required
-            [disabled]="userRole"
-            #get="ngModel">
-      </mat-form-field>
-    <button mat-raised-button color="primary">แก้ไข</button>
-  </form>
+    <h3>แก้ไขครุภัณฑ์</h3>
+    <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+        <mat-form-field>
+            <mat-label>ชื่อครุภัณฑ์</mat-label>
+            <input matInput matInput placeholder="กรอกชื่อครุภัณฑ์" type="text" class="form-control" name="du_name" [(ngModel)]="form.du_name" required [disabled]="userRole" #du_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>สภาพครุภัณฑ์</mat-label>
+            <mat-select [(ngModel)]="form.du_status" name="du_status" #du_status="ngModel">
+                <mat-option *ngFor="let statuse of status" [value]="statuse.value">
+                    {{statuse.value}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>สภาพครุภัณฑ์</mat-label>
+            <input matInput matInput placeholder="กรอกสภาพครุภัณฑ์" type="text" class="form-control" name="du_serial" [(ngModel)]="form.du_serial" required [disabled]="userRole" #du_serial="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>ราคาครุภัณฑ์</mat-label>
+            <input matInput matInput placeholder="กรอกราคาครุภัณฑ์" type="number" class="form-control" name="du_price" [(ngModel)]="form.du_price" [disabled]="userRole" #du_price="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>ที่มาของครุภัณฑ์</mat-label>
+            <input matInput matInput placeholder="กรอกที่มาของครุภัณฑ์" type="text" class="form-control" name="get" [(ngModel)]="form.get" [disabled]="userRole" #get="ngModel">
+        </mat-form-field>
+        <button mat-raised-button color="primary">แก้ไข</button>
+    </form>
 </div>

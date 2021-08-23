@@ -16,6 +16,7 @@ export class HomepageComponent implements OnInit {
   id:number = 0
   bid:number = 0
   dire:boolean = false;
+  accept:number | null = null;
 
 
   constructor(
@@ -44,19 +45,31 @@ export class HomepageComponent implements OnInit {
 loadDate(){
   this.userService.getDirecBuy(this.id).subscribe(
     data => {
-      this.bid = data.user[0].id
-      console.log(this.id)
-      if(!data.user.length){
-        console.log('no')
-      } else {
-        console.log('yes')
-        this.dire = true
+      console.log(data.user.length)
+      for(var i=0; i <= data.user.length;i++){
+        console.log(i)
+        this.accept = data.user[i].accept
+        this.bid = data.user[i].id
+        if(this.accept){
+          console.log('มี')
+          this.dire = false
+        } else{
+          console.log('no')
+          this.dire = true
+        }
       }
+      // if(!data.user.length){
+      //   console.log('no')
+      // } else {
+      //   console.log('yes')
+      //   this.dire = true
+      // }
     }
   )
 }
 
 openDetail(){
+
   const dialogDetail = this.dialog.open(BuyDetailComponent,{
     width: '1500px',
     data: {id:this.bid}

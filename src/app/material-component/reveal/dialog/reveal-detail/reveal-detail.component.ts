@@ -1,13 +1,13 @@
-import { Component, OnInit,Inject} from '@angular/core';
-import { RevealService,Item } from '../../../../shared/service/reveal.service';
-import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { RevealService, Item } from '../../../../shared/service/reveal.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TokenStorageService } from '../../../../shared/service/token-storage.service';
 import { SupplieService } from 'src/app/shared/service/supplie.service';
 import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 
 
 export interface DialogData {
-  id : number;
+  id: number;
   sup_name: string;
   price: number;
   unit: number;
@@ -27,24 +27,24 @@ export class RevealDetailComponent implements OnInit {
   cls: string = ''
   total: number = 0
   isAdmin: boolean = false;
-  isUser:boolean = false;
+  isUser: boolean = false;
   adminApp: boolean = false;
   direApp: boolean = false;
   isDirec: boolean = false;
   isAccept: boolean = false;
-  revealID:number = 0;
+  revealID: number = 0;
   private roles: string[] = [];
-  public length:number = 0;
-  year:string =''
+  public length: number = 0;
+  year: string = ''
 
   constructor(
     public dialogRef: MatDialogRef<RevealDetailComponent>,
     private revealService: RevealService,
     private supService: SupplieService,
-    private token:TokenStorageService,
-    private budget:BudgetYearService,
+    private token: TokenStorageService,
+    private budget: BudgetYearService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loadTable(this.data.id);
@@ -52,9 +52,9 @@ export class RevealDetailComponent implements OnInit {
     this.year = this.budget.budgetYear()
   }
 
-  displayedColumns: string[] = ['supplieId','supplie_name','price', 'unit', 'unit_name', 'delete'];
+  displayedColumns: string[] = ['supplieId', 'supplie_name', 'price', 'unit', 'unit_name', 'delete'];
 
-  loadTable(id:number){
+  loadTable(id: number) {
     this.revealService.getRevealDetail(id).subscribe(
       data => {
         console.log(data.reveal)
@@ -74,7 +74,7 @@ export class RevealDetailComponent implements OnInit {
     )
   }
 
-  getRole(){
+  getRole() {
     const user = this.token.getUser()
     this.roles = user.roles
     this.isAdmin = this.roles.includes('ROLE_ADMIN');
@@ -84,49 +84,77 @@ export class RevealDetailComponent implements OnInit {
     console.log(this.isDirec)
   }
 
-  updateUnit(){
-    if(this.adminApp){
-      for (var i =0; i<this.length;i++){
-        var id = 0
-        var unit:number = 0
-        var tunit:number = this.table[i].unit
-        console.log(this.table[i].supplieId)
-        this.supService.getSupById(this.table[i].supplieId,this.year).subscribe(
+  updateUnit() {
+    if (this.adminApp) {
+      for (var i = 0; i < this.length; i++) {
+        this.revealService.getUnit(this.data.id, this.table[i].supplieId).subscribe(
           data => {
-            console.log(data.supplie[0].unit)
-            unit = data.supplie[0].unit
-            unit = unit - tunit
-            console.log(unit + 'จำนวน')
-            console.log(tunit + 'จำนวน')
-            this.supService.updateUnit(data.supplie[0].supplieId,unit,this.year).subscribe(
-              data=>{}
-            )
-            this.revealService.updateRemain(this.revealID,data.supplie[0].supplieId,unit).subscribe()
+            this.get1(data.get[0].supplieId, data.get[0].unit)
+            // this.supService.getSupById(data.get[0].supplieId,this.year).subscribe(
+            //   data => {
+            //     console.log(data.supplie[0].supplie_name+ " " + data.supplie[0].unit)
+
+            //     // var units = data.supplie[0].unit - tunit
+            //     console.log('loopEnd')
+
+            //     // this.supService.updateUnit(data.supplie[0].supplieId,units,this.year).subscribe(
+            //     //   data=>{}
+            //     // )
+            //     // this.revealService.updateRemain(this.revealID,data.supplie[0].supplieId,units).subscribe()
+            //   }
+            // )
           }
-          )
+        )
       }
-    } else{
+    } else {
       console.log(false)
     }
+
   }
 
-  accept(){
+  get1(supId: number, tunit: number) {
+    this.supService.getSupById(supId, this.year).subscribe(
+      data => {
+        console.log('loopStart')
+        console.log(supId)
+        console.log(data.supplie[0].supplie_name + " " + data.supplie[0].unit)
+        var units = data.supplie[0].unit - tunit
+        console.log('เหลือ ' + units);
+        console.log('loopEnd')
+        if (units < 0) {
+          console.log('ไม่ให้ทำ')
+          this.revealService.updateApprove(this.revealID, false).subscribe(
+            data => { }
+          )
+        } else {
+
+          this.supService.updateUnit(data.supplie[0].supplieId, units, this.year).subscribe(
+            data => { }
+          )
+          this.revealService.updateRemain(this.revealID, data.supplie[0].supplieId, units).subscribe()
+        }
+
+      }
+    )
+  }
+
+  accept() {
     this.isAccept = true
     console.log(this.revealID)
-    this.revealService.updateAccept(this.revealID,this.isAccept).subscribe(
-      d=>{}
+    this.revealService.updateAccept(this.revealID, this.isAccept).subscribe(
+      d => { }
     )
   }
 
-  Appove(){
+  Appove() {
     console.log(this.adminApp)
     console.log(this.direApp)
-    this.revealService.updateApprove(this.revealID,this.adminApp).subscribe(
-      data =>{}
+    this.revealService.updateApprove(this.revealID, this.adminApp).subscribe(
+      data => { }
     )
   }
 
-  reportDetail(){
+  reportDetail() {
     this.revealService.reportDetail(this.revealID)
   }
 

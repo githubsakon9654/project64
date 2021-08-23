@@ -48,6 +48,9 @@ export class BuyService {
   getDetail(id:number): Observable<any>{
     return this.http.post(API_URL + 'byid',{id});
   }
+  globalUpdate(check1:boolean,check2:boolean,check3:boolean,id:number):Observable<any>{
+    return this.http.post(API_URL + 'gloupdate',{check1,check2,check3,id});
+  }
 
   getFilldate(start:string,end:string):Observable<any>{
     return this.http.post(API_URL + 'filldate',{start,end});
@@ -62,8 +65,8 @@ export class BuyService {
   setBuyRepel(id:number,repel:boolean) : Observable<any>{
     return this.http.post(API_URL + 'update',{id,repel})
   }
-  updateBuy(id:number,userId2:number) : Observable<any>{
-    return this.http.post(API_URL + 'update2',{id,userId2})
+  updateBuy(id:number,userId2:number,userId3:number,userId4:number) : Observable<any>{
+    return this.http.post(API_URL + 'update2',{id,userId2,userId3,userId4})
   }
   setAccept(id:number,year:string) : Observable<any>{
     return this.http.post(API_URL + 'accept',{id,year});

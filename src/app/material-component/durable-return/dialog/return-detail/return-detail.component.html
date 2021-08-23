@@ -1,49 +1,48 @@
 <mat-dialog-content class="mat-typography">
 
-  <p>ชื่อผู้ขอยืม : {{name}}</p>
-  <p>ชั้นเรียน : {{cls}}</p>
-  <mat-slide-toggle [disabled]="isDirec || isUser"  [(ngModel)]="adminApp" (ngModelChange)="Appove()">
-    ยืนยันรายการคืน(ผู้ดูแล)</mat-slide-toggle>
+    <p>ชื่อผู้ขอยืม : {{name}}</p>
+    <p>ชั้นเรียน : {{cls}}</p>
+    <mat-slide-toggle [disabled]="isDirec || isUser" [(ngModel)]="adminApp" (ngModelChange)="Appove()">
+        ยืนยันรายการคืน(ผู้ดูแล)</mat-slide-toggle>
     <br>
-  <button *ngIf="adminApp" mat-raised-button color="primary" (click)="report()">พิมพ์รายการคืนครุภัณฑ์</button>
-  <table mat-table [dataSource]="table" class="mat-elevation-z8">
+    <button *ngIf="adminApp" mat-raised-button color="primary" (click)="report()">พิมพ์รายการคืนครุภัณฑ์</button>
+    <table mat-table [dataSource]="table" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
+        <!--- Note that these columns can be defined in any order.
       The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
-        <td mat-cell *matCellDef="let element"> {{element.duId}} </td>
-      </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ลำดับที่ </th>
+            <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+        </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="du_name">
-        <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
-        <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
-      </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="du_name">
+            <th mat-header-cell *matHeaderCellDef> ชื่อครุภัณฑ์ </th>
+            <td mat-cell *matCellDef="let element"> {{element.du_name}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="du_serial">
-        <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
-        <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
-      </ng-container>
+        <ng-container matColumnDef="du_serial">
+            <th mat-header-cell *matHeaderCellDef> เลขซีเรียล </th>
+            <td mat-cell *matCellDef="let element"> {{element.du_serial}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="du_status">
-        <th mat-header-cell *matHeaderCellDef> สภาพ </th>
-        <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
-      </ng-container>
+        <ng-container matColumnDef="du_status">
+            <th mat-header-cell *matHeaderCellDef> สภาพ </th>
+            <td mat-cell *matCellDef="let element"> {{element.du_status}} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="delete">
-        <th mat-header-cell *matHeaderCellDef> รับคืนครุภัณฑ์ </th>
-        <td mat-cell *matCellDef="let element" >
-          <button *ngIf="adminApp && !isUser && element.userId" mat-raised-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(115, 255, 0);"
-          (click)="openSetnull(element)">รับคืนครุภัณฑ์</button>
-          <p *ngIf="!element.userId" style="background-color: rgba(99, 99, 90, 0); color: rgb(76, 168, 0);">รับคืนครุภัณฑ์แล้ว</p>
-        </td>
-      </ng-container>
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef> รับคืนครุภัณฑ์ </th>
+            <td mat-cell *matCellDef="let element">
+                <button *ngIf="adminApp && !isUser && element.userId" mat-raised-button color="basic" style="background-color: rgb(99, 99, 90); color: rgb(115, 255, 0);" (click)="openSetnull(element)">รับคืนครุภัณฑ์</button>
+                <p *ngIf="!element.userId" style="background-color: rgba(99, 99, 90, 0); color: rgb(76, 168, 0);">รับคืนครุภัณฑ์แล้ว</p>
+            </td>
+        </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
-  </mat-dialog-content>
+</mat-dialog-content>

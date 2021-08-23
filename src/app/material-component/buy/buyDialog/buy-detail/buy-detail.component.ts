@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Directive, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, Directive,ElementRef, TemplateRef, ViewChild } from '@angular/core';
 import { BuyService, DialogData } from '../../../../shared/service/buy.service'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TokenStorageService } from '../../../../shared/service/token-storage.service';
@@ -7,7 +7,6 @@ import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 import { SupplieService } from 'src/app/shared/service/supplie.service';
 import { from } from 'rxjs';
 import { UserService } from 'src/app/shared/service/user.service';
-
 interface store {
   value: string;
   viewValue: string;
@@ -20,15 +19,19 @@ interface store {
 })
 export class BuyDetailComponent implements OnInit {
 
+
   stores: store[] = [];
   names: store[] = [];
   dataRow = [];
   datain = [];
-  fullname: string = ''
+  fullnames: string = ''
   class: string = ''
   price: number = 0
   isDirector: boolean = false
   buy_status: boolean = false
+  check1: boolean = false
+  check2: boolean = false
+  check3: boolean = false
   private roles: string[] = [];
   id: number = 0
   repel: boolean = false
@@ -36,15 +39,23 @@ export class BuyDetailComponent implements OnInit {
   comment: string = ''
   onCom: boolean = false
   year: string = ''
+  iD: number = 0
   form: any = {
     store:null
   };
   form2: any = {
-    fname:null
+    fname:null,
+    fname2:null,
+    fname3:null
   };
   dire2:number = 0
+  dire3:number = 0
+  dire4:number = 0
   direname:string = ''
+  direname2:string = ''
+  direname3:string = ''
   isDT:boolean = false
+
 
   constructor(
     public dialog: MatDialog,
@@ -55,7 +66,11 @@ export class BuyDetailComponent implements OnInit {
     private supplieService: SupplieService,
     private userService : UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+    ) {
+
+  }
+
+
 
   displayedColumns: string[] = ['id','store', 'supplie_name', 'price', 'unit', 'unit_name'];
 
@@ -65,6 +80,7 @@ export class BuyDetailComponent implements OnInit {
     this.getCate()
     this.getUserAll()
     this.year = this.budget.budgetYear()
+    this.iD = Number(this.userService.getId())
     console.log(this.year.substring(2, 4))
 
   }
@@ -74,7 +90,7 @@ export class BuyDetailComponent implements OnInit {
       data => {
         console.log(data)
         this.dataRow = data.buy
-        this.fullname = data.buy[0].fullname
+        this.fullnames = data.buy[0].fullname
         this.class = data.buy[0].name
         this.price = data.buy[0].buyprice
         this.id = data.buy[0].id
@@ -83,15 +99,63 @@ export class BuyDetailComponent implements OnInit {
         this.accept = data.buy[0].accept
         this.comment = data.buy[0].store
         this.dire2 = data.buy[0].userId2
+        this.dire3 = data.buy[0].userId3
+        this.dire4 = data.buy[0].userId4
+        this.check1 =  data.buy[0].check1
+        this.check2 =  data.buy[0].check2
+        this.check3 =  data.buy[0].check3
         console.log(this.dire2)
         this.direname = data.buy2[0].fullname
+        this.direname2 = data.buy2[1].fullname
+        this.direname3 = data.buy2[2].fullname
         const Uid = Number(this.userService.getId())
-        if(Uid == this.dire2){
+        if(Uid == this.dire2 || Uid == this.dire3||Uid == this.dire4){
           this.isDT = true
           console.log(this.isDT)
         }
       }
     )
+  }
+
+  checkAccept(){
+    if(this.check1 &&this.check1 &&this.check1){
+      console.log('รับเย้ๆๆ')
+      this.setAccept()
+    }
+  }
+
+  checkDire1(){
+    if(this.check1){
+      console.log(this.check1);
+      this.buyService.globalUpdate(this.check1,this.check2,this.check3,this.id).subscribe(
+        data=>{
+          this.loadData()
+          this.checkAccept()
+        }
+      )
+    }
+  }
+  checkDire2(){
+   if(this.check2){
+      console.log(this.check2);
+      this.buyService.globalUpdate(this.check1,this.check2,this.check3,this.id).subscribe(
+        data=>{
+          this.loadData()
+          this.checkAccept()
+        }
+      )
+    }
+  }
+  checkDire3(){
+    if(this.check3){
+      console.log(this.check3);
+      this.buyService.globalUpdate(this.check1,this.check2,this.check3,this.id).subscribe(
+        data=>{
+          this.loadData()
+          this.checkAccept()
+        }
+      )
+    }
   }
 
   getCate() {
@@ -109,9 +173,11 @@ export class BuyDetailComponent implements OnInit {
     this.buyService.reportbuyformByStore(this.id,store)
   }
   onSubmit2(){
-    const {fname} = this.form2
+    const {fname,fname2,fname3} = this.form2
     console.log(fname)
-    this.buyService.updateBuy(this.id,fname).subscribe(
+    console.log(fname2)
+    console.log(fname3)
+    this.buyService.updateBuy(this.id,fname,fname2,fname3).subscribe(
       data => {
         console.log(data)
       }
@@ -145,6 +211,7 @@ export class BuyDetailComponent implements OnInit {
       data => {
         console.log(data.users)
         this.names = data.users
+
       }
     )
   }

@@ -42,7 +42,7 @@ export class SupplieService {
     return this.http.post(API_URL + 'deleteunit',{supplieId,year})
   }
 
-  updateSupplie(id:number,supplie_name: string, price:number, unit_name:string): Observable<any> {
+  updateSupplie(id:number,supplie_name:string, price:number, unit_name:string): Observable<any> {
     return this.http.post(API_URL + 'update',{id,supplie_name,price,unit_name});
   }
 

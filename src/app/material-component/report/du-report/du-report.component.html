@@ -1,0 +1,12 @@
+<h2>เลือกประเภทครุภัณฑ์</h2>
+<form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+    <mat-form-field class="example-full-width">
+        <mat-label>ประเภทครุภัณฑ์</mat-label>
+        <mat-select [(ngModel)]="form.id" name="id" #id="ngModel">
+            <mat-option *ngFor="let food of cates" [value]="food.id">
+                {{food.name + ' ' + food.serial}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary">พิมพ์</button>
+</form>

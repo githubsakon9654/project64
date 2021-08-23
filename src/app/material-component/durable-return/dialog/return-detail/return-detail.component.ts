@@ -5,6 +5,7 @@ import { TokenStorageService } from '../../../../shared/service/token-storage.se
 import { BorrowService } from 'src/app/shared/service/borrow.service';
 import { ReturnsService ,Item} from 'src/app/shared/service/returns.service';
 import { SetnullDurableComponent } from 'src/app/material-component/durablelist/dialog/insert-durable/insert-durable.component';
+import { UserService } from 'src/app/shared/service/user.service';
 
 @Component({
   selector: 'app-return-detail',
@@ -28,6 +29,7 @@ export class ReturnDetailComponent implements OnInit,OnDestroy {
   constructor(
     public dialogRef: MatDialogRef<ReturnDetailComponent>,
     private revealService: RevealService,
+    private userService:UserService,
     public dialog: MatDialog,
     public returnService: ReturnsService,
     private token:TokenStorageService,
@@ -97,7 +99,8 @@ export class ReturnDetailComponent implements OnInit,OnDestroy {
   }
 
   report(){
-    this.returnService.reportDetail(+this.data.id)
+    const id = Number(this.userService.getId())
+    this.returnService.reportDetail(+this.data.id,id)
   }
 
 }

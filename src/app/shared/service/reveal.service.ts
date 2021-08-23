@@ -106,6 +106,10 @@ export class RevealService {
     return this.http.post(API_URL + 'upRemain',{id,supplieId,remain})
   }
 
+  getUnit(id:number,supplieId:number):Observable<any>{
+    return this.http.post(API_URL + 'getUnit',{id,supplieId})
+  }
+
   getRevealUserList(userId:number): Observable<any> {
     return this.http.post(API_URL + 'listByUser', {userId});
   }

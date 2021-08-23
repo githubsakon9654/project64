@@ -1,51 +1,23 @@
 <div>
-  <h3>แก้ไขข้อมูลพัสดุ</h3>
-  <form  class="example-form"
-  name="form"
-  (ngSubmit)="f.form.valid && onSubmit()"
-  #f="ngForm"
-  novalidat>
-    <mat-form-field >
-    <mat-label>ชื่อพัสดุ</mat-label>
-    <input matInput
-          matInput placeholder="กรอกชื่อพัสดุ"
-          type="text"
-          class="form-control"
-          name="supname"
-          [(ngModel)]="form.sup_name"
-          required
-          #supname="ngModel">
-    </mat-form-field>
-    <mat-form-field >
-    <mat-label>ราคา</mat-label>
-    <input matInput
-          matInput placeholder="กรอกราคาพัสดุ"
-          type="text"
-          class="form-control"
-          name="price"
-          [(ngModel)]="form.price"
-          required
-          #price="ngModel">
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>หน่วยพัสดุ</mat-label>
-      <input type="text"
-             placeholder="Pick one"
-             matInput placeholder="กรอกหน่วยพัสดุ"
-             aria-label="Number"
-             matInput
-             class="form-control"
-            name="unit_name"
-            [(ngModel)]="form.unit_name"
-             required
-             [matAutocomplete]="auto"
-             #unit_name="ngModel">
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button mat-raised-button color="primary">แก้ไข</button>
-  </form>
+    <h3>แก้ไขข้อมูลพัสดุ</h3>
+    <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidat>
+        <mat-form-field>
+            <mat-label>ชื่อพัสดุ</mat-label>
+            <input matInput matInput placeholder="กรอกชื่อพัสดุ" type="text" class="form-control" name="supname" [(ngModel)]="form.sup_name" required #supname="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>ราคา</mat-label>
+            <input matInput matInput placeholder="กรอกราคาพัสดุ" type="text" class="form-control" name="price" [(ngModel)]="form.price" required #price="ngModel">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <mat-label>หน่วยพัสดุ</mat-label>
+            <input type="text" placeholder="Pick one" matInput placeholder="กรอกหน่วยพัสดุ" aria-label="Number" matInput class="form-control" name="unit_name" [(ngModel)]="form.unit_name" required [matAutocomplete]="auto" #unit_name="ngModel">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button mat-raised-button color="primary">แก้ไข</button>
+    </form>
 </div>

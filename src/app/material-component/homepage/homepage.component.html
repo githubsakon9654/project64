@@ -1,20 +1,24 @@
 <mat-card>
     <mat-card-content>
         <diV class="example-container">
-
-            <h2>โรงเรียนบ้านสวายจีก ตำบลสวายจีก อำเภอเมือง จังหวัดบุรีรัมย์</h2>
-            <h3>
+            <h3 style="margin-left: 80%;">
                 งบประมาณรอบที่ {{budgetYear}}
             </h3>
+
+            <h2 style="font-weight: bold;">โรงเรียนบ้านสวายจีก ตำบลสวายจีก อำเภอเมือง จังหวัดบุรีรัมย์</h2>
             <h3 *ngIf="offer">
                 <a style="color: rgb(177, 34, 34);" routerLink="/from">
-                  "เปิดรายการเสนอพัสดุแล้ว"
+                  "..เปิดรายการสำรวจความต้องการวัสดุ.."
                 </a>
             </h3>
-            <h3 (click)="openDetail()" *ngIf="dire">
-                <a style="color: rgb(187, 138, 5);" routerLink="/home">
+            <h3 *ngIf="dire">
+                ท่านถูกแต่งตั้งเป็นกรรมการตรวจสอบรายการสั่งซื้อวัสดุ
+                <!-- <a style="color: rgb(163, 98, 0);" routerLink="/home">
                 "เปิดหน้ารายการสั่งซื้อ"
-              </a>
+              </a> -->
+                <button mat-icon-button color="basic" style="color: rgb(255, 145, 0); background-color: rgb(78, 64, 44);" (click)="openDetail()">
+                <mat-icon>assignment</mat-icon>
+              </button>
             </h3>
         </diV>
     </mat-card-content>

@@ -30,23 +30,50 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="price">
             <th mat-header-cell *matHeaderCellDef> จำนวนรับ </th>
-            <td mat-cell *matCellDef="let element"> {{element.units}} </td>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.units != '-' ;else other_content">
+                    {{element.units + ' ' + element.unit_name}}
+                </div>
+                <ng-template #other_content>
+                    {{element.units}}
+                </ng-template>
+            </td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="unit">
             <th mat-header-cell *matHeaderCellDef> ราคารวมรับ </th>
-            <td mat-cell *matCellDef="let element"> {{element.sum}}
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.sum != '-' ;else other_content">
+                    {{element.sum | currency:"฿ "}}
+                </div>
+                <ng-template #other_content>
+                    {{element.sum}}
+                </ng-template>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="unit_name">
             <th mat-header-cell *matHeaderCellDef> จำนวนจ่าย </th>
-            <td mat-cell *matCellDef="let element"> {{element.unit}} </td>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.unit != '-' ;else other_content">
+                    {{element.unit + ' ' + element.unit_name}}
+                </div>
+                <ng-template #other_content>
+                    {{element.unit}}
+                </ng-template>
+            </td>
         </ng-container>
         <ng-container matColumnDef="store">
             <th mat-header-cell *matHeaderCellDef> ราคารวมจ่าย </th>
-            <td mat-cell *matCellDef="let element"> {{element.prices}} </td>
+            <td mat-cell *matCellDef="let element">
+                <div *ngIf="element.prices != '-' ;else other_content">
+                    {{element.prices | currency:"฿ "}}
+                </div>
+                <ng-template #other_content>
+                    {{element.prices}}
+                </ng-template>
+            </td>
         </ng-container>
 
 

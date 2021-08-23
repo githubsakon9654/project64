@@ -67,6 +67,7 @@ import { ReportComponent } from './report/report.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { StoreComponent } from './supplielist/store/store.component';
 import { ListhistoryComponent } from './supplielist/listhistory/listhistory.component';
+import { DuReportComponent } from './report/du-report/du-report.component';
 
 @NgModule({
   imports: [
@@ -145,7 +146,8 @@ import { ListhistoryComponent } from './supplielist/listhistory/listhistory.comp
     ReportComponent,
     HomepageComponent,
     StoreComponent,
-    ListhistoryComponent
+    ListhistoryComponent,
+    DuReportComponent
   ]
 })
 export class MaterialComponentsModule {}

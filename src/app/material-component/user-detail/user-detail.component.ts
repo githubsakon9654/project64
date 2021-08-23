@@ -41,6 +41,7 @@ export class UserDetailComponent implements OnInit {
     this.loadClass()
     console.log(this.IsEdit)
     console.log(this.data.budget)
+    console.log(this.data.classes)
     this.year= this.budgetService.budgetYear()
     this.userService.getBudgetUser(this.data.id,this.year).subscribe(
       d => {
@@ -64,8 +65,14 @@ export class UserDetailComponent implements OnInit {
   updateData(){
     const id = this.data.id
     const {username,fullname,classes,price} = this.form
-    this.userService.updateUserByAdmin(id,username,classes,price,fullname).subscribe(
-      data => {}
+    console.log(classes);
+    this.userService.getClassByname(classes).subscribe(
+      data => {
+        console.log(data.classe[0].id)
+        this.userService.updateUserByAdmin(id,username,data.classe[0].id,fullname).subscribe(
+          data => {}
+        )
+      }
     )
   }
 

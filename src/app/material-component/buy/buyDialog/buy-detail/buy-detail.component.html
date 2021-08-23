@@ -1,9 +1,9 @@
 <mat-dialog-content class="mat-typography">
     <h2>รายละเอียดรายการสั่งซื้อ</h2>
     <button *ngIf="isDirector && !buy_status" style="margin-left: 980px; background-color: rgb(250, 104, 0);" (click)="Onrepel()" mat-raised-button>ตีกลับรายการสั่งซื้อ</button>
-    <button *ngIf="buy_status && !accept && isDT" style="margin-left: 980px; background-color: rgb(103, 182, 0);" (click)="setAccept()" mat-raised-button color="primary">รับพัสดุครบแล้ว</button>
+    <!-- <button *ngIf="buy_status && !accept && isDT" style="margin-left: 980px; background-color: rgb(103, 182, 0);" (click)="setAccept()" mat-raised-button color="primary">รับพัสดุครบแล้ว</button> -->
     <p *ngIf="accept" style="margin-left: 1000px; color: rgb(103, 182, 0);">รับพัสดุครบแล้ว</p>
-    <h4>ชื่อ: {{fullname}}</h4>
+    <h4>ชื่อ: {{fullnames}}</h4>
     <h4>ชั้นเรียน: {{class}}</h4>
     <h4>ราคา: {{price | currency: '฿ '}} บาท</h4>
     <button *ngIf="isDirector" style="background-color: rgb(0, 250, 133); margin-bottom: 10px;" (click)="Oncomment()" mat-raised-button>เพิ่มข้อเสนอแนะ</button>
@@ -28,17 +28,74 @@
         <button type="submit" mat-raised-button color="primary" style="margin-right: 10px;" (click)="onSubmit()">พิมพ์ตามร้าน</button>
         <button *ngIf="buy_status" mat-raised-button color="primary" (click)="reportbuyform()">พิมพ์รายการสั่งซื้อ</button>
     </form>
-    <h4 *ngIf="dire2">กรรมการ : {{direname}}</h4>
+    <div class="row" style="margin-bottom: 10px;">
+        <div class="column">
+            <h4 *ngIf="dire2">กรรมการคนที่ 1 : {{direname}}</h4>
+            <mat-slide-toggle [disabled]="iD != this.dire2" [(ngModel)]="check1" (ngModelChange)="checkDire1()">
+                <div *ngIf="check1">กรรมการตรวจสอบแล้ว</div>
+                <div *ngIf="!check1">รอตรวจสอบ</div>
+            </mat-slide-toggle>
+        </div>
+        <div class="column">
+            <h4 *ngIf="dire3">กรรมการคนที่ 2 : {{direname2}}</h4>
+            <mat-slide-toggle [disabled]="iD != this.dire3" [(ngModel)]="check2" (ngModelChange)="checkDire2()">
+                <div *ngIf="check2">กรรมการตรวจสอบแล้ว</div>
+                <div *ngIf="!check2">รอตรวจสอบ</div>
+            </mat-slide-toggle>
+        </div>
+        <div class="column">
+            <h4 *ngIf="dire4">กรรมการคนที่ 3 : {{direname3}}</h4>
+            <mat-slide-toggle [disabled]="iD != this.dire4" [(ngModel)]="check3" (ngModelChange)="checkDire3()">
+                <div *ngIf="check3">กรรมการตรวจสอบแล้ว</div>
+                <div *ngIf="!check3">รอตรวจสอบ</div>
+            </mat-slide-toggle>
+        </div>
+    </div>
+
+
+
     <form class="example-form" name="form2" (ngSubmit)="f.form.valid && onSubmit2()" #f="ngForm" novalidat *ngIf="buy_status && !dire2">
-        <mat-form-field class="example-full-width" style="width: 30%; margin-right: 10px;">
-            <mat-label>ประเภทครุภัณฑ์</mat-label>
+        <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
+            <mat-label>เลือกกรรมการ</mat-label>
             <mat-select [(ngModel)]="form2.fname" name="fname" #fname="ngModel">
                 <mat-option *ngFor="let food of names" [value]="food.id">
                     {{food.fullname}}
                 </mat-option>
             </mat-select>
         </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
+            <mat-label>เลือกกรรมการ</mat-label>
+            <mat-select [(ngModel)]="form2.fname2" name="fname2" #fname2="ngModel">
+                <mat-option *ngFor="let food of names" [value]="food.id">
+                    {{food.fullname}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
+            <mat-label>เลือกกรรมการ</mat-label>
+            <mat-select [(ngModel)]="form2.fname3" name="fname3" #fname3="ngModel">
+                <mat-option *ngFor="let food of names" [value]="food.id">
+                    {{food.fullname}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
         <button type="submit" mat-raised-button color="primary" style="margin-right: 10px;" (click)="onSubmit2()">ตั้งกรรมการ</button>
+
+        <!-- <mat-form-field class="example-chip-list">
+            <mat-label>Favorite Fruits</mat-label>
+            <mat-chip-list #chipList aria-label="Fruit selection">
+                <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (removed)="remove(fruit)">
+                    {{fruit}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="New fruit..." #fruitInput [formControl]="fruitCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+            <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let fruit of filteredFruits | async" [value]="id">
+                    {{fruit}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field> -->
     </form>
 
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl} from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { BudgetYearService } from 'src/app/shared/service/budget-year.service';
 import { TokenStorageService } from 'src/app/shared/service/token-storage.service';
 import { UserService } from 'src/app/shared/service/user.service';
+import { DuReportComponent } from './du-report/du-report.component';
 
 interface Food {
   value: string;
@@ -29,7 +31,8 @@ export class ReportComponent implements OnInit {
   constructor(
     private tokenStorageService: TokenStorageService,
     private budget : BudgetYearService,
-    private userService:UserService
+    private userService:UserService,
+    public dialog: MatDialog,
   ) { }
 
 
@@ -65,7 +68,6 @@ export class ReportComponent implements OnInit {
   getRole(){
     this.roles = this.tokenStorageService.getRole()
     this.userRole = this.roles[1].IsUser
-
   }
 
   onSubmit(){
@@ -74,10 +76,22 @@ export class ReportComponent implements OnInit {
     console.log(this.userRole)
     const id = Number(this.userService.getId())
     if(!this.userRole){
-      return window.open(API_URL + link + this.year + '/'+ id)
+      if(link == '/api/report/durablelist/'){
+        console.log('durable')
+        const dialogdu = this.dialog.open(DuReportComponent,{
+          width: '500px',
+          height: '500px'
+        });
+      } else {
+        return window.open(API_URL + link + this.year + '/'+ id)
+      }
     } else {
-      console.log('dddd')
-      return window.open(API_URL + link + this.year + '/' + id)
+      if(link == '/api/report/durablelist/'){
+        console.log('durable')
+      } else {
+        return window.open(API_URL + link + this.year + '/' + id)
+      }
+
     }
   }
 }
