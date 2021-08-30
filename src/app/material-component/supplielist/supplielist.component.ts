@@ -38,7 +38,7 @@ export class SupplielistComponent implements OnInit {
   userRole:boolean = false
   year:string = ''
   // paginator:any
-  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store','delete'];
+  displayedColumns: string[] = ['id', 'supplie_name','price', 'unit', 'unit_name','store','status','delete'];
 
 
   constructor(

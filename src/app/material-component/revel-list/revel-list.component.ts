@@ -20,6 +20,7 @@ export class RevelListComponent implements OnInit {
   });
 
   table: Array<any> = []
+  tablethai: Array<any> = []
   role: Array<any> = []
   adAppove: boolean = false
   diAppove: boolean = false
@@ -48,6 +49,64 @@ export class RevelListComponent implements OnInit {
     });
   }
 
+  loopThaiDate(dateR:Array<any>){
+    var len = dateR.length;
+    var row:Array<Object> = []
+    for(let i=0; i < len; i++){
+      console.log(dateR[i].Date)
+            var dates = dateR[i].Date
+            var month = dates.substring(5, 7);
+            var year = +((dates).substring(2, 4)) + 43;
+            var day = (dates).substring(8, 10);
+            var THmonth;
+            switch (+month) {
+                case 1:
+                    THmonth = ' ม.ค. ';
+                    break;
+                case 2:
+                    THmonth = ' ก.พ. ';
+                    break;
+                case 3:
+                    THmonth = ' มี.ค. ';
+                    break;
+                case 4:
+                    THmonth = ' เม.ย. ';
+                    break;
+                case 5:
+                    THmonth = ' พ.ค. ';
+                    break;
+                case 6:
+                    THmonth = ' มิ.ย. ';
+                    break;
+                case 7:
+                    THmonth = ' ก.ค. ';
+                    break;
+                case 8:
+                    THmonth = ' ส.ค. ';
+                    break;
+                case 9:
+                    THmonth = ' ก.ย. ';
+                    break;
+                case 10:
+                    THmonth = ' ตุ.ค. ';
+                    break;
+                case 11:
+                    THmonth = ' พฤ.ย. ';
+                    break;
+                case 12:
+                    THmonth = ' ธ.ค. ';
+            }
+            var THdate = day + THmonth + year;
+            console.log(THdate)
+            var id = dateR[i].id
+            row.push({id:dateR[i].id,Date:THdate,admin_approve:dateR[i].admin_approve,fullname:dateR[i].fullname
+            ,serial:dateR[i].serial,total_price:dateR[i].total_price})
+
+          }
+          this.tablethai = row
+          console.log(this.tablethai)
+  }
+
   getDate(){
     var start = (this.range.value.start).toISOString()
     var s = start.substring(0,10)
@@ -61,6 +120,7 @@ export class RevelListComponent implements OnInit {
       date => {
         this.table = date.date
         console.log(this.table)
+        this.loopThaiDate(this.table)
       }
     )
   }
@@ -87,6 +147,7 @@ export class RevelListComponent implements OnInit {
         data => {
           this.table = data.reveal
           console.log(this.table)
+          this.loopThaiDate(this.table)
 
         }
       )
@@ -96,6 +157,7 @@ export class RevelListComponent implements OnInit {
         data => {
           this.table = data.reveal
           console.log(this.table)
+          this.loopThaiDate(this.table)
         }
       )
     }

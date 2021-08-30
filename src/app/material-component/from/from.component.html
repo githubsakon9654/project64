@@ -9,7 +9,7 @@
         <h4 *ngIf="!offer">ยังไม่เปิดเสนอรายการพัสดุ</h4>
         <!-- <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="openReport()">พิมพ์รายการแบบเสนอ</button> -->
         <button *ngIf="!IsUser" mat-raised-button color="primary" (click)="unit()">ดูรายการรวมพัสดุที่เสนอ</button>
-        <table mat-table [dataSource]="row" class="mat-elevation-z8">
+        <table mat-table [dataSource]="rowThai" class="mat-elevation-z8">
 
             <!--- Note that these columns can be defined in any order.
                   The actual rendered columns are set as a property on the row definition" -->

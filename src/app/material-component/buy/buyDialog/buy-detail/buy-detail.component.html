@@ -56,7 +56,7 @@
 
     <form class="example-form" name="form2" (ngSubmit)="f.form.valid && onSubmit2()" #f="ngForm" novalidat *ngIf="buy_status && !dire2">
         <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
-            <mat-label>เลือกกรรมการ</mat-label>
+            <mat-label>เลือกกรรมการคนที่ 1</mat-label>
             <mat-select [(ngModel)]="form2.fname" name="fname" #fname="ngModel">
                 <mat-option *ngFor="let food of names" [value]="food.id">
                     {{food.fullname}}
@@ -64,7 +64,7 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
-            <mat-label>เลือกกรรมการ</mat-label>
+            <mat-label>เลือกกรรมการคนที่ 2</mat-label>
             <mat-select [(ngModel)]="form2.fname2" name="fname2" #fname2="ngModel">
                 <mat-option *ngFor="let food of names" [value]="food.id">
                     {{food.fullname}}
@@ -72,7 +72,7 @@
             </mat-select>
         </mat-form-field>
         <mat-form-field class="example-full-width" style="width: 20%; margin-right: 10px;">
-            <mat-label>เลือกกรรมการ</mat-label>
+            <mat-label>เลือกกรรมการคนที่ 3</mat-label>
             <mat-select [(ngModel)]="form2.fname3" name="fname3" #fname3="ngModel">
                 <mat-option *ngFor="let food of names" [value]="food.id">
                     {{food.fullname}}
